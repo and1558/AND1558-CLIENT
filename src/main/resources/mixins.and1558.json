@@ -1,0 +1,28 @@
+{
+  "required": true,
+  "compatibilityLevel": "JAVA_8",
+  "verbose": true,
+  "package": "uk.to.and1558.mixins",
+  "refmap": "mixins.and1558.refmap.json",
+  "mixins": [
+    "client.MixinCraft",
+    "client.MixinMainMenu",
+    "client.MixinMultiplayerMenu",
+    "client.MixinSelectWorld",
+    "client.MixinConnecting",
+    "client.MixinEntityRenderer",
+    "client.MixinGameSettings",
+    "client.MixinIngame",
+    "client.MixinItemRenderer",
+    "client.MixinIngameMenu",
+    "client.Invoke.ItemFoodAccessor",
+    "client.MixinRenderItem",
+    "client.MixinRenderDroppedItem",
+    "client.MixinDebugOverlay",
+    "client.MixinRenderLiving",
+    "client.MixinRndrManager",
+    "client.MixinPlayerEntity",
+    "client.MixinNHPC",
+    "client.MixinRenderTNTPrimed"
+  ]
+}

@@ -1,6 +1,5 @@
 .gradle
-**/build/
-!src/**/build/
+/build/
 
 # Ignore Gradle GUI config
 gradle-app.setting
@@ -11,8 +10,8 @@ gradle-app.setting
 # Cache of project
 .gradletasknamecache
 
-# Eclipse Gradle plugin generated files
-# Eclipse Core
-.project
-# JDT-specific (Eclipse Java Development Tools)
-.classpath
+# # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
+# gradle/wrapper/gradle-wrapper.properties
+
+# Ignore .idea folder
+.idea

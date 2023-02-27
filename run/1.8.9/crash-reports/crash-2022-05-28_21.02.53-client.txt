@@ -1,0 +1,120 @@
+---- Minecraft Crash Report ----
+// Surprise! Haha. Well, this is awkward.
+
+Time: 5/28/22 9:02 PM
+Description: Updating screen events
+
+java.lang.NoClassDefFoundError: org/json/JSONObject
+	at uk.to.and1558.Maxytreal123.ConfigurationAPI.test(ConfigurationAPI.java:16)
+	at uk.to.and1558.Gui.ModTogglerScreen.loadConfig(ModTogglerScreen.java:182)
+	at uk.to.and1558.Gui.ModTogglerScreen.initGui(ModTogglerScreen.java:33)
+	at net.minecraft.client.gui.GuiScreen.setWorldAndResolution(GuiScreen.java:539)
+	at net.minecraft.client.Minecraft.displayGuiScreen(Minecraft.java:957)
+	at uk.to.and1558.Gui.ModScreen.actionPerformed(ModScreen.java:47)
+	at net.minecraft.client.gui.GuiScreen.mouseClicked(GuiScreen.java:494)
+	at net.minecraft.client.gui.GuiScreen.handleMouseInput(GuiScreen.java:596)
+	at net.minecraft.client.gui.GuiScreen.handleInput(GuiScreen.java:565)
+	at net.minecraft.client.Minecraft.runTick(Minecraft.java:1733)
+	at net.minecraft.client.Minecraft.runGameLoop(Minecraft.java:1061)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:378)
+	at net.minecraft.client.main.Main.main(Main.java:113)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraftforge.gradle.GradleStartCommon.launch(GradleStartCommon.java:97)
+	at GradleStart.main(GradleStart.java:26)
+Caused by: java.lang.ClassNotFoundException: org.json.JSONObject
+	at net.minecraft.launchwrapper.LaunchClassLoader.findClass(LaunchClassLoader.java:191)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:418)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:351)
+	... 25 more
+Caused by: java.lang.NullPointerException
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Stacktrace:
+	at uk.to.and1558.Maxytreal123.ConfigurationAPI.test(ConfigurationAPI.java:16)
+	at uk.to.and1558.Gui.ModTogglerScreen.loadConfig(ModTogglerScreen.java:182)
+	at uk.to.and1558.Gui.ModTogglerScreen.initGui(ModTogglerScreen.java:33)
+	at net.minecraft.client.gui.GuiScreen.setWorldAndResolution(GuiScreen.java:539)
+	at net.minecraft.client.Minecraft.displayGuiScreen(Minecraft.java:957)
+	at uk.to.and1558.Gui.ModScreen.actionPerformed(ModScreen.java:47)
+	at net.minecraft.client.gui.GuiScreen.mouseClicked(GuiScreen.java:494)
+	at net.minecraft.client.gui.GuiScreen.handleMouseInput(GuiScreen.java:596)
+	at net.minecraft.client.gui.GuiScreen.handleInput(GuiScreen.java:565)
+
+-- Affected screen --
+Details:
+	Screen name: uk.to.and1558.Gui.ModTogglerScreen
+
+-- Affected level --
+Details:
+	Level name: MpServer
+	All players: 6 total; [EntityPlayerSP['_SM64'/135273, l='MpServer', x=1.73, y=138.00, z=-7.19], EntityOtherPlayerMP['Anjayawagyu_'/135164, l='MpServer', x=1.38, y=138.00, z=-4.31], EntityOtherPlayerMP['Elizabethh'/135168, l='MpServer', x=0.50, y=138.00, z=0.50], EntityOtherPlayerMP['Syr12'/135271, l='MpServer', x=-0.91, y=138.00, z=-5.72], EntityOtherPlayerMP['Executer'/135272, l='MpServer', x=-0.58, y=138.77, z=3.74], EntityOtherPlayerMP['RizraVantz'/135364, l='MpServer', x=0.50, y=138.00, z=0.50]]
+	Chunk stats: MultiplayerChunkCache: 439, 439
+	Level seed: 0
+	Level generator: ID 01 - flat, ver 0. Features enabled: false
+	Level generator options: 
+	Level spawn location: 0.00,138.00,0.00 - World: (0,138,0), Chunk: (at 0,8,0 in 0,0; contains blocks 0,0,0 to 15,255,15), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,0,0 to 511,255,511)
+	Level time: 49233 game time, 1 day time
+	Level dimension: 0
+	Level storage version: 0x00000 - Unknown?
+	Level weather: Rain time: 0 (now: false), thunder time: 0 (now: false)
+	Level game mode: Game mode: adventure (ID 2). Hardcore: false. Cheats: false
+	Forced entities: 24 total; [EntityOtherPlayerMP['Elizabethh'/135168, l='MpServer', x=0.50, y=138.00, z=0.50], EntityPlayerSP['_SM64'/135273, l='MpServer', x=1.73, y=138.00, z=-7.19], EntityOtherPlayerMP['Executer'/135272, l='MpServer', x=0.50, y=138.00, z=0.50], EntityOtherPlayerMP['Syr12'/135271, l='MpServer', x=0.50, y=138.00, z=0.50], EntityOtherPlayerMP['Anjayawagyu_'/135164, l='MpServer', x=1.38, y=138.00, z=-4.31], EntityOtherPlayerMP['Anjayawagyu_'/135164, l='MpServer', x=1.38, y=138.00, z=-4.31], EntityOtherPlayerMP['Syr12'/135271, l='MpServer', x=0.50, y=138.00, z=0.50], EntityOtherPlayerMP['Elizabethh'/135168, l='MpServer', x=0.50, y=138.00, z=0.50], EntityOtherPlayerMP['Syr12'/135271, l='MpServer', x=0.50, y=138.00, z=0.50], EntityOtherPlayerMP['Executer'/135272, l='MpServer', x=0.50, y=138.00, z=0.50], EntityOtherPlayerMP['Executer'/135272, l='MpServer', x=0.50, y=138.00, z=0.50], EntityOtherPlayerMP['Syr12'/135271, l='MpServer', x=0.50, y=138.00, z=0.50], EntityOtherPlayerMP['RizraVantz'/135364, l='MpServer', x=0.50, y=138.00, z=0.50], EntityOtherPlayerMP['Anjayawagyu_'/135164, l='MpServer', x=1.38, y=138.00, z=-4.31], EntityOtherPlayerMP['Executer'/135272, l='MpServer', x=0.50, y=138.00, z=0.50], EntityOtherPlayerMP['Syr12'/135271, l='MpServer', x=0.50, y=138.00, z=0.50], EntityOtherPlayerMP['Elizabethh'/135168, l='MpServer', x=0.50, y=138.00, z=0.50], EntityOtherPlayerMP['Anjayawagyu_'/135164, l='MpServer', x=1.38, y=138.00, z=-4.31], EntityOtherPlayerMP['Executer'/135272, l='MpServer', x=0.50, y=138.00, z=0.50], EntityOtherPlayerMP['Syr12'/135271, l='MpServer', x=-0.91, y=138.00, z=-5.72], EntityOtherPlayerMP['Elizabethh'/135168, l='MpServer', x=0.50, y=138.00, z=0.50], EntityOtherPlayerMP['Executer'/135272, l='MpServer', x=-0.58, y=138.77, z=3.74], EntityOtherPlayerMP['RizraVantz'/135364, l='MpServer', x=0.50, y=138.00, z=0.50], EntityOtherPlayerMP['RizraVantz'/135364, l='MpServer', x=0.50, y=138.00, z=0.50]]
+	Retry entities: 0 total; []
+	Server brand: PaperSpigot (Velocity)
+	Server type: Non-integrated multiplayer server
+Stacktrace:
+	at net.minecraft.client.multiplayer.WorldClient.addWorldInfoToCrashReport(WorldClient.java:379)
+	at net.minecraft.client.Minecraft.addGraphicsAndWorldToCrashReport(Minecraft.java:2699)
+	at net.minecraft.client.Minecraft.run(Minecraft.java:399)
+	at net.minecraft.client.main.Main.main(Main.java:113)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at net.minecraftforge.gradle.GradleStartCommon.launch(GradleStartCommon.java:97)
+	at GradleStart.main(GradleStart.java:26)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.8.9
+	Operating System: Windows 10 (amd64) version 10.0
+	Java Version: 1.8.0_322, BellSoft
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode), BellSoft
+	Memory: 465874056 bytes (444 MB) / 775421952 bytes (739 MB) up to 4772593664 bytes (4551 MB)
+	JVM Flags: 0 total; 
+	IntCache: cache: 0, tcache: 0, allocated: 13, tallocated: 95
+	Launched Version: 1.8.9
+	LWJGL: 2.9.4
+	OpenGL: GeForce GTX 1050 Ti/PCIe/SSE2 GL version 4.6.0 NVIDIA 456.71, NVIDIA Corporation
+	GL Caps: Using GL 1.3 multitexturing.
+Using GL 1.3 texture combiners.
+Using framebuffer objects because OpenGL 3.0 is supported and separate blending is supported.
+Shaders are available because OpenGL 2.1 is supported.
+VBOs are available because OpenGL 1.5 is supported.
+
+	Using VBOs: Yes
+	Is Modded: Very likely; Jar signature invalidated
+	Type: Client (map_client.txt)
+	Resource Packs: 
+	Current Language: English (US)
+	Profiler Position: N/A (disabled)
+	CPU: 12x AMD Ryzen 5 3600 6-Core Processor 

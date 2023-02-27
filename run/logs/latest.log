@@ -1,0 +1,172 @@
+[20:31:09] [main/INFO]: username: _SM64
+[20:31:09] [main/INFO]: Extra: [--tweakClass, uk.to.and1558.mixins.and1558Tweaker]
+[20:31:09] [main/INFO]: Running with arguments: [--userProperties, {}, --assetsDir, C:/Users/AND5158/.gradle/caches/minecraft/assets, --assetIndex, 1.8, --accessToken{REDACTED}, --version, 1.8.9, --username, _SM64, --tweakClass, uk.to.and1558.mixins.and1558Tweaker]
+[20:31:09] [main/INFO]: Loading tweak class name uk.to.and1558.mixins.and1558Tweaker
+[20:31:09] [main/INFO]: Using primary tweak class name uk.to.and1558.mixins.and1558Tweaker
+[20:31:09] [main/INFO]: Calling tweak class uk.to.and1558.mixins.and1558Tweaker
+[20:31:09] [main/INFO]: SpongePowered MIXIN Subsystem Version=0.7.11 Source=file:/C:/Users/AND5158/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.7.11-SNAPSHOT/7a670207bdb97db418118ad1e9bb42424ff3776d/mixin-0.7.11-SNAPSHOT.jar Service=LaunchWrapper Env=UNKNOWN
+[20:31:09] [main/INFO]: FML platform manager could not load class cpw.mods.fml.relauncher.CoreModManager. Proceeding without FML support.
+[20:31:09] [main/INFO]: Compatibility level set to JAVA_8
+[20:31:09] [main/ERROR]: Mixin config mixins.and1558.json does not specify "minVersion" property
+[20:31:09] [main/INFO]: Loading tweak class name org.spongepowered.asm.mixin.EnvironmentStateTweaker
+[20:31:09] [main/INFO]: Calling tweak class org.spongepowered.asm.mixin.EnvironmentStateTweaker
+[20:31:09] [main/WARN]: Reference map 'mixins.and1558.refmap.json' for mixins.and1558.json could not be read. If this is a development environment you can ignore this message
+[20:31:09] [main/ERROR]: Classloader restrictions [PACKAGE_CLASSLOADER_EXCLUSION] encountered loading mixins.and1558.json:client.MixinCraft, name: uk.to.and1558.mixins.client.MixinCraft
+[20:31:09] [main/ERROR]: Classloader restrictions [PACKAGE_CLASSLOADER_EXCLUSION] encountered loading mixins.and1558.json:client.MixinMainMenu, name: uk.to.and1558.mixins.client.MixinMainMenu
+[20:31:09] [main/ERROR]: Classloader restrictions [PACKAGE_CLASSLOADER_EXCLUSION] encountered loading mixins.and1558.json:client.MixinMultiplayerMenu, name: uk.to.and1558.mixins.client.MixinMultiplayerMenu
+[20:31:09] [main/ERROR]: Classloader restrictions [PACKAGE_CLASSLOADER_EXCLUSION] encountered loading mixins.and1558.json:client.MixinSelectWorld, name: uk.to.and1558.mixins.client.MixinSelectWorld
+[20:31:09] [main/ERROR]: Classloader restrictions [PACKAGE_CLASSLOADER_EXCLUSION] encountered loading mixins.and1558.json:client.MixinConnecting, name: uk.to.and1558.mixins.client.MixinConnecting
+[20:31:09] [main/ERROR]: Classloader restrictions [PACKAGE_CLASSLOADER_EXCLUSION] encountered loading mixins.and1558.json:client.MixinEntityRenderer, name: uk.to.and1558.mixins.client.MixinEntityRenderer
+[20:31:09] [main/ERROR]: Classloader restrictions [PACKAGE_CLASSLOADER_EXCLUSION] encountered loading mixins.and1558.json:client.MixinGameSettings, name: uk.to.and1558.mixins.client.MixinGameSettings
+[20:31:09] [main/ERROR]: Classloader restrictions [PACKAGE_CLASSLOADER_EXCLUSION] encountered loading mixins.and1558.json:client.MixinIngame, name: uk.to.and1558.mixins.client.MixinIngame
+[20:31:09] [main/ERROR]: Classloader restrictions [PACKAGE_CLASSLOADER_EXCLUSION] encountered loading mixins.and1558.json:client.MixinItemRenderer, name: uk.to.and1558.mixins.client.MixinItemRenderer
+[20:31:09] [main/ERROR]: Classloader restrictions [PACKAGE_CLASSLOADER_EXCLUSION] encountered loading mixins.and1558.json:client.MixinIngameMenu, name: uk.to.and1558.mixins.client.MixinIngameMenu
+[20:31:09] [main/ERROR]: Classloader restrictions [PACKAGE_CLASSLOADER_EXCLUSION] encountered loading mixins.and1558.json:client.Invoke.ItemFoodAccessor, name: uk.to.and1558.mixins.client.Invoke.ItemFoodAccessor
+[20:31:09] [main/ERROR]: Classloader restrictions [PACKAGE_CLASSLOADER_EXCLUSION] encountered loading mixins.and1558.json:client.MixinRenderItem, name: uk.to.and1558.mixins.client.MixinRenderItem
+[20:31:09] [main/ERROR]: Classloader restrictions [PACKAGE_CLASSLOADER_EXCLUSION] encountered loading mixins.and1558.json:client.MixinRenderDroppedItem, name: uk.to.and1558.mixins.client.MixinRenderDroppedItem
+[20:31:09] [main/ERROR]: Classloader restrictions [PACKAGE_CLASSLOADER_EXCLUSION] encountered loading mixins.and1558.json:client.MixinDebugOverlay, name: uk.to.and1558.mixins.client.MixinDebugOverlay
+[20:31:09] [main/ERROR]: Classloader restrictions [PACKAGE_CLASSLOADER_EXCLUSION] encountered loading mixins.and1558.json:client.MixinRenderLiving, name: uk.to.and1558.mixins.client.MixinRenderLiving
+[20:31:09] [main/ERROR]: Classloader restrictions [PACKAGE_CLASSLOADER_EXCLUSION] encountered loading mixins.and1558.json:client.MixinRndrManager, name: uk.to.and1558.mixins.client.MixinRndrManager
+[20:31:09] [main/ERROR]: Classloader restrictions [PACKAGE_CLASSLOADER_EXCLUSION] encountered loading mixins.and1558.json:client.MixinPlayerEntity, name: uk.to.and1558.mixins.client.MixinPlayerEntity
+[20:31:09] [main/ERROR]: Classloader restrictions [PACKAGE_CLASSLOADER_EXCLUSION] encountered loading mixins.and1558.json:client.MixinNHPC, name: uk.to.and1558.mixins.client.MixinNHPC
+[20:31:09] [main/ERROR]: Classloader restrictions [PACKAGE_CLASSLOADER_EXCLUSION] encountered loading mixins.and1558.json:client.MixinRenderTNTPrimed, name: uk.to.and1558.mixins.client.MixinRenderTNTPrimed
+[20:31:09] [main/INFO]: Launching wrapped minecraft {net.minecraft.client.main.Main}
+[20:31:09] [main/INFO]: Mixing client.MixinCraft from mixins.and1558.json into net.minecraft.client.Minecraft
+[20:31:10] [main/INFO]: Mixing client.MixinPlayerEntity from mixins.and1558.json into net.minecraft.entity.player.EntityPlayer
+[20:31:10] [main/INFO]: Mixing client.MixinIngameMenu from mixins.and1558.json into net.minecraft.client.gui.GuiIngameMenu
+[20:31:10] [main/INFO]: Mixing client.MixinMainMenu from mixins.and1558.json into net.minecraft.client.gui.GuiMainMenu
+[20:31:10] [main/INFO]: Mixing client.MixinConnecting from mixins.and1558.json into net.minecraft.client.multiplayer.GuiConnecting
+[20:31:11] [Client thread/INFO]: Setting user: _SM64
+[20:31:11] [Client thread/INFO]: (Session ID is token:FML:_SM64)
+[20:31:12] [Client thread/INFO]: Mixing client.Invoke.ItemFoodAccessor from mixins.and1558.json into net.minecraft.item.ItemFood
+[20:31:13] [Client thread/INFO]: [Session Changer Mod] Loading session changer
+[20:31:13] [Client thread/INFO]: -----------------Session Changed-------------------
+[20:31:13] [Client thread/INFO]: Successfully changed session to the given arguments
+[20:31:13] [Client thread/INFO]: Username : _SM64
+[20:31:13] [Client thread/INFO]: Access Token : [CENSORED]
+[20:31:13] [Client thread/INFO]: ---------------------------------------------------
+[20:31:13] [Client thread/INFO]: [Session Changer Mod] User has been successfully changed to the given args
+[20:31:13] [Client thread/INFO]: [Session Changer Mod] aka: your default launchers account
+[20:31:13] [Client thread/INFO]: [LWJGL] Enable Repeat Events has been set to [TRUE]
+[20:31:13] [Client thread/INFO]: MIXING CLASSES... Stage 1
+[20:31:13] [Client thread/INFO]: MIXING CLASSES Stage 1 SUCCESS
+[20:31:13] [Client thread/INFO]: Loading Mod Configs...
+[20:31:13] [Client thread/INFO]: Mod Configs Loaded!
+[20:31:13] [Client thread/INFO]: Starting Discord RPC
+[20:31:13] [Client thread/INFO]: Started Discord RPC
+[20:31:13] [Client thread/INFO]: Mixing client.MixinItemRenderer from mixins.and1558.json into net.minecraft.client.renderer.ItemRenderer
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/ERROR]: The jar file C:\Users\AND5158\.gradle\caches\modules-2\files-2.1\net.java.jinput\jinput\2.0.5\39c7796b469a600f72380316f6b1f11db6c2c7c4\jinput-2.0.5.jar has a security seal for path net.java.games.input, but that path is defined and not secure
+[20:31:13] [Client thread/INFO]: Mixing client.MixinGameSettings from mixins.and1558.json into net.minecraft.client.settings.GameSettings
+[20:31:14] [Client thread/INFO]: LWJGL Version: 2.9.4
+[20:31:15] [Client thread/INFO]: Reloading ResourceManager: Default
+[20:31:16] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[20:31:16] [Thread-11/INFO]: Initializing LWJGL OpenAL
+[20:31:16] [Thread-11/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[20:31:16] [Thread-11/INFO]: OpenAL initialized.
+[20:31:16] [Client thread/INFO]: MIXING CLASSES... Stage 2
+[20:31:16] [Sound Library Loader/INFO]: Sound engine started
+[20:31:18] [Client thread/INFO]: Created: 512x512 textures-atlas
+[20:31:18] [Client thread/INFO]: Mixing client.MixinRenderItem from mixins.and1558.json into net.minecraft.client.renderer.entity.RenderItem
+[20:31:19] [Client thread/INFO]: Mixing client.MixinRndrManager from mixins.and1558.json into net.minecraft.client.renderer.entity.RenderManager
+[20:31:19] [Client thread/INFO]: Mixing client.MixinRenderLiving from mixins.and1558.json into net.minecraft.client.renderer.entity.RendererLivingEntity
+[20:31:19] [Client thread/INFO]: Mixing client.MixinRenderDroppedItem from mixins.and1558.json into net.minecraft.client.renderer.entity.RenderEntityItem
+[20:31:19] [Client thread/INFO]: Mixing client.MixinRenderTNTPrimed from mixins.and1558.json into net.minecraft.client.renderer.entity.RenderTNTPrimed
+[20:31:19] [Client thread/INFO]: Mixing client.MixinEntityRenderer from mixins.and1558.json into net.minecraft.client.renderer.EntityRenderer
+[20:31:19] [Client thread/INFO]: Mixing client.MixinIngame from mixins.and1558.json into net.minecraft.client.gui.GuiIngame
+[20:31:19] [Client thread/INFO]: Mixing client.MixinDebugOverlay from mixins.and1558.json into net.minecraft.client.gui.GuiOverlayDebug
+[20:31:19] [Client thread/INFO]: Mixing client.MixinSelectWorld from mixins.and1558.json into net.minecraft.client.gui.GuiSelectWorld
+[20:31:19] [Client thread/INFO]: Mixing client.MixinMultiplayerMenu from mixins.and1558.json into net.minecraft.client.gui.GuiMultiplayer
+[20:31:19] [Client thread/INFO]: Initializing Mods
+[20:31:19] [Client thread/INFO]: MIXING CLASSES Stage 2 SUCCESS
+[20:31:19] [Client thread/INFO]: Initializing Mods
+[20:31:27] [Client thread/INFO]: Initializing Mods
+[20:31:27] [Server thread/INFO]: Starting integrated minecraft server version 1.8.9
+[20:31:27] [Server thread/INFO]: Generating keypair
+[20:31:27] [Server thread/INFO]: Preparing start region for level 0
+[20:31:28] [Server thread/INFO]: Changing view distance to 12, from 10
+[20:31:31] [Client thread/INFO]: [CHAT] A New update is available, Please use the installer to update
+[20:31:31] [Client thread/INFO]: [CHAT] Current Version: §cdev-1.81
+[20:31:31] [Client thread/INFO]: [CHAT] Latest Version: §adev-1.80
+[20:31:31] [Client thread/INFO]: Initializing Mods
+[20:31:31] [Netty Local Client IO #0/INFO]: Mixing client.MixinNHPC from mixins.and1558.json into net.minecraft.client.network.NetHandlerPlayClient
+[20:31:31] [Server thread/INFO]: _SM64[local:E:a80a8334] logged in with entity id 132 at (545.8932354261187, 71.0, 27.425113201310378)
+[20:31:31] [Server thread/INFO]: _SM64 joined the game
+[20:31:34] [Server thread/INFO]: Saving and pausing game...
+[20:31:34] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
+[20:31:34] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
+[20:31:34] [Server thread/INFO]: Saving chunks for level 'New World'/The End
+[20:31:35] [Server thread/INFO]: Saving and pausing game...
+[20:31:35] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
+[20:31:35] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
+[20:31:35] [Server thread/INFO]: Saving chunks for level 'New World'/The End
+[20:32:16] [Server thread/INFO]: Saving and pausing game...
+[20:32:16] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
+[20:32:16] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
+[20:32:16] [Server thread/INFO]: Saving chunks for level 'New World'/The End
+[20:32:38] [Server thread/INFO]: Saving and pausing game...
+[20:32:38] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
+[20:32:38] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
+[20:32:38] [Server thread/INFO]: Saving chunks for level 'New World'/The End
+[20:32:42] [Client thread/INFO]: Stopping!
+[20:32:42] [Client thread/INFO]: SoundSystem shutting down...
+[20:32:42] [Server thread/INFO]: Stopping server
+[20:32:42] [Server thread/INFO]: Saving players
+[20:32:42] [Server thread/INFO]: Saving worlds
+[20:32:42] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
+[20:32:42] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
+[20:32:42] [Server thread/INFO]: Saving chunks for level 'New World'/The End
+[20:32:42] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
