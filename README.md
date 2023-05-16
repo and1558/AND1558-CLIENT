@@ -18,7 +18,10 @@ Note: This might take a while.<br>
 8. Click "Minecraft Client"
 9. on the line "-cp" change it to "and1558.main"
 10. You should be done now
-<p>Notes: if it fails to launch with an error of<br>"Caused by: java.lang.ClassNotFoundException: com.mojang.authlib.exceptions.AuthenticationException"<br>
-use the runClient script, and hopefully it would work</p>
+## Common Issues when Developing
+### "Caused by: java.lang.ClassNotFoundException: com.mojang.authlib.exceptions.AuthenticationException"
+Re-import the gradle project<br>
+### No sound on minecraft
+Copy the assets folder from your minecraft folder over to the run folder on intellij
 <h1>Thank you for your cooperations</h1>
 <p>This is the first revision of the 1.81Mixin Client Version</p>
