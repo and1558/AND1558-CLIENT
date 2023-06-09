@@ -9,7 +9,7 @@ Before you start, please make sure that you have your minecraft assets stored in
 else the script would fail to download as the minecraft assets website no longer allow using http<br>
 1. Open using your IDE (I used IntelliJ IDE for this)
 2. Wait until everything finish loading
-3. Click on gradle -> project name (should be and1558) -> tasks -> forgegradle
+3. Click on gradle -> project name (should be "and1558") -> tasks -> forgegradle
 4. Click on setupDecompWorkspace<br>
 Note: This might take a while.<br>
 5. Click on genIntellijRuns
