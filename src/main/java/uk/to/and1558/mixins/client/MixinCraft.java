@@ -191,7 +191,7 @@ public class MixinCraft{
     private void createDisplay() throws LWJGLException
     {
         Display.setResizable(true);
-        Display.setTitle("Minecraft 1.8.9 // AND1558 PVP Client UNRELEASED!!!");
+        Display.setTitle("Minecraft 1.8.9 // AND1558 PVP Client [Github]");
 
         try
         {
