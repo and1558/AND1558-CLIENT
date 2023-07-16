@@ -13,16 +13,7 @@ import java.io.IOException;
 
 public class ModTogglerScreen extends GuiScreen {
     GuiScreen lastGui;
-    boolean check1 = false;
-    boolean check2 = false;
-    boolean check3 = false;
-    boolean check4 = false;
-    boolean check5 = false;
-    boolean check6 = false;
-    boolean check7 = false;
-    boolean check8 = false;
-    boolean check9 = false;
-    boolean check10 = false;
+    boolean check1,check2,check3,check4,check5,check6,check7,check8,check9,check10 = false; // Simplified to 1 straight line [dev-1.82]
     public ModTogglerScreen(GuiScreen p_i1046_1_)
     {
         this.lastGui = p_i1046_1_;
@@ -62,7 +53,7 @@ public class ModTogglerScreen extends GuiScreen {
         check4 = and1558.getIO.loadConfig("lowfire");
         check5 = and1558.getIO.loadConfig("oldanimations");
         check6 = and1558.getIO.loadConfig("itemPhys");
-        check7 = false;
+        check7 = and1558.getIO.loadConfig("perspective");
         check8 = and1558.getIO.loadConfig("sprinttoggle");
         check9 = and1558.getIO.loadConfig("armorview");
     }
@@ -81,114 +72,67 @@ public class ModTogglerScreen extends GuiScreen {
         this.drawString(fontRendererObj, "- Toggle Sprint (no toggle sneak)", 32, 156, -1); // Partially Working
         this.drawString(fontRendererObj, "- Armor View (Includes Swords)", 32, 176, -1); //
         super.drawScreen(mouseX, mouseY, partialTicks);
-    }@Override
+    }
+
+    @Override
     protected void actionPerformed(final GuiButton button) throws IOException {
+        // Change on dev-1.82
+        // Simplified the else if statement
+        // Instead of if (true) logic; else if(false) logic;
+        // Use logic = value ? false : true;
         switch (button.id) {
             case 0: {
-                if(check1 == false) {
-                    check1 = true;
-                    and1558.getIO.saveConfig(true, "Keystrokes");
-                    ModInstances.getKeystrokes().isEnabled = true;
-                }else {
-                    check1 = false;
-                    and1558.getIO.saveConfig(false, "Keystrokes");
-                    ModInstances.getKeystrokes().isEnabled = false;
-                }
+                check1 = check1 ? false : true;
+                and1558.getIO.saveConfig(check1, "Keystrokes");
+                ModInstances.getKeystrokes().isEnabled = check1;
                 break;
             }
             case 1:{
-                if(check2 == false){
-                    check2 = true;
-                    and1558.getIO.saveConfig(true, "bps");
-                    ModInstances.getSpeedCounter().isEnabled = true;
-                }else{
-                    check2 = false;
-                    and1558.getIO.saveConfig(false, "bps");
-                    ModInstances.getSpeedCounter().isEnabled = false;
-                }
+                check2 = check2 ? false : true;
+                and1558.getIO.saveConfig(check2, "bps");
+                ModInstances.getSpeedCounter().isEnabled = check2;
                 break;
             }
             case 2:{
-                if(check3 == false){
-                    check3 = true;
-                    and1558.getIO.saveConfig(true, "ping");
-                    ModInstances.getPingCounter().isEnabled = true;
-                }else{
-                    check3 = false;
-                    and1558.getIO.saveConfig(false, "ping");
-                    ModInstances.getPingCounter().isEnabled = false;
-                }
+                check3 = check3 ? false : true;
+                and1558.getIO.saveConfig(check3, "ping");
+                ModInstances.getPingCounter().isEnabled = check3;
                 break;
             }
             case 3:{
-                if(check4 == false){
-                    check4 = true;
-                    and1558.getIO.saveConfig(true, "lowfire");
-                    ModInstances.getLfire().isEnabled = true;
-                }else{
-                    check4 = false;
-                    and1558.getIO.saveConfig(false, "lowfire");
-                    ModInstances.getLfire().isEnabled = false;
-                }
+                check4 = check4 ? false : true;
+                and1558.getIO.saveConfig(check4, "lowfire");
+                ModInstances.getLfire().isEnabled = check4;
                 break;
             }
             case 4:{
-                if(check5 == false){
-                    check5 = true;
-                    and1558.getIO.saveConfig(true, "oldanimations");
-                    ModInstances.getOldanim().isEnabled = true;
-                }else{
-                    check5 = false;
-                    and1558.getIO.saveConfig(false, "oldanimations");
-                    ModInstances.getOldanim().isEnabled = false;
-                }
+                check5 = check5 ? false : true;
+                and1558.getIO.saveConfig(check5, "oldanimations");
+                ModInstances.getOldanim().isEnabled = check5;
                 break;
             }
             case 5:{
-                if(check6 == false){
-                    check6 = true;
-                    and1558.getIO.saveConfig(true, "itemPhys");
-                    ModInstances.getItemPhysics().isEnabled = true;
-                }else{
-                    check6 = false;
-                    and1558.getIO.saveConfig(false, "itemPhys");
-                    ModInstances.getItemPhysics().isEnabled = false;
-                }
+                check6 = check6 ? false : true;
+                and1558.getIO.saveConfig(check6, "itemPhys");
+                ModInstances.getItemPhysics().isEnabled = check6;
+                break;
             }
             case 6:{
-                if(check7 == false){
-                    check7 = true;
-                    and1558.getIO.saveConfig(true, "perspective");
-                    ModInstances.getToggleSprint().isEnabled = true;
-                }else{
-                    check7 = false;
-                    and1558.getIO.saveConfig(false, "perspective");
-                    ModInstances.getToggleSprint().isEnabled = false;
-                }
+                check7 = check7 ? false : true;
+                and1558.getIO.saveConfig(check7, "perspective");
+                ModInstances.getPerspective().isEnabled = check7;
                 break;
             }
             case 7:{
-                if(check8 == false){
-                    check8 = true;
-                    and1558.getIO.saveConfig(true, "sprinttoggle");
-                    ModInstances.getToggleSprint().isEnabled = true;
-                }else{
-                    check8 = false;
-                    and1558.getIO.saveConfig(false, "sprinttoggle");
-                    ModInstances.getToggleSprint().isEnabled = false;
-                }
+                check8 = check8 ? false : true;
+                and1558.getIO.saveConfig(check8, "sprinttoggle");
+                ModInstances.getToggleSprint().isEnabled = check8;
                 break;
             }
             case 8:{
-                if(check9 == false){
-                    check9 = true;
-                    and1558.getIO.saveConfig(true, "armorview");
-                    ModInstances.getArmorView().isEnabled = true;
-                }else{
-                    check9 = false;
-                    and1558.getIO.saveConfig(false, "armorview");
-                    ModInstances.getArmorView().isEnabled = false;
-                }
+                check8 = check9 ? false : true;
+                and1558.getIO.saveConfig(check9, "armorview");
+                ModInstances.getArmorView().isEnabled = check9;
                 break;
             }
             case 10:{
@@ -199,93 +143,56 @@ public class ModTogglerScreen extends GuiScreen {
         super.actionPerformed(button);
     }
     public void setEnable(int which, boolean isEnabled) {
-        // Below is for enabled
-        if(which == 0 && isEnabled) {
-            check1 = true;
-        }else if(which == 1 && isEnabled) {
-            check2 = true;
-        }else if(which == 2 && isEnabled) {
-            check3 = true;
-        }else if(which == 3 && isEnabled) {
-            check4 = true;
-        }else if(which == 4 && isEnabled) {
-            check5 = true;
-        }else if(which == 5 && isEnabled) {
-            check6 = true;
-        }else if(which == 6 && isEnabled) {
-            check7 = true;
-        }else if(which == 7 && isEnabled) {
-            check8 = true;
-        }else if(which == 8 && isEnabled) {
-            check9 = true;
-        }else if(which == 9 && isEnabled) {
-            check10 = true;
-        }else // Below is for disabled
-            if(which == 0 && !isEnabled) {
-                check1 = false;
-            }else if(which == 1 && !isEnabled) {
-                check2 = false;
-            }else if(which == 2 && !isEnabled) {
-                check3 = false;
-            }else if(which == 3 && !isEnabled) {
-                check4 = false;
-            }else if(which == 4 && !isEnabled) {
-                check5 = false;
-            }else if(which == 5 && !isEnabled) {
-                check6 = false;
-            }else if(which == 6 && !isEnabled) {
-                check7 = false;
-            }else if(which == 7 && !isEnabled) {
-                check8 = false;
-            }else if(which == 8 && !isEnabled) {
-                check9 = false;
-            }else if(which == 9 && !isEnabled) {
-                check10 = false;
-            }
+        // Change on dev-1.82
+        // Simplified the else if statement
+        // See last change for more info
+        if(which == 0) {
+            check1 = isEnabled ? true : false;
+        }else if(which == 1) {
+            check2 = isEnabled ? true : false;
+        }else if(which == 2) {
+            check3 = isEnabled ? true : false;
+        }else if(which == 3) {
+            check4 = isEnabled ? true : false;
+        }else if(which == 4) {
+            check5 = isEnabled ? true : false;
+        }else if(which == 5) {
+            check6 = isEnabled ? true : false;
+        }else if(which == 6) {
+            check7 = isEnabled ? true : false;
+        }else if(which == 7) {
+            check8 = isEnabled ? true : false;
+        }else if(which == 8) {
+            check9 = isEnabled ? true : false;
+        }else if(which == 9) {
+            check10 = isEnabled ? true : false;
+        }
     }
     private void checkMods(int which, boolean isEnabled) {
-        if(which == 0 && isEnabled) {
-            check1 = true;
-        }else if(which == 1 && isEnabled) {
-            check2 = true;
-        }else if(which == 2 && isEnabled) {
-            check3 = true;
-        }else if(which == 3 && isEnabled) {
-            check4 = true;
-        }else if(which == 4 && isEnabled) {
-            check5 = true;
-        }else if(which == 5 && isEnabled) {
-            check6 = true;
-        }else if(which == 6 && isEnabled) {
-            check7 = true;
-        }else if(which == 7 && isEnabled) {
-            check8 = true;
-        }else if(which == 8 && isEnabled) {
-            check9 = true;
-        }else if(which == 9 && isEnabled) {
-            check10 = true;
-        }else // Below is for disabled
-            if(which == 0 && !isEnabled) {
-                check1 = false;
-            }else if(which == 1 && !isEnabled) {
-                check2 = false;
-            }else if(which == 2 && !isEnabled) {
-                check3 = false;
-            }else if(which == 3 && !isEnabled) {
-                check4 = false;
-            }else if(which == 4 && !isEnabled) {
-                check5 = false;
-            }else if(which == 5 && !isEnabled) {
-                check6 = false;
-            }else if(which == 6 && !isEnabled) {
-                check7 = false;
-            }else if(which == 7 && !isEnabled) {
-                check8 = false;
-            }else if(which == 8 && !isEnabled) {
-                check9 = false;
-            }else if(which == 9 && !isEnabled) {
-                check10 = false;
-            }
+        // Change on dev-1.82
+        // Simplified the else if statement
+        // See last change for more info
+        if(which == 0) {
+            check1 = isEnabled ? true : false;
+        }else if(which == 1) {
+            check2 = isEnabled ? true : false;
+        }else if(which == 2) {
+            check3 = isEnabled ? true : false;
+        }else if(which == 3) {
+            check4 = isEnabled ? true : false;
+        }else if(which == 4) {
+            check5 = isEnabled ? true : false;
+        }else if(which == 5) {
+            check6 = isEnabled ? true : false;
+        }else if(which == 6) {
+            check7 = isEnabled ? true : false;
+        }else if(which == 7) {
+            check8 = isEnabled ? true : false;
+        }else if(which == 8) {
+            check9 = isEnabled ? true : false;
+        }else if(which == 9) {
+            check10 = isEnabled ? true : false;
+        }
     }
     // Updates screen at a specific amount of time, Regarding the FPS
     @Override

@@ -13,7 +13,10 @@ public class RenderNametag <T extends EntityLivingBase> extends Render<T>  {
     public RenderNametag(RenderManager renderManager) {
         super(renderManager);
     }
-
+    /* ===========================
+    *   This used to be able to see your nametag
+    *   on F5 or the Inventory (for some reason)
+    *  ===========================*/
     public boolean canRenderName(T entity)
     {
         EntityPlayerSP entityplayersp = Minecraft.getMinecraft().thePlayer;
