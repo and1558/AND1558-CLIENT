@@ -6,7 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
-
+// Create a button with a checkbox
 public class GuiCheckBox extends GuiButton {
 
 	public boolean checked;

@@ -25,6 +25,9 @@ import uk.to.and1558.Mods.ModLoader.ModIO;
 import uk.to.and1558.Mods.ModLoader.ModInstances;
 import uk.to.and1558.Mods.RawMouseInput;
 import uk.to.and1558.Plugins.AnimationHandler;
+import uk.to.and1558.Gui.impl.GuiUtils;
+import uk.to.and1558.Plugins.ClientAnimations.Animation;
+import uk.to.and1558.Plugins.ClientAnimations.Easing;
 import uk.to.and1558.Plugins.SessionMod;
 
 public class and1558 {
@@ -32,6 +35,8 @@ public class and1558 {
     public static final and1558 INSTANCE = new and1558();
     public boolean started = false;
     public static final and1558 getInstance() { return INSTANCE; }
+    // dev-1.82. Added animations for GuiUtils and made it accessible here
+    public static GuiUtils guiUtils = new GuiUtils();
     private DiscordRPCEvent DiscordEvent = new DiscordRPCEvent();
     private HUDManager hudManager;
     public KeyBinding MODPOSGUI;

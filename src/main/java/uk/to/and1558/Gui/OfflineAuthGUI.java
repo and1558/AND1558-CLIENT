@@ -28,6 +28,7 @@ public class OfflineAuthGUI extends GuiScreen {
 
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {
+        // dev 1.82 -> Fixed going to last menu after clicking login
         switch (button.id){
             case 0:{
                 /**try {
@@ -39,6 +40,7 @@ public class OfflineAuthGUI extends GuiScreen {
                 }**/
                 and1558.getInstance().modifyableSession.changeSession(email.getText(), email.getText(), "0", "legacy");
                 err = "Successfully logged in as: " + and1558.getInstance().modifyableSession.getUsername();
+                break;
             }
             case 1:{
                 this.mc.displayGuiScreen(new GuiSelectSession());

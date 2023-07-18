@@ -29,4 +29,10 @@ public class HP extends ModDraggable {
                 font.drawStringWithShadow("HP: " + (int) this.mc.thePlayer.getHealth() + "/" + (int) this.mc.thePlayer.getMaxHealth(), pos.getAbsoluteX(), pos.getAbsoluteY(), Color.YELLOW.getRGB());
         }
     }
+
+    @Override
+    public void renderDummy(ScreenPosition pos) {
+        // Fixed HP text ont showing when opening the editor WITHOUT a world opened
+        font.drawStringWithShadow("HP: ??/??", pos.getAbsoluteX(), pos.getAbsoluteY(), -1);
+    }
 }

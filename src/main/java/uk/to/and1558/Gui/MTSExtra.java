@@ -10,7 +10,7 @@ import uk.to.and1558.Gui.impl.GuiUtils;
 public class MTSExtra extends GuiScreen {
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        GuiUtils.drawRoundBG(this);
+        GuiUtils.drawRoundBG(this, false);
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 }

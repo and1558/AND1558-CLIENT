@@ -6,10 +6,11 @@ import net.arikia.dev.drpc.DiscordUser;
 import net.arikia.dev.drpc.callbacks.ReadyCallback;
 import net.arikia.dev.drpc.DiscordRPC;
 import uk.to.and1558.and1558;
-
+// Discord RPC Implementation for this client
 public class DiscordRPCEvent {
     private boolean running = true;
     private long created = 0;
+    // Initialize the DiscordRPC Service
     public void start(){
         this.created = System.currentTimeMillis();
         DiscordEventHandlers handlers = new DiscordEventHandlers.Builder().setReadyEventHandler(new ReadyCallback() {
@@ -34,6 +35,7 @@ public class DiscordRPCEvent {
         // Does not shutdown discord, only the Rich Presence
         DiscordRPC.discordShutdown();
     }
+    // Update the Rich Presence with a text when hovering the icon
     public void update(String first, String Second, String Hover){
         DiscordRichPresence.Builder b = new DiscordRichPresence.Builder(Second);
         b.setBigImage("large", Hover);
@@ -41,6 +43,7 @@ public class DiscordRPCEvent {
         b.setStartTimestamps(created);
         DiscordRPC.discordUpdatePresence(b.build());
     }
+    // Update the Rich Presence without a text when hovering the icon
     public void update(String first, String Second){
         DiscordRichPresence.Builder b = new DiscordRichPresence.Builder(Second);
         b.setBigImage("large", "");

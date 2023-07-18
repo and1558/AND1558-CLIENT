@@ -17,6 +17,8 @@ import java.io.IOException;
 public class MSAuthGUI extends GuiScreen {
     private GuiTextField email;
     private GuiTextField pass;
+    private GuiButton loginButton;
+    private GuiButton backButton;
 
     @Override
     public void updateScreen() {
@@ -26,8 +28,10 @@ public class MSAuthGUI extends GuiScreen {
     @Override
     public void initGui() {
         //this.buttonList.add(new GuiButton(0, this.width / 2 - 155, this.height - 28, 150, 20, "Login"));
-        this.buttonList.add(new GuiButton(0, this.width / 2 - 160, 150, 150, 20, "Login"));
-        this.buttonList.add(new GuiButton(1, this.width / 2, 150, 150, 20, "Back"));
+        loginButton = new GuiButton(0, this.width / 2 - 160, 150, 150, 20, "Login");
+        backButton = new GuiButton(1, this.width / 2, 150, 150, 20, "Back");
+        this.buttonList.add(loginButton);
+        this.buttonList.add(backButton);
         this.buttonList.add(new GuiCheckBox(4, this.width / 2 + 105, 100, showPass));
         this.email = new GuiTextField(2, this.fontRendererObj, this.width / 2 - 100, 60, 200, 20);
         this.pass = new GuiTextField(3, this.fontRendererObj,this.width / 2 - 100, 100, 200, 20);
@@ -36,16 +40,24 @@ public class MSAuthGUI extends GuiScreen {
 
     @Override
     protected void actionPerformed(GuiButton button) throws IOException {
+        // dev 1-.82 -> Fixed client freezing when trying to login
         switch (button.id){
             case 0:{
-                try {
-                    new MSAuth().authenticate(this.email.getText(), this.pass.getText());
-                }
-                catch (MicrosoftAuthenticationException e){
-                    err = e.getMessage();
-                    break;
-                }
-                err = "Successfully logged in as: " + and1558.getInstance().modifyableSession.getUsername();
+                new Thread(() -> {
+                    err = "Trying to login, Please Wait...";
+                    loginButton.enabled = false;
+                    backButton.enabled = false;
+                    try {
+                        new MSAuth().authenticate(this.email.getText(), this.pass.getText());
+                        err = "Successfully logged in as: " + and1558.getInstance().modifyableSession.getUsername();
+                    }
+                    catch (MicrosoftAuthenticationException e){
+                        err = e.getMessage();
+                        pass.setText("");
+                    }
+                    loginButton.enabled = true;
+                    backButton.enabled = true;
+                }).start();
                 break;
             }
             case 1:{

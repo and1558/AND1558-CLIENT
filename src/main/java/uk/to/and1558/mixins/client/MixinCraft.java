@@ -4,7 +4,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.MusicTicker;
 import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.main.GameConfiguration;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -34,8 +36,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import uk.to.and1558.Events.KeyEvent;
 import uk.to.and1558.Events.impl.ClientTickEvent;
 import uk.to.and1558.Gui.SplashScreen;
+import uk.to.and1558.Gui.impl.BlurUtils;
 import uk.to.and1558.Mods.RawMouseHelper;
 import uk.to.and1558.Mods.RawMouseInput;
+import uk.to.and1558.Plugins.GuiUtils;
 import uk.to.and1558.Plugins.SessionMod;
 import uk.to.and1558.Plugins.ShaderLoader;
 import uk.to.and1558.and1558;
@@ -134,13 +138,12 @@ public class MixinCraft{
     }
 
     @Inject(method = "startGame", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;checkGLError(Ljava/lang/String;)V"))
-    private void init4(CallbackInfo ci){
-        if(!done3) {
+    private void init4(CallbackInfo ci) {
+        if (!done3) {
             SplashScreen.setProgress(8, "Minecraft - Finished!");
-            done3=true;
+            done3 = true;
         }
     }
-    private boolean executeOnce = false;
     @Inject(method = "runTick", at = @At("HEAD"))
     private void event1(CallbackInfo ci){
         and1558.getInstance().EarlyTick();
@@ -151,21 +154,12 @@ public class MixinCraft{
         KeyEvent keyEvent = new KeyEvent(k);
         keyEvent.call();
     }
+
     @Inject(method = "runTick", at = @At("RETURN"))
     private void event(CallbackInfo ci){
         and1558.getInstance().setPartialTicks(timer.renderPartialTicks);
         and1558.getInstance().tick();
-        /**
-         * WARNING: POTENTIALLY NOT SUPPORTED WITH OPTIFINE, DUE TO STOPPING USES OF SHADER!!!!
-         */
-        if(this.currentScreen != null && !executeOnce && !this.currentScreen.toString().contains(/*use amv if running outside of development as minecraft classes are obfuscated*/"GuiChat")){
-            ShaderLoader.loadShader(new ResourceLocation("shaders/post/blur.json"));
-            executeOnce = true;
-        }
-        else if(this.currentScreen == null && executeOnce){
-            this.entityRenderer.stopUseShader();
-            executeOnce = false;
-        }
+        // Removed default GUI blur. [dev 1.82]
         new ClientTickEvent().call();
     }
 

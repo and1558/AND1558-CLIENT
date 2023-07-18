@@ -23,6 +23,7 @@
     "client.MixinRndrManager",
     "client.MixinPlayerEntity",
     "client.MixinNHPC",
-    "client.MixinRenderTNTPrimed"
+    "client.MixinRenderTNTPrimed",
+    "client.MixinGuiScreen"
   ]
 }

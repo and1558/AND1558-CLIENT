@@ -19,6 +19,8 @@ import org.lwjgl.opengl.GL11;
 import uk.to.and1558.Gui.FallbackGui.PanelCrashReport;
 import uk.to.and1558.Mods.ModLoader.ModInstances;
 import uk.to.and1558.Gui.impl.RButton;
+import uk.to.and1558.Plugins.ClientAnimations.Animation;
+import uk.to.and1558.Plugins.ClientAnimations.Easing;
 import uk.to.and1558.VersionString;
 import uk.to.and1558.and1558;
 
@@ -28,13 +30,16 @@ public class MainMenu extends GuiScreen
         mainMenu = this;
     }
     public RButton multiplayer;
-    int posX = -20;
+    int posX = -400;
+    // Animations Variable
+    private Animation animation,opacityTransition,logoAnim,clientTextAnim;
+
     @Override
     public void initGui() {
         and1558.getInstance().init2();
-        opacity = 0.0F;
-        posX = -20;
-        and1558.getInstance().getDiscordRPC().update("Main Menu", "Waiting for input", "Main Menu dik hed"); //Idle, Main Menu
+        posX = -400;
+        // dev 1.82 -> Removes offensive text
+        and1558.getInstance().getDiscordRPC().update("Main Menu", "Waiting for input"); //Idle, Main Menu
         this.buttonList.add(new RButton(1, this.width / 2 - 50, this.height / 2 - 17, 98, 16, 7, "Singleplayer")); //Singleplayer
         this.buttonList.add(multiplayer = new RButton(2, this.width / 2 - 50, this.height / 2, 98, 16, 7, "Multiplayer")); //Multiplayer
         this.buttonList.add(new RButton(10, this.width / 2 - 50, this.height / 2 + 17, 98, 16, 7, "Changelog"));
@@ -44,11 +49,19 @@ public class MainMenu extends GuiScreen
         this.buttonList.add(new RButton(8, this.width / 2 - 50, this.height / 2 + 85, 98, 16, 7, "Credits"));
         this.buttonList.add(new RButton(9, this.width - 136, 6, 110, 16, 7, EnumChatFormatting.BOLD + "Change Session"));
         this.buttonList.add(new RButton(7, this.width - 23, 6, 17, 17, 7, EnumChatFormatting.BOLD + ""));
+        // dev 1.82. Added Animations for the UI when opened
+        animation = new Animation(2f,-200,0, Easing.EASE_OUT_QUINT);
+        opacityTransition = new Animation(5f, 0.0f, 1.0f, Easing.EASE_OUT_QUINT);
+        logoAnim = new Animation(2f, -50, 30, Easing.EASE_OUT_QUINT);
+        clientTextAnim = new Animation(2f, this.width, 0, Easing.EASE_OUT_QUINT);
         super.initGui();
     }
-    float opacity = 0.0F;
+
     @Override
     public void drawScreen(final int mouseX, final int mouseY, final float partialTicks) {
+        // dev 1.82 -> Changed to a smoother animation
+        if(animation != null)
+            posX = (int) animation.getValue();
         and1558.getInstance().runSingleplayer();
         // Stuck in 39 - 40
         this.mc.getTextureManager().bindTexture(new ResourceLocation("and1558/images/bg.jpg"));
@@ -58,27 +71,31 @@ public class MainMenu extends GuiScreen
 
         DrawChangelogs.getLess(this, this.fontRendererObj, posX);
 
-        this.drawCenteredString(this.mc.fontRendererObj, EnumChatFormatting.BOLD + "AND1558 " + EnumChatFormatting.RESET + "Client", this.width / 2 - 2, this.height / 2 - 30, -1);
+        // dev 1.82. Added Animations for client text name
+        this.drawCenteredString(this.mc.fontRendererObj, EnumChatFormatting.BOLD + "AND1558 " + EnumChatFormatting.RESET + "Client", this.width / 2 - 2 - (int) clientTextAnim.getValue(), this.height / 2 - 30, -1);
 
         super.drawScreen(mouseX, mouseY, partialTicks);
         mc.getTextureManager().bindTexture(new ResourceLocation("and1558/images/menu/exit.png"));
         Gui.drawModalRectWithCustomSizedTexture(width - 22, 7, 0, 0, 16, 16, 16, 16);
         GL11.glEnable(GL11.GL_BLEND);
-        GL11.glColor4f(1.0F,1.0F,1.0F,opacity);
+        GL11.glColor4f(1.0F,1.0F,1.0F,opacityTransition.getValue());
+        // Draws Minecraft Logo
         int i = 274;
         int j = this.width / 2 - i / 2;
-        int k = 30;
+        int k = (int) logoAnim.getValue();
         this.mc.getTextureManager().bindTexture(new ResourceLocation("textures/gui/title/minecraft.png"));
         //GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+
         this.drawTexturedModalRect(j + 0, k + 0, 0, 0, 155, 44);
         this.drawTexturedModalRect(j + 155, k + 0, 0, 45, 155, 44);
         GlStateManager.pushMatrix();
         GlStateManager.translate((float) (this.width / 2 + 90), 70.0F, 0.0F);
         GlStateManager.rotate(-20.0F, 0.0F, 0.0F, 1.0F);
         float f = 1.8F - MathHelper.abs(MathHelper.sin((float) (Minecraft.getSystemTime() % 1000L) / 1000.0F * (float) Math.PI * 2.0F) * 0.5F);
-        f = f * 100.0F / (float) (this.fontRendererObj.getStringWidth("Finally Mixin") + 32);
+        // dev 1.82 -> Changed text from "Finally Mixin!" to "Welcome {username}"
+        f = f * 100.0F / (float) (this.fontRendererObj.getStringWidth("Welcome " + mc.getSession().getUsername() + "!") + 32);
         GlStateManager.scale(f, f, f);
-        this.drawCenteredString(this.fontRendererObj, "Finally Mixin!", 0, -8, -256);
+        this.drawCenteredString(this.fontRendererObj, "Welcome " + mc.getSession().getUsername() + "!", 0, -8, -256);
         GlStateManager.popMatrix();
         GL11.glDisable(GL11.GL_BLEND);
     }
@@ -141,15 +158,12 @@ public class MainMenu extends GuiScreen
         super.actionPerformed(button);
     }
 
+
     @Override
     public void updateScreen() {
         if(and1558.INSTANCE.started) {
-            if (opacity < 1) {
-                opacity += 0.04F;
-            }
-            if (posX < 0) {
-                posX += 1;
-            }
+            // dev 1.82 -> Logo opacity transition moved to drawScreen()
+            // dev 1.82 -> Changelog animation moved to drawScreen()
         }else {
 
         }

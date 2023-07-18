@@ -25,7 +25,7 @@ public class ModComboCounter extends ModDraggable {
 
     @Override
     public int getWidth() {
-        return font.getStringWidth("[NUL Combo]");
+        return font.getStringWidth("[0 Combo]");
     }
 
     @Override
@@ -47,7 +47,7 @@ public class ModComboCounter extends ModDraggable {
 
     @Override
     public void renderDummy(ScreenPosition pos) {
-        font.drawString("[NUL Combo]", pos.getAbsoluteX(), pos.getAbsoluteY(), -1,true);
-        super.renderDummy(pos);
+        // dev 1.82 -> Fixed Combo text glitching on the Edit Menu
+        font.drawString("[0 Combo]", pos.getAbsoluteX(), pos.getAbsoluteY(), -1,true);
     }
 }

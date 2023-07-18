@@ -2,7 +2,8 @@ package uk.to.and1558.Gui.impl;
 
 import uk.to.and1558.Mods.ModLoader.ModInstances;
 import uk.to.and1558.and1558;
-
+// Unused!
+// Testing a new saving mechanism
 public class MTSSaver {
     public static void save(int which, boolean val){
         switch (which) {

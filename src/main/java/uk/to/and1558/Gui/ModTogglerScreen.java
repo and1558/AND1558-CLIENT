@@ -35,7 +35,8 @@ public class ModTogglerScreen extends GuiScreen {
         this.buttonList.add(new GuiCheckBox(6, 10, 130, check7));
         this.buttonList.add(new GuiCheckBox(7, 10, 150, check8));
         this.buttonList.add(new GuiCheckBox(8, 10, 170, check9));
-        this.buttonList.add(new GuiButton(10,10,210, "Back"));
+        this.buttonList.add(new GuiCheckBox(9, 10, 190, check10));
+        this.buttonList.add(new GuiButton(10,10,230, "Back"));
         super.initGui();
     }
     private void checkAll(){
@@ -44,7 +45,12 @@ public class ModTogglerScreen extends GuiScreen {
         checkMods(2, ModInstances.getPingCounter().isEnabled);
         checkMods(3, ModInstances.getLfire().isEnabled);
         checkMods(4, ModInstances.getOldanim().isEnabled);
+        // dev-1.82 -> Actually checks every mod
+        checkMods(5, ModInstances.getItemPhysics().isEnabled);
+        checkMods(6, ModInstances.getPerspective().isEnabled);
+        checkMods(7, ModInstances.getToggleSprint().isEnabled);
         checkMods(8, ModInstances.getArmorView().isEnabled);
+        checkMods(9, ModInstances.getOldDebug().isEnabled);
     }
     private void loadAll(){
         check1 = and1558.getIO.loadConfig("Keystrokes");
@@ -56,6 +62,7 @@ public class ModTogglerScreen extends GuiScreen {
         check7 = and1558.getIO.loadConfig("perspective");
         check8 = and1558.getIO.loadConfig("sprinttoggle");
         check9 = and1558.getIO.loadConfig("armorview");
+        check10 = and1558.getIO.loadConfig("oldf3");
     }
 
     //Re-draws/draws screen, Depends on FPS
@@ -68,9 +75,11 @@ public class ModTogglerScreen extends GuiScreen {
         this.drawString(fontRendererObj, "- LowFire", 32, 76, -1); // Done
         this.drawString(fontRendererObj, "- Old Animations (1.7 Additions) (Partially Working)", 32, 96, -1); // Partially Working
         this.drawString(fontRendererObj, "- Item Physics [Now Toggleable!]", 32, 116, -1); // Broken
-        this.drawString(fontRendererObj, "- Perspective Mod (Hypixel Disabled)", 32, 136, -1); // Janky
+        this.drawString(fontRendererObj, "- Perspective Mod (Hypixel Disabled)", 32, 136, -1); // Working
         this.drawString(fontRendererObj, "- Toggle Sprint (no toggle sneak)", 32, 156, -1); // Partially Working
-        this.drawString(fontRendererObj, "- Armor View (Includes Swords)", 32, 176, -1); //
+        this.drawString(fontRendererObj, "- Armor View (Includes Swords)", 32, 176, -1); // Working
+        // dev 1.82 -> Added OLD F3 to toggling list
+        this.drawString(fontRendererObj, "- 1.7 Version of F3", 32, 196, -1); //
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
@@ -130,9 +139,15 @@ public class ModTogglerScreen extends GuiScreen {
                 break;
             }
             case 8:{
-                check8 = check9 ? false : true;
+                check9 = check9 ? false : true;
                 and1558.getIO.saveConfig(check9, "armorview");
                 ModInstances.getArmorView().isEnabled = check9;
+                break;
+            }
+            case 9:{
+                check10 = check10 ? false : true;
+                and1558.getIO.saveConfig(check10,"oldf3");
+                ModInstances.getOldDebug().isEnabled = check10;
                 break;
             }
             case 10:{

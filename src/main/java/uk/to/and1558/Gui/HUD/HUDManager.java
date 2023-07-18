@@ -74,6 +74,8 @@ public class HUDManager
         if (pos == null) {
             pos = ScreenPosition.fromRelativePosition(1.5, 1.5);
         }
-        renderer.render(pos);
+        // Disable HUD Mod from being visible when another menu opens
+        if(mc.currentScreen == null)
+            renderer.render(pos);
     }
 }
