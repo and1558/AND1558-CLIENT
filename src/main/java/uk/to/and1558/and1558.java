@@ -8,9 +8,11 @@ import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.MathHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.opengl.Display;
 import uk.to.and1558.DiscordRP.DiscordRPCEvent;
 import uk.to.and1558.Events.EventManager;
 import uk.to.and1558.Events.EventTarget;
@@ -21,6 +23,7 @@ import uk.to.and1558.Gui.HUD.HUDManager;
 import uk.to.and1558.Gui.ModTogglerScreen;
 import uk.to.and1558.Gui.SplashScreen;
 import uk.to.and1558.IO.FileIOManager;
+import uk.to.and1558.Mods.ModLoader.Mod;
 import uk.to.and1558.Mods.ModLoader.ModIO;
 import uk.to.and1558.Mods.ModLoader.ModInstances;
 import uk.to.and1558.Mods.RawMouseInput;
@@ -119,6 +122,20 @@ public class and1558 {
             new ModTogglerScreen().setEnable(7, false);
             ModInstances.getToggleSprint().isEnabled = false;
         }
+        if (getIO.loadConfig("oldf3") == true){
+            new ModTogglerScreen().setEnable(9,true);
+            ModInstances.getOldDebug().isEnabled = true;
+        }else{
+            new ModTogglerScreen().setEnable(9,false);
+            ModInstances.getOldDebug().isEnabled = false;
+        }
+        if (getIO.loadConfig("hp") == true){
+            new ModTogglerScreen().setEnable(10,true);
+            ModInstances.getHPDisplay().isEnabled = true;
+        }else{
+            new ModTogglerScreen().setEnable(10,false);
+            ModInstances.getHPDisplay().isEnabled = false;
+        }
         if(getIO.loadConfig("rminput") == true){
             RawMouseInput.turnOnRMInput();
         }
@@ -167,7 +184,12 @@ public class and1558 {
         if(isUpdateChecked == false) {
             if (new UpdateCheckEvent().isLatest() == false) {
                 // If current version is NOT the latest version
+                String newVersion = UpdateCheckThread.getVersionNumber();
                 isUpdateChecked = true;
+                if(newVersion == "Version.Number.Latest"){
+                    Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("Unable to check for updates, Please check your internet connection"));
+                    return;
+                }
                 Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("A New update is available, Please use the installer to update"));
                 Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("Current Version: " + EnumChatFormatting.RED + VersionString.verSimple));
                 Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new ChatComponentText("Latest Version: " + EnumChatFormatting.GREEN + UpdateCheckThread.getVersionNumber()));
@@ -185,6 +207,7 @@ public class and1558 {
         if(MODPOSGUI != null && MODPOSGUI.isPressed()){
             hudManager.openMenuScreen();
         }
+        Display.setTitle("Minecraft 1.8.9 / AND1558 PVP Client [Github] [FPS: " + Minecraft.getDebugFPS() + "]");
     }
     public void setKeybind(KeyBinding key, String type){
         if(type.contains("POS")) {
@@ -225,5 +248,97 @@ public class and1558 {
     }
     public void EarlyTick(){
 
+    }
+    public static enum Options{
+        testslide("options.fov", true, false, 30.0F, 110.0F, 1.0F);
+        private final boolean enumFloat;
+        private final boolean enumBoolean;
+        private final String enumString;
+        private final float valueStep;
+        private float valueMin;
+        private float valueMax;
+
+        public static and1558.Options getEnumOptions(int p_74379_0_)
+        {
+            for (and1558.Options gamesettings$options : values())
+            {
+                if (gamesettings$options.returnEnumOrdinal() == p_74379_0_)
+                {
+                    return gamesettings$options;
+                }
+            }
+
+            return null;
+        }
+        private Options(String p_i1015_3_, boolean isFloat, boolean isBoolean)
+        {
+            this(p_i1015_3_, isFloat, isBoolean, 0.0F, 1.0F, 0.0F);
+        }
+
+        private Options(String name, boolean isFloat, boolean isBoolean, float min, float max, float defValue)
+        {
+            this.enumString = name;
+            this.enumFloat = isFloat;
+            this.enumBoolean = isBoolean;
+            this.valueMin = min;
+            this.valueMax = max;
+            this.valueStep = defValue;
+        }
+
+        public boolean getEnumFloat()
+        {
+            return this.enumFloat;
+        }
+
+        public boolean getEnumBoolean()
+        {
+            return this.enumBoolean;
+        }
+
+        public int returnEnumOrdinal()
+        {
+            return this.ordinal();
+        }
+
+        public String getEnumString()
+        {
+            return this.enumString;
+        }
+
+        public float getValueMax()
+        {
+            return this.valueMax;
+        }
+
+        public void setValueMax(float p_148263_1_)
+        {
+            this.valueMax = p_148263_1_;
+        }
+
+        public float normalizeValue(float p_148266_1_)
+        {
+            return MathHelper.clamp_float((this.snapToStepClamp(p_148266_1_) - this.valueMin) / (this.valueMax - this.valueMin), 0.0F, 1.0F);
+        }
+
+        public float denormalizeValue(float p_148262_1_)
+        {
+            return this.snapToStepClamp(this.valueMin + (this.valueMax - this.valueMin) * MathHelper.clamp_float(p_148262_1_, 0.0F, 1.0F));
+        }
+
+        public float snapToStepClamp(float p_148268_1_)
+        {
+            p_148268_1_ = this.snapToStep(p_148268_1_);
+            return MathHelper.clamp_float(p_148268_1_, this.valueMin, this.valueMax);
+        }
+
+        protected float snapToStep(float p_148264_1_)
+        {
+            if (this.valueStep > 0.0F)
+            {
+                p_148264_1_ = this.valueStep * (float)Math.round(p_148264_1_ / this.valueStep);
+            }
+
+            return p_148264_1_;
+        }
     }
 }

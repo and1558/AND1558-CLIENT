@@ -9,7 +9,7 @@ import java.io.IOException;
 public class GuiSelectSession extends GuiScreen {
     @Override
     public void initGui() {
-        this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 2 - 30, "Mojang/MS"));//Settings
+        this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 2 - 30, "Microsoft"));
         this.buttonList.add(new GuiButton(1, this.width / 2 - 100, this.height / 2 - 4, "Offline"));
         super.initGui();
     }

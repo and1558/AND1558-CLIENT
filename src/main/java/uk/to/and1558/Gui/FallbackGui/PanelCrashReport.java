@@ -4,19 +4,23 @@ import java.io.IOException;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import uk.to.and1558.Gui.ModTogglerScreen;
 
 public class PanelCrashReport extends GuiScreen
 {
     public static String crashinfo = null;
+    public PanelCrashReport(String info){
+        crashinfo = info;
+    }
     /**
      * Adds the buttons (and other controls) to the screen in question. Called when the GUI is displayed and when the
      * window resizes, the buttonList is cleared beforehand.
      */
     public void initGui()
     {
-        this.buttonList.clear();
+        this.buttonList.add(new GuiButton(1, this.width / 2 - 140, this.height / 4 - 60 + 60 + 92, "Goto Mod Toggler Menu"));
         if(crashinfo == null) {
-            crashinfo = "Unable to get Error info";
+            crashinfo = "Unable to get Banned Mods info";
         }
     }
 
@@ -25,7 +29,11 @@ public class PanelCrashReport extends GuiScreen
      */
     protected void actionPerformed(GuiButton button) throws IOException
     {
-
+        switch (button.id){
+            case 1:
+                this.mc.displayGuiScreen(new ModTogglerScreen());
+                break;
+        }
     }
 
     /**
@@ -42,17 +50,19 @@ public class PanelCrashReport extends GuiScreen
     public void drawScreen(int mouseX, int mouseY, float partialTicks)
     {
         this.drawDefaultBackground();
-        this.drawCenteredString(this.fontRendererObj, "Minecraft Has Crashed!", this.width / 2, this.height / 4 - 60 + 20, 16777215);
-        this.drawString(this.fontRendererObj, "Minecraft has shutted down unexpectedly.", this.width / 2 - 140, this.height / 4 - 60 + 60 + 0, 10526880);
-        this.drawString(this.fontRendererObj, "This could be caused by a bug in the game or by the", this.width / 2 - 140, this.height / 4 - 60 + 60 + 18, 10526880);
-        this.drawString(this.fontRendererObj, "Java Virtual Machine not being optimized", this.width / 2 - 140, this.height / 4 - 60 + 60 + 27, 10526880);
-        this.drawString(this.fontRendererObj, "enough.", this.width / 2 - 140, this.height / 4 - 60 + 60 + 36, 10526880);
-        this.drawString(this.fontRendererObj, "To prevent level corruption, the current game has quit.", this.width / 2 - 140, this.height / 4 - 60 + 60 + 54, 10526880);
-        this.drawString(this.fontRendererObj, "We\'ve tried to free up enough memory to not overload your RAM", this.width / 2 - 140, this.height / 4 - 60 + 60 + 63, 10526880);
-        this.drawString(this.fontRendererObj, "This error doesnt generate any crash reports", this.width / 2 - 140, this.height / 4 - 60 + 60 + 72, 10526880);
-        this.drawString(this.fontRendererObj, "due to this is not a code error", this.width / 2 - 140, this.height / 4 - 60 + 60 + 81, 10526880);
-        this.drawString(this.fontRendererObj, "You may close the game manually", this.width / 2 - 140, this.height / 4 - 60 + 60 + 90, 10526880);
-        this.drawString(this.fontRendererObj, "Crash Info: " + crashinfo, this.width / 2 - 140, this.height / 4 - 60 + 60 + 105, -1);
+        this.drawCenteredString(this.fontRendererObj, "Banned mods on Banned server!", this.width / 2, this.height / 4 - 60 + 20, 16777215);
+        this.drawString(this.fontRendererObj, "You are currently using a banned mod in a server that banned them.", this.width / 2 - 140, this.height / 4 - 60 + 60 + 0, 10526880);
+        this.drawString(this.fontRendererObj, "To close this menu, please disable the banned mod that is listed below", this.width / 2 - 140, this.height / 4 - 60 + 60 + 18, 10526880);
+        this.drawString(this.fontRendererObj, "We know this might be an inconvenience", this.width / 2 - 140, this.height / 4 - 60 + 60 + 27, 10526880);
+        this.drawString(this.fontRendererObj, "but we have to stay abide by server rules", this.width / 2 - 140, this.height / 4 - 60 + 60 + 36, 10526880);
+        this.drawString(this.fontRendererObj, "To prevent false anticheat bans, we displayed this menu.", this.width / 2 - 140, this.height / 4 - 60 + 60 + 54, 10526880);
+        this.drawString(this.fontRendererObj, "Thank you and have fun!", this.width / 2 - 140, this.height / 4 - 60 + 60 + 63, 10526880);
+        this.drawString(this.fontRendererObj, "Banned mods: " + crashinfo, this.width / 2 - 140, this.height / 4 - 60 + 60 + 72, 10526880);
         super.drawScreen(mouseX, mouseY, partialTicks);
+    }
+
+    @Override
+    public void onGuiClosed() {
+
     }
 }

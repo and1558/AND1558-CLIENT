@@ -1,5 +1,6 @@
 package uk.to.and1558.mixins.client;
 
+import jdk.nashorn.internal.runtime.Version;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.MusicTicker;
 import net.minecraft.client.audio.SoundHandler;
@@ -42,6 +43,7 @@ import uk.to.and1558.Mods.RawMouseInput;
 import uk.to.and1558.Plugins.GuiUtils;
 import uk.to.and1558.Plugins.SessionMod;
 import uk.to.and1558.Plugins.ShaderLoader;
+import uk.to.and1558.VersionString;
 import uk.to.and1558.and1558;
 
 import javax.imageio.ImageIO;
@@ -185,7 +187,7 @@ public class MixinCraft{
     private void createDisplay() throws LWJGLException
     {
         Display.setResizable(true);
-        Display.setTitle("Minecraft 1.8.9 // AND1558 PVP Client [Github]");
+        Display.setTitle(VersionString.titleVer);
 
         try
         {

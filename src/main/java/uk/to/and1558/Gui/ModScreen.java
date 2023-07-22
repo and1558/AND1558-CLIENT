@@ -9,6 +9,7 @@ import uk.to.and1558.Mods.ModLoader.ModInstances;
 import uk.to.and1558.Mods.RawMouseInput;
 import uk.to.and1558.Plugins.ClientAnimations.Animation;
 import uk.to.and1558.Plugins.ClientAnimations.Easing;
+import uk.to.and1558.and1558;
 
 import java.io.IOException;
 
@@ -16,6 +17,11 @@ public class ModScreen extends GuiScreen {
     private HUDManager hudManager = HUDManager.getInstance();
     @Override
     public void initGui() {
+        // Moved to loadButtons()
+        loadButtons();
+        super.initGui();
+    }
+    private void loadButtons(){
         // dev-1.82 -> Fix button Alignment
         // General Mods
         this.buttonList.add(new RButton(0, this.width / 2 - 60, this.height / 2 - 34, 120, 16, 7, "Toggle Mods"));
@@ -25,8 +31,6 @@ public class ModScreen extends GuiScreen {
         this.buttonList.add(new RButton(3, this.width / 2 - 60, this.height / 2 + 17, 120, 16, 7, "Raw Mouse Input : " + (ModInstances.getRawInput().enabled ? "ON" : "OFF")));
         // Extra Gui Button
         this.buttonList.add(new RButton(4, this.width / 2 - 60, this.height / 2 + 34, 120, 16, 7, "Extra Options"));
-
-        super.initGui();
     }
 
     @Override
@@ -39,6 +43,7 @@ public class ModScreen extends GuiScreen {
 
     @Override
     public void onGuiClosed() {
+        and1558.getInstance().guiUtils.disableDefaultBlur = false;
         super.onGuiClosed();
     }
 
@@ -59,7 +64,8 @@ public class ModScreen extends GuiScreen {
             }
             case 3:{
                 RawMouseInput.toggleRawInput();
-                this.mc.displayGuiScreen(new ModScreen());
+                this.buttonList.clear();
+                loadButtons();
                 break;
             }
             case 4:{
@@ -68,6 +74,11 @@ public class ModScreen extends GuiScreen {
             }
         }
         super.actionPerformed(button);
+    }
+
+    @Override
+    public boolean doesGuiPauseGame() {
+        return false;
     }
 
     @Override

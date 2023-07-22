@@ -104,9 +104,9 @@ public class BlurUtils {
                 return;
             }
             if(15 != lastBgBlurFactor) {
-                blurShaderHorz.getShaderManager().getShaderUniform("Radius").set((float)12);
-                blurShaderVert.getShaderManager().getShaderUniform("Radius").set((float)12);
-                lastBgBlurFactor = 12;
+                blurShaderHorz.getShaderManager().getShaderUniform("Radius").set((float)50);
+                blurShaderVert.getShaderManager().getShaderUniform("Radius").set((float)50);
+                lastBgBlurFactor = 50;
             }
             GL11.glPushMatrix();
             GL30.glBindFramebuffer(GL30.GL_READ_FRAMEBUFFER, Minecraft.getMinecraft().getFramebuffer().framebufferObject);

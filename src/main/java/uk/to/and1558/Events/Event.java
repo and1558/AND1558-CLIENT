@@ -12,7 +12,7 @@ public class Event {
 					data.target.invoke(data.source, this);
 				}
 				catch (Exception e) {
-					e.printStackTrace();
+					// ignore
 				}
 			}
 		}

@@ -7,7 +7,8 @@ import net.minecraft.client.resources.I18n;
 import uk.to.and1558.and1558;
 
 import java.io.IOException;
-
+// Unused!
+// Test saving mechanism.
 public class TestingGui extends GuiScreen {
     private GuiTextField typeToFind;
 

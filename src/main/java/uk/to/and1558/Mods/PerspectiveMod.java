@@ -1,11 +1,14 @@
 package uk.to.and1558.Mods;
 
+import net.minecraft.client.Minecraft;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import uk.to.and1558.Events.EventTarget;
 import uk.to.and1558.Events.KeyEvent;
+import uk.to.and1558.Gui.FallbackGui.PanelCrashReport;
 import uk.to.and1558.Gui.HUD.ScreenPosition;
 import uk.to.and1558.Mods.ModLoader.ModDraggable;
+import uk.to.and1558.Mods.ModLoader.ModInstances;
 import uk.to.and1558.and1558;
 
 public class PerspectiveMod extends ModDraggable {
@@ -112,6 +115,8 @@ public class PerspectiveMod extends ModDraggable {
 
     @Override
     public void render(ScreenPosition pos) {
-
+        if(Minecraft.getMinecraft().getCurrentServerData().serverIP.contains("hypixel") && ModInstances.getPerspective().isEnabled){
+            this.mc.displayGuiScreen(new PanelCrashReport("Perspective mod"));
+        }
     }
 }

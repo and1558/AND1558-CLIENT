@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class ModTogglerScreen extends GuiScreen {
     GuiScreen lastGui;
-    boolean check1,check2,check3,check4,check5,check6,check7,check8,check9,check10 = false; // Simplified to 1 straight line [dev-1.82]
+    boolean check1,check2,check3,check4,check5,check6,check7,check8,check9,check10,check11 = false; // Simplified to 1 straight line [dev-1.82]
     public ModTogglerScreen(GuiScreen p_i1046_1_)
     {
         this.lastGui = p_i1046_1_;
@@ -36,7 +36,8 @@ public class ModTogglerScreen extends GuiScreen {
         this.buttonList.add(new GuiCheckBox(7, 10, 150, check8));
         this.buttonList.add(new GuiCheckBox(8, 10, 170, check9));
         this.buttonList.add(new GuiCheckBox(9, 10, 190, check10));
-        this.buttonList.add(new GuiButton(10,10,230, "Back"));
+        this.buttonList.add(new GuiCheckBox(11, 10, 210, check11));
+        this.buttonList.add(new GuiButton(10,10,240, "Back"));
         super.initGui();
     }
     private void checkAll(){
@@ -51,6 +52,7 @@ public class ModTogglerScreen extends GuiScreen {
         checkMods(7, ModInstances.getToggleSprint().isEnabled);
         checkMods(8, ModInstances.getArmorView().isEnabled);
         checkMods(9, ModInstances.getOldDebug().isEnabled);
+        checkMods(10, ModInstances.getHPDisplay().isEnabled);
     }
     private void loadAll(){
         check1 = and1558.getIO.loadConfig("Keystrokes");
@@ -63,6 +65,7 @@ public class ModTogglerScreen extends GuiScreen {
         check8 = and1558.getIO.loadConfig("sprinttoggle");
         check9 = and1558.getIO.loadConfig("armorview");
         check10 = and1558.getIO.loadConfig("oldf3");
+        check11 = and1558.getIO.loadConfig("hp");
     }
 
     //Re-draws/draws screen, Depends on FPS
@@ -78,8 +81,10 @@ public class ModTogglerScreen extends GuiScreen {
         this.drawString(fontRendererObj, "- Perspective Mod (Hypixel Disabled)", 32, 136, -1); // Working
         this.drawString(fontRendererObj, "- Toggle Sprint (no toggle sneak)", 32, 156, -1); // Partially Working
         this.drawString(fontRendererObj, "- Armor View (Includes Swords)", 32, 176, -1); // Working
-        // dev 1.82 -> Added OLD F3 to toggling list
-        this.drawString(fontRendererObj, "- 1.7 Version of F3", 32, 196, -1); //
+        // dev 1.92 -> Added OLD F3 to toggling list
+        this.drawString(fontRendererObj, "- 1.7 Version of F3", 32, 196, -1); // Working
+        // dev 1.82 -> Added HP to toggling list
+        this.drawString(fontRendererObj, "- HP Display", 32, 216, -1); // Working
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
@@ -150,6 +155,12 @@ public class ModTogglerScreen extends GuiScreen {
                 ModInstances.getOldDebug().isEnabled = check10;
                 break;
             }
+            case 11:{
+                check11 = check11 ? false : true;
+                and1558.getIO.saveConfig(check11,"hp");
+                ModInstances.getHPDisplay().isEnabled = check11;
+                break;
+            }
             case 10:{
                 this.mc.displayGuiScreen(lastGui);
                 break;
@@ -181,6 +192,8 @@ public class ModTogglerScreen extends GuiScreen {
             check9 = isEnabled ? true : false;
         }else if(which == 9) {
             check10 = isEnabled ? true : false;
+        }else if(which == 10){
+            check11 = isEnabled ? true : false;
         }
     }
     private void checkMods(int which, boolean isEnabled) {
@@ -207,6 +220,8 @@ public class ModTogglerScreen extends GuiScreen {
             check9 = isEnabled ? true : false;
         }else if(which == 9) {
             check10 = isEnabled ? true : false;
+        }else if(which == 9) {
+            check11 = isEnabled ? true : false;
         }
     }
     // Updates screen at a specific amount of time, Regarding the FPS

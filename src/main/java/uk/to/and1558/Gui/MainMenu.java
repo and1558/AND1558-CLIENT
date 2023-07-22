@@ -24,6 +24,8 @@ import uk.to.and1558.Plugins.ClientAnimations.Easing;
 import uk.to.and1558.VersionString;
 import uk.to.and1558.and1558;
 
+import static org.lwjgl.opengl.GL11.glColor4f;
+
 public class MainMenu extends GuiScreen
 {
     public MainMenu(){
@@ -78,7 +80,7 @@ public class MainMenu extends GuiScreen
         mc.getTextureManager().bindTexture(new ResourceLocation("and1558/images/menu/exit.png"));
         Gui.drawModalRectWithCustomSizedTexture(width - 22, 7, 0, 0, 16, 16, 16, 16);
         GL11.glEnable(GL11.GL_BLEND);
-        GL11.glColor4f(1.0F,1.0F,1.0F,opacityTransition.getValue());
+        glColor4f(1.0F,1.0F,1.0F,opacityTransition.getValue());
         // Draws Minecraft Logo
         int i = 274;
         int j = this.width / 2 - i / 2;
@@ -98,6 +100,8 @@ public class MainMenu extends GuiScreen
         this.drawCenteredString(this.fontRendererObj, "Welcome " + mc.getSession().getUsername() + "!", 0, -8, -256);
         GlStateManager.popMatrix();
         GL11.glDisable(GL11.GL_BLEND);
+        // dev 1.82 -> Fixed yellowed background when using Fast Render on Optifine
+        glColor4f(1,1,1,1);
     }
 
     @Override
@@ -135,7 +139,7 @@ public class MainMenu extends GuiScreen
                 and1558.getInstance().logger.error("CLOSING FAILED, AN UNKNOWN CODE HAS BEEN EXECUTED!!!");
                 and1558.getInstance().logger.info("Running crash screen!");
                 PanelCrashReport.crashinfo = "Realms TEST is disabled, and an unknown code is executed";
-                this.mc.displayGuiScreen(new PanelCrashReport());
+                this.mc.displayGuiScreen(new PanelCrashReport("ACCESSING BANNED MENU"));
                 break;
             }
             case 7: {

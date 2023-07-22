@@ -42,6 +42,7 @@ public class ModInstances {
         api.register(tntCounter);
         //api.register(player); - UNFINISHED/BUGGY
     }
+    public static HP getHPDisplay() { return hp; }
     public static ModComboCounter getComboCounter() { return comboCounter; }
     public static TNTCounter getTntCounter() { return tntCounter; }
     public static ModLowFire getLfire(){

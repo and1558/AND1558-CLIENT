@@ -18,14 +18,9 @@ public class MixinGameSettings {
 
     public KeyBinding MODPOSGUI = new KeyBinding("Change Mod Position", Keyboard.KEY_RSHIFT, "AND1558");
     public KeyBinding PerspectiveToggle = new KeyBinding("Toggle Perspective Mod", Keyboard.KEY_V, "AND1558");
-
-    @Inject(at = @At("RETURN"), method = "<init>()V")
+    // dev 1.82 -> Fixed controls not saving after being changed by the players
+    @Inject(at = @At("HEAD"), method = "loadOptions")
     private void injectFirstConstructor(CallbackInfo ci) {
-        this.addKeybinds();
-    }
-
-    @Inject(at = @At("RETURN"), method = "<init>(Lnet/minecraft/client/Minecraft;Ljava/io/File;)V")
-    private void injectSecondConstructor(CallbackInfo ci) {
         this.addKeybinds();
     }
 

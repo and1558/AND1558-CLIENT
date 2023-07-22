@@ -1,6 +1,7 @@
 package uk.to.and1558.Gui.HUD;
 
 import java.awt.Color;
+import java.io.Console;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
@@ -15,6 +16,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
+import uk.to.and1558.Gui.impl.BlurUtils;
 import uk.to.and1558.and1558;
 
 public class HUDConfigScreen extends GuiScreen {
@@ -40,6 +42,7 @@ public class HUDConfigScreen extends GuiScreen {
     public void initGui() {
 
         // modified to add your own buttons <3
+        and1558.getInstance().guiUtils.disableDefaultBlur = true;
 
         super.initGui();
     }
@@ -68,63 +71,67 @@ public class HUDConfigScreen extends GuiScreen {
         }
 
     }
-
+    IRenderer selected = null;
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 
+        if(!dragged){
+            ScaledResolution sc = new ScaledResolution(mc);
+            BlurUtils.renderBlurredBackground(sc.getScaledWidth(),sc.getScaledHeight(), 0, 0, width, height, 0);
+            selected = null;
+        }
         super.drawDefaultBackground();
-
+        if(mc.theWorld == null) super.drawDefaultBackground();
         final float zBackup = this.zLevel;
         this.zLevel = 200;
-
         for (IRenderer renderer : renderers.keySet()) {
-
-            ScreenPosition pos = renderers.get(renderer);
-
-            Gui.drawRect(pos.getAbsoluteX(), pos.getAbsoluteY(), pos.getAbsoluteX() + renderer.getWidth(), pos.getAbsoluteY() + renderer.getHeight(), 0x33FFFFFF);
-            this.drawHollowRect(pos.getAbsoluteX(), pos.getAbsoluteY(), renderer.getWidth(), renderer.getHeight(), 0x88FFFFFF);
-
-
-            renderer.renderDummy(pos);
-
-            // START OF SMOOTH DRAGGING
-
-            // Thanks ESS_Si1kn#0481 for pointing out that I forgot to add these back.
-            float absoluteX = pos.getAbsoluteX();
-            float absoluteY = pos.getAbsoluteY();
-
-            this.hovered = mouseX >= absoluteX && mouseX <= absoluteX + renderer.getWidth() && mouseY >= absoluteY && mouseY <= absoluteY + renderer.getHeight();
-
-            if (this.hovered) {
-                if (dragged) {
-                    pos.setAbsolute(pos.getAbsoluteX() + mouseX - this.prevX, pos.getAbsoluteY() + mouseY - this.prevY);
-
-                    adjustBounds(renderer, pos);
-
-                    this.prevX = mouseX;
-                    this.prevY = mouseY;
+            if(renderer.getHeight() > 0 && renderer.getWidth() > 0) {
+                ScreenPosition pos = renderers.get(renderer);
+                float absoluteX = pos.getAbsoluteX();
+                float absoluteY = pos.getAbsoluteY();
+                this.hovered = mouseX >= absoluteX && mouseX <= absoluteX + renderer.getWidth() && mouseY >= absoluteY && mouseY <= absoluteY + renderer.getHeight();
+                if (!dragged) {
+                    this.drawHollowRect(pos.getAbsoluteX(), pos.getAbsoluteY(), renderer.getWidth(), renderer.getHeight(), 0x88FFFFFF);
                 }
+                // START OF SMOOTH DRAGGING
+                if (this.hovered) {
+
+                    this.drawHollowRect(pos.getAbsoluteX(), pos.getAbsoluteY(), renderer.getWidth(), renderer.getHeight(), 0x8800FF00);
+                    Gui.drawRect(pos.getAbsoluteX(), pos.getAbsoluteY(), pos.getAbsoluteX() + renderer.getWidth(), pos.getAbsoluteY() + renderer.getHeight(), 0x3300AA00);
+                    if (dragged) {
+                        if(selected == null){
+                            selected = renderer;
+                        }
+                        if(selected == renderer) {
+                            pos.setAbsolute(pos.getAbsoluteX() + mouseX - this.prevX, pos.getAbsoluteY() + mouseY - this.prevY);
+
+                            adjustBounds(renderer, pos);
+
+                            this.prevX = mouseX;
+                            this.prevY = mouseY;
+                        }
+                    }
+                }
+
+                renderer.renderDummy(pos);
+                // END OF SMOOTH DRAGGING
+                selectedPos = new ScreenPosition(0, 0);
             }
-
-            // END OF SMOOTH DRAGGING
-
         }
-
         this.smX = mouseX;
         this.smY = mouseY;
 
         this.zLevel = zBackup;
+
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
-    private void drawHollowRect(int x, int y, int w, int h, int color) {
-
+    public void drawHollowRect(int x, int y, int w, int h, int color) {
         this.drawHorizontalLine(x, x + w, y, color);
         this.drawHorizontalLine(x, x + w, y + h, color);
 
         this.drawVerticalLine(x, y + h, y, color);
         this.drawVerticalLine(x + w, y + h, y, color);
-
     }
 
     @Override
@@ -141,7 +148,7 @@ public class HUDConfigScreen extends GuiScreen {
             this.mc.displayGuiScreen(null);
         }
     }
-
+    ScreenPosition selectedPos = new ScreenPosition(0,0);
     @Override
     protected void mouseClickMove(int x, int y, int button, long time) {
         if (selectedRenderer.isPresent()) {
@@ -174,6 +181,7 @@ public class HUDConfigScreen extends GuiScreen {
         for (IRenderer renderer : renderers.keySet()) {
             renderer.save(renderers.get(renderer));
         }
+        and1558.getInstance().guiUtils.disableDefaultBlur = false;
         //this.mc.displayGuiScreen(lastScreen);
     }
 
@@ -185,7 +193,7 @@ public class HUDConfigScreen extends GuiScreen {
     private void adjustBounds(IRenderer renderer, ScreenPosition pos) {
 
         ScaledResolution res = new ScaledResolution(Minecraft.getMinecraft());
-
+        selectedPos = pos;
         int screenWidth = res.getScaledWidth();
         int screenHeight = res.getScaledHeight();
 
@@ -202,17 +210,18 @@ public class HUDConfigScreen extends GuiScreen {
 
         // NEEDED FOR SMOOTH DRAGGING
         dragged = true;
+        mouseHeld = true;
 
         loadMouseOver(x, y);
         super.mouseClicked(x, y, button);
     }
-
+    boolean mouseHeld = false;
     @Override
     protected void mouseReleased(int mouseX, int mouseY, int state) {
 
         // NEEDED FOR SMOOTH DRAGGING
         dragged = false;
-
+        mouseHeld = false;
         super.mouseReleased(mouseX, mouseY, state);
     }
 

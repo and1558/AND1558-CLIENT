@@ -3,6 +3,8 @@ package uk.to.and1558.Gui;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
+import uk.to.and1558.Plugins.ClientAnimations.Animation;
+import uk.to.and1558.Plugins.ClientAnimations.Easing;
 
 import java.io.IOException;
 
@@ -11,9 +13,11 @@ public class ChangelogScreen extends GuiScreen {
     ChangelogScreen(GuiScreen lastScreen){
         this.lastScreen = lastScreen;
     }
+    Animation animation = null;
     @Override
     public void initGui() {
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height - 27, "Back"));
+        animation = new Animation(2f, -200, 1, Easing.EASE_OUT_QUINT);
         super.initGui();
     }
 
@@ -27,11 +31,10 @@ public class ChangelogScreen extends GuiScreen {
         }
         super.actionPerformed(button);
     }
-
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawDefaultBackground();
-        DrawChangelogs.get(this, this.fontRendererObj, 1);
+        DrawChangelogs.get(this, this.fontRendererObj, (int) animation.getValue());
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
