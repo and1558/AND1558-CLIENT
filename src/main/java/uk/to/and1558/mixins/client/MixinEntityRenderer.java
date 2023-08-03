@@ -63,7 +63,7 @@ public class MixinEntityRenderer{
      * @reason Perspective Mod
      */
     @Overwrite
-    public void updateCameraAndRender(float p_181560_1_, long p_181560_2_)
+    public void updateCameraAndRender(float partialTicks, long nanoTime)
     {
         boolean flag = Display.isActive();
 
@@ -106,8 +106,8 @@ public class MixinEntityRenderer{
             {
                 this.smoothCamYaw += f2;
                 this.smoothCamPitch += f3;
-                float f4 = p_181560_1_ - this.smoothCamPartialTicks;
-                this.smoothCamPartialTicks = p_181560_1_;
+                float f4 = partialTicks - this.smoothCamPartialTicks;
+                this.smoothCamPartialTicks = partialTicks;
                 f2 = this.smoothCamFilterX * f4;
                 f3 = this.smoothCamFilterY * f4;
                 this.mc.thePlayer.setAngles(f2, f3 * (float)i);
@@ -137,9 +137,9 @@ public class MixinEntityRenderer{
                 this.mc.mcProfiler.startSection("level");
                 int j = Math.min(Minecraft.getDebugFPS(), i2);
                 j = Math.max(j, 60);
-                long k = System.nanoTime() - p_181560_2_;
+                long k = System.nanoTime() - nanoTime;
                 long l = Math.max((long)(1000000000 / j / 4) - k, 0L);
-                this.renderWorld(p_181560_1_, System.nanoTime() + l);
+                this.renderWorld(partialTicks, System.nanoTime() + l);
 
                 if (OpenGlHelper.shadersSupported)
                 {
@@ -150,7 +150,7 @@ public class MixinEntityRenderer{
                         GlStateManager.matrixMode(5890);
                         GlStateManager.pushMatrix();
                         GlStateManager.loadIdentity();
-                        this.theShaderGroup.loadShaderGroup(p_181560_1_);
+                        this.theShaderGroup.loadShaderGroup(partialTicks);
                         GlStateManager.popMatrix();
                     }
 
@@ -163,7 +163,7 @@ public class MixinEntityRenderer{
                 if (!this.mc.gameSettings.hideGUI || this.mc.currentScreen != null)
                 {
                     GlStateManager.alphaFunc(516, 0.1F);
-                    this.mc.ingameGUI.renderGameOverlay(p_181560_1_);
+                    this.mc.ingameGUI.renderGameOverlay(partialTicks);
                 }
 
                 this.mc.mcProfiler.endSection();
@@ -185,7 +185,7 @@ public class MixinEntityRenderer{
 
                 try
                 {
-                    this.mc.currentScreen.drawScreen(k1, l1, p_181560_1_);
+                    this.mc.currentScreen.drawScreen(k1, l1, partialTicks);
                 }
                 catch (Throwable throwable)
                 {
@@ -195,21 +195,21 @@ public class MixinEntityRenderer{
                     {
                         public String call() throws Exception
                         {
-                            return mc.currentScreen.getClass().getCanonicalName();
+                            return Minecraft.getMinecraft().currentScreen.getClass().getCanonicalName();
                         }
                     });
                     crashreportcategory.addCrashSectionCallable("Mouse location", new Callable<String>()
                     {
                         public String call() throws Exception
                         {
-                            return String.format("Scaled: (%d, %d). Absolute: (%d, %d)", Integer.valueOf(k1), Integer.valueOf(l1), Integer.valueOf(Mouse.getX()), Integer.valueOf(Mouse.getY()));
+                            return String.format("Scaled: (%d, %d). Absolute: (%d, %d)", new Object[] {Integer.valueOf(k1), Integer.valueOf(l1), Integer.valueOf(Mouse.getX()), Integer.valueOf(Mouse.getY())});
                         }
                     });
                     crashreportcategory.addCrashSectionCallable("Screen size", new Callable<String>()
                     {
                         public String call() throws Exception
                         {
-                            return String.format("Scaled: (%d, %d). Absolute: (%d, %d). Scale factor of %d", scaledresolution.getScaledWidth(), Integer.valueOf(scaledresolution.getScaledHeight()), Integer.valueOf(mc.displayWidth), Integer.valueOf(mc.displayHeight), Integer.valueOf(scaledresolution.getScaleFactor()));
+                            return String.format("Scaled: (%d, %d). Absolute: (%d, %d). Scale factor of %d", new Object[] {Integer.valueOf(scaledresolution.getScaledWidth()), Integer.valueOf(scaledresolution.getScaledHeight()), Integer.valueOf(Minecraft.getMinecraft().displayWidth), Integer.valueOf(Minecraft.getMinecraft().displayHeight), Integer.valueOf(scaledresolution.getScaleFactor())});
                         }
                     });
                     throw new ReportedException(crashreport);

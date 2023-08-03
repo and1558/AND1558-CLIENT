@@ -113,9 +113,9 @@ public class MixinItemRenderer{
         float f1 = abstractclientplayer.getSwingProgress(partialTicks);
         float f2 = abstractclientplayer.prevRotationPitch + (abstractclientplayer.rotationPitch - abstractclientplayer.prevRotationPitch) * partialTicks;
         float f3 = abstractclientplayer.prevRotationYaw + (abstractclientplayer.rotationYaw - abstractclientplayer.prevRotationYaw) * partialTicks;
-        this.func_178101_a(f2, f3);
-        this.func_178109_a(abstractclientplayer);
-        this.func_178110_a((EntityPlayerSP)abstractclientplayer, partialTicks);
+        this.rotateArroundXAndY(f2, f3);
+        this.setLightMapFromPlayer(abstractclientplayer);
+        this.rotateWithPlayerRotations((EntityPlayerSP)abstractclientplayer, partialTicks);
         GlStateManager.enableRescaleNormal();
         GlStateManager.pushMatrix();
 
@@ -132,33 +132,33 @@ public class MixinItemRenderer{
                     if (enumaction.equals(EnumAction.NONE)) {
                         this.transformFirstPersonItem(f, 0.0F);
                     } else if (enumaction.equals(EnumAction.EAT) || enumaction.equals(EnumAction.DRINK)) {
-                        this.func_178104_a(abstractclientplayer, partialTicks);
+                        this.performDrinking(abstractclientplayer, partialTicks);
                         this.transformFirstPersonItem(f, f1);
                     } else if (enumaction.equals(EnumAction.BLOCK)) {
                         this.transformFirstPersonItem(f, f1);
-                        this.func_178103_d();
+                        this.doBlockTransformations();
                     } else if (enumaction.equals(EnumAction.BOW)) {
                         this.transformFirstPersonItem(f, f1);
-                        this.func_178098_a(partialTicks, abstractclientplayer);
+                        this.doBowTransformations(partialTicks, abstractclientplayer);
                     }
                 }else {
                     if (enumaction.equals(EnumAction.NONE)) {
                         this.transformFirstPersonItem(f, 0.0F);
                     } else if (enumaction.equals(EnumAction.EAT) || enumaction.equals(EnumAction.DRINK)) {
-                        this.func_178104_a(abstractclientplayer, partialTicks);
+                        this.performDrinking(abstractclientplayer, partialTicks);
                         this.transformFirstPersonItem(f, 0.0f);
                     } else if (enumaction.equals(EnumAction.BLOCK)) {
                         this.transformFirstPersonItem(f, 0.0f);
-                        this.func_178103_d();
+                        this.doBlockTransformations();
                     } else if (enumaction.equals(EnumAction.BOW)) {
                         this.transformFirstPersonItem(f, 0.0f);
-                        this.func_178098_a(partialTicks, abstractclientplayer);
+                        this.doBowTransformations(partialTicks, abstractclientplayer);
                     }
                 }
             }
             else
             {
-                this.func_178105_d(f1);
+                this.doItemUsedTransformations(f1);
                 this.transformFirstPersonItem(f, f1);
             }
 
@@ -166,23 +166,24 @@ public class MixinItemRenderer{
         }
         else if (!abstractclientplayer.isInvisible())
         {
-            this.func_178095_a(abstractclientplayer, f, f1);
+            this.renderPlayerArm(abstractclientplayer, f, f1);
         }
 
         GlStateManager.popMatrix();
         GlStateManager.disableRescaleNormal();
         RenderHelper.disableStandardItemLighting();
     }
-    @Shadow private void func_178104_a(AbstractClientPlayer clientPlayer, float p_178104_2_) {}
-    @Shadow private void func_178103_d() {}
-    @Shadow private void func_178101_a(float angle, float p_178101_2_) {}
-    @Shadow private void func_178109_a(AbstractClientPlayer clientPlayer) {}
-    @Shadow private void func_178110_a(EntityPlayerSP entityplayerspIn, float partialTicks) {}
+    @Shadow private void rotateArroundXAndY(float angle, float angleY) {}
+    @Shadow private void setLightMapFromPlayer(AbstractClientPlayer clientPlayer) {}
+    @Shadow private void rotateWithPlayerRotations(EntityPlayerSP entityplayerspIn, float partialTicks) {}
+    @Shadow private void performDrinking(AbstractClientPlayer clientPlayer, float partialTicks) {}
+    @Shadow private void doBlockTransformations() {}
+    @Shadow private void doBowTransformations(float partialTicks, AbstractClientPlayer clientPlayer) {}
+    @Shadow private void doItemUsedTransformations(float swingProgress) {}
     @Shadow private void renderItemMap(AbstractClientPlayer clientPlayer, float p_178097_2_, float p_178097_3_, float p_178097_4_) {}
-    @Shadow private void func_178098_a(float p_178098_1_, AbstractClientPlayer clientPlayer) {}
-    @Shadow private void func_178105_d(float p_178105_1_) {}
     @Shadow public void renderItem(EntityLivingBase entityIn, ItemStack heldStack, ItemCameraTransforms.TransformType transform) {}
-    @Shadow private void func_178095_a(AbstractClientPlayer clientPlayer, float p_178095_2_, float p_178095_3_) {}
+    @Shadow private void renderPlayerArm(AbstractClientPlayer clientPlayer, float equipProgress, float swingProgress) {}
+
     @Shadow protected Minecraft mc;
     @Shadow @Final private RenderItem itemRenderer;
     @Shadow
