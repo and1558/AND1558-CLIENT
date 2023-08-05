@@ -2,7 +2,7 @@
 Welcome to the AND1558 PVP Client Public Repository!<br>
 - You may use this client as a base but YOU MUST credit me for it<br>
 - If you use this client or any of my code YOU MUST make your SOURCE CODE PUBLIC, no exceptions<br>
-- For any issues you are welcome to push fixes or create an issue for it<br>
+- For any issues you may have found, you are allowed to push/send fixes or create an issue for it<br>
 ## Building/Compiling
 Tutorial on how to compile/build this Gradle Project<br>
 Before you start, please make sure that you have your minecraft assets stored in the default .minecraft folder<br>
