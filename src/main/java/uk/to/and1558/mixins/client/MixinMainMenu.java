@@ -1,6 +1,5 @@
 package uk.to.and1558.mixins.client;
 
-import jdk.jfr.internal.tool.Main;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiMainMenu;
 import org.spongepowered.asm.mixin.Mixin;

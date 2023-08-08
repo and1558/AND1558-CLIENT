@@ -2,7 +2,6 @@ package uk.to.and1558.Gui;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import uk.to.and1558.Gui.impl.RButton;
 
 import java.io.IOException;
 
@@ -12,6 +11,7 @@ public class GuiSelectSession extends GuiScreen {
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 2 - 30, "Microsoft"));
         this.buttonList.add(new GuiButton(1, this.width / 2 - 100, this.height / 2 - 4, "Offline"));
         super.initGui();
+        //this.mc.displayGuiScreen(new AltManagerGui());
     }
 
     @Override

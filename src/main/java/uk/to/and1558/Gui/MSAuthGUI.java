@@ -1,6 +1,5 @@
 package uk.to.and1558.Gui;
 
-import fr.litarvan.openauth.microsoft.MicrosoftAuthenticationException;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -9,33 +8,23 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import uk.to.and1558.Gui.impl.GuiCheckBox;
 import uk.to.and1558.Plugins.SessionHelper;
+import uk.to.and1558.Plugins.openauth.microsoft.MicrosoftAuthenticationException;
 import uk.to.and1558.and1558;
 
 import java.awt.*;
 import java.io.IOException;
 
 public class MSAuthGUI extends GuiScreen {
-    private GuiTextField email;
-    private GuiTextField pass;
     private GuiButton loginButton;
     private GuiButton backButton;
 
-    @Override
-    public void updateScreen() {
-        this.email.updateCursorCounter();
-    }
     boolean showPass = false;
     @Override
     public void initGui() {
-        //this.buttonList.add(new GuiButton(0, this.width / 2 - 155, this.height - 28, 150, 20, "Login"));
-        loginButton = new GuiButton(0, this.width / 2 - 160, 150, 150, 20, "Login");
+        loginButton = new GuiButton(0, this.width / 2 - 160, 150, 150, 20, "Click here to login");
         backButton = new GuiButton(1, this.width / 2, 150, 150, 20, "Back");
-        this.buttonList.add(loginButton);
         this.buttonList.add(backButton);
-        this.buttonList.add(new GuiCheckBox(4, this.width / 2 + 105, 100, showPass));
-        this.email = new GuiTextField(2, this.fontRendererObj, this.width / 2 - 100, 60, 200, 20);
-        this.pass = new GuiTextField(3, this.fontRendererObj,this.width / 2 - 100, 100, 200, 20);
-        this.email.setFocused(true);
+        this.buttonList.add(loginButton);
     }
 
     @Override
@@ -45,18 +34,23 @@ public class MSAuthGUI extends GuiScreen {
             case 0:{
                 new Thread(() -> {
                     err = "Trying to login, Please Wait...";
+                    err2 = "DO NOT PRESS THE ESCAPE KEY!";
                     loginButton.enabled = false;
                     backButton.enabled = false;
                     try {
-                        new MSAuth().authenticate(this.email.getText(), this.pass.getText());
+                        new MSAuth().authenticate();
                         err = "Successfully logged in as: " + and1558.getInstance().modifyableSession.getUsername();
                     }
                     catch (MicrosoftAuthenticationException e){
-                        err = e.getMessage();
-                        pass.setText("");
+                        if(e.getMessage().contains("User closed")){
+                            err = "Authentication Window Closed!";
+                        }else{
+                            err = e.getMessage();
+                        }
                     }
                     loginButton.enabled = true;
                     backButton.enabled = true;
+                    err2 = "";
                 }).start();
                 break;
             }
@@ -75,37 +69,18 @@ public class MSAuthGUI extends GuiScreen {
         }
     }
     String err = "No Error Yet!";
+    String err2 = "";
     String passdebug = "if this shows up your password will also shows up";
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawDefaultBackground();
-        this.drawCenteredString(this.fontRendererObj, "Two-Factor Authenticated accounts may not work", this.width / 2, 17, 16777215);
-        this.drawCenteredString(this.fontRendererObj, "and you are typing your password its just not visible", this.width / 2, 32, 16777215);
+        this.drawCenteredString(this.fontRendererObj, "Microsoft Login GUI", this.width / 2, 17, 16777215);
         this.drawCenteredString(this.fontRendererObj, err, this.width / 2, 42, 16777215);
-        this.drawString(this.fontRendererObj,"Password Length = " + pass.getText().length(), this.width / 2 - 100, 130,-1);
-        this.drawString(this.fontRendererObj,"- Show Password", this.width / 2 + 130, 107,-1);
-        this.drawString(this.fontRendererObj,"Email: ", this.width / 2 - 130, 65,-1);
-        this.drawString(this.fontRendererObj,"Pass: ", this.width / 2 - 130, 105,-1);
-        this.email.drawTextBox();
-        this.pass.drawTextBox();
-        if(!showPass){
-            pass.setTextColor(Color.black.getRGB());
-        }else{
-            pass.setTextColor(Color.white.getRGB());
-        }
+        this.drawCenteredString(this.fontRendererObj, err2, this.width / 2, 52, 16777215);
         super.drawScreen(mouseX,mouseY,partialTicks);
     }
     @Override
     protected void keyTyped(char typedChar, int keyCode) throws IOException {
-        this.email.textboxKeyTyped(typedChar, keyCode);
-        this.pass.textboxKeyTyped(typedChar, keyCode);
         super.keyTyped(typedChar, keyCode);
-    }
-
-    @Override
-    protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
-        this.email.mouseClicked(mouseX, mouseY, mouseButton);
-        this.pass.mouseClicked(mouseX, mouseY, mouseButton);
-        super.mouseClicked(mouseX, mouseY, mouseButton);
     }
 }

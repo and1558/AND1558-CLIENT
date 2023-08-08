@@ -1,6 +1,5 @@
 package uk.to.and1558.Gui;
 
-import fr.litarvan.openauth.microsoft.MicrosoftAuthenticationException;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
