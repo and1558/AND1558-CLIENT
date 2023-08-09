@@ -1,7 +1,7 @@
 package uk.to.and1558.Mods.ModLoader;
 
 import com.google.gson.Gson;
-import org.lwjgl.Sys;
+import org.json.JSONObject;
 import uk.to.and1558.Maxytreal123.Configuration;
 import uk.to.and1558.Maxytreal123.ConfigurationAPI;
 import uk.to.and1558.and1558;
@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Map;
 
 public class ModIO {
@@ -29,6 +28,17 @@ public class ModIO {
     public void saveConfigNew(Object value, String modjson) {
         configSaving = ConfigurationAPI.newConfiguration(new File(getJsonFolder(), "mod.cfg"));
         configSaving.set(modjson, value); // The Value can be set anything from string to boolean, int, float, double, long, etc
+
+        try {
+            configSaving.save();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void saveCredsJson(Object value) {
+        configSaving = ConfigurationAPI.newConfiguration(new File(getJsonFolder(), "creds.json"));
+        configSaving.set("token", value); // The Value can be set anything from string to boolean, int, float, double, long, etc
+        configSaving.set("Note", "DO NOT SHARE THIS TOKEN TO ANYONE ELSE!");
 
         try {
             configSaving.save();
@@ -75,6 +85,24 @@ public class ModIO {
         }else {
             return true;
         }
+    }
+    public String loadRToken() {
+        try {
+            content = new ConfigurationAPI().readFile(new File(getJsonFolder(), "creds.json"));
+            JSONObject jsonObject = new JSONObject(content);
+            return jsonObject.getString("token");
+        } catch (IOException e) {
+            //e.printStackTrace();
+            and1558.logger.error("The following "+e.getMessage());
+            and1558.logger.error("Saving token with a placeholder value!");
+            and1558.logger.error("This is not a bug! its just that you haven't logged in using a microsoft account");
+            try {
+                and1558.getIO.saveCredsJson("refreshtokenhere");
+            }catch (Exception e2){
+                and1558.logger.error("Failed to save: " + e.getMessage());
+            }
+        }
+        return "refreshtokenhere";
     }
     // Testing!!!
     String contentNew="";
