@@ -24,4 +24,3 @@ Re-import the gradle project<br>
 ### No sound on minecraft
 Copy the assets folder from your minecraft folder over to the run folder on intellij
 <h1>Thank you for your cooperations</h1>
-<p>This is the first revision of the 1.81Mixin Client Version</p>
