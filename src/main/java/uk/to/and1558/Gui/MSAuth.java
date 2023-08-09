@@ -11,7 +11,7 @@ import uk.to.and1558.and1558;
 import java.lang.reflect.Field;
 
 public class MSAuth {
-    private static final Field sessionField = ReflectionUtils.findObfuscatedField(Minecraft.class, "field_71449_j", "session");
+
     String refreshToken = "";
     public void authenticate() throws MicrosoftAuthenticationException {
         Minecraft minecraft = Minecraft.getMinecraft();

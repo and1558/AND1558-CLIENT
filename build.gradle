@@ -65,9 +65,9 @@ dependencies {
         exclude module: 'commons-io'
     }
 
-    compile('org.spongepowered:mixin:0.7.11-SNAPSHOT')
-    compile group: 'com.github.Vatuu', name: 'discord-rpc', version: '1.6.2'
-    compile fileTree(dir: 'src/libs', include: '*.jar')
+    embed('org.spongepowered:mixin:0.7.11-SNAPSHOT')
+    embed group: 'com.github.Vatuu', name: 'discord-rpc', version: '1.6.2'
+    embed fileTree(dir: 'src/libs', include: '*.jar')
 }
 
 mixin {
