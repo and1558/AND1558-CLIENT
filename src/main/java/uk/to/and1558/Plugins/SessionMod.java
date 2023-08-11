@@ -30,6 +30,7 @@ public class SessionMod extends Session {
         and1558.logger.info("Successfully changed session to the given arguments");
         and1558.logger.info("Username : " + username);
         and1558.logger.info("Access Token : [CENSORED]");
+        and1558.logger.info("UUID : " + UUID);
         and1558.logger.info("---------------------------------------------------");
     }
     public String getSessionID()

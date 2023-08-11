@@ -36,6 +36,7 @@ public class DrawChangelogs {
         changelog.add("-  Fixed HP Text not showing when opening the editor without a world opened");
         changelog.add("-  Fixed Glitched Combo Text when opening the editor");
         changelog.add("-  Fixed Client keybinds resetting after restarting Minecraft");
+        changelog.add("-  Changed Microsoft Login method to allow 2FA Accounts");
         changelog.add("NOTE: ANY IMPROVEMENTS/FIXES TO BUGS WILL BE ACCEPTED AFTER CHECKED THAT ITS WORKING");
         for (String s : changelog) {
             wheretoDraw.drawString(fontRendererObj, EnumChatFormatting.GREEN + s, posX + fontRendererObj.getStringWidth("joe") - 0, y + yAdd,0);
@@ -59,6 +60,7 @@ public class DrawChangelogs {
         changelogLess.add("- Fixed HP Text not showing when opening the editor without a world opened");
         changelogLess.add("- Fixed Glitched Combo Text when opening the editor");
         changelogLess.add("- Fixed Client keybinds resetting after restarting Minecraft");
+        changelogLess.add("- Changed Microsoft Login method to allow 2FA Accounts");
         changelogLess.add("NOTE: ANY CODE PUSH WILL BE ACCEPTED");
         changelogLess.add("AFTER THAT IT IS CONFIRMED WORKING/SAFE");
         changelogLess.add("Turn ON Fast-Render to turn OFF UI Blur");

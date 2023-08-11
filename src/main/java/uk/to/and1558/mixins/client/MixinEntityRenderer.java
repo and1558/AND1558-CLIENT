@@ -216,7 +216,6 @@ public class MixinEntityRenderer{
                 }
             }
         }
-        new RenderEvent().call();
     }
     @Shadow private boolean cloudFog;
     @Shadow private float thirdPersonDistance;

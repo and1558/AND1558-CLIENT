@@ -3,7 +3,7 @@
   "compatibilityLevel": "JAVA_8",
   "verbose": true,
   "package": "uk.to.and1558.mixins",
-  "refmap": "mixins.and1558.refmap.json",
+  "refmap": "mixins.exampleclient.refmap.json",
   "mixins": [
     "client.MixinCraft",
     "client.MixinMainMenu",

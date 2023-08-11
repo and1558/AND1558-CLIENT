@@ -207,7 +207,7 @@ public class and1558 {
         if(MODPOSGUI != null && MODPOSGUI.isPressed()){
             hudManager.openMenuScreen();
         }
-        Display.setTitle("Minecraft 1.8.9 / AND1558 PVP Client [Github] [FPS: " + Minecraft.getDebugFPS() + "]");
+        Display.setTitle("Minecraft 1.8.9 / AND1558 PVP Client [Github]");
     }
     public void setKeybind(KeyBinding key, String type){
         if(type.contains("POS")) {

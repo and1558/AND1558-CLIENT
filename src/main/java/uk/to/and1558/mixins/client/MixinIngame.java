@@ -12,18 +12,22 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import uk.to.and1558.Events.impl.RenderEvent;
 import uk.to.and1558.Mods.ModLoader.ModInstances;
 import uk.to.and1558.Plugins.AnimationHandler;
 import uk.to.and1558.VersionString;
 
 @Mixin(GuiIngame.class)
 public class MixinIngame {
-    @Shadow private int playerHealth;
     protected final Minecraft mc = Minecraft.getMinecraft();
     @Inject(method = "renderGameOverlay", at = @At("RETURN"))
-    private void renderGameOverlayR(CallbackInfo ci){
-        if(Minecraft.getMinecraft().gameSettings.showDebugInfo == false){
-            Minecraft.getMinecraft().fontRendererObj.drawStringWithShadow(VersionString.Ver, 2, 2,-1);
+    private void renderGameOverlayR(){
+        if(!mc.gameSettings.showDebugInfo) {
+            Minecraft.getMinecraft().fontRendererObj.drawStringWithShadow(VersionString.Ver, 2, 2, -1);
+            if (mc.inGameHasFocus && mc.thePlayer != null && mc.theWorld != null) {
+                // Dev-1.82 -> Prevent some HUD randomly not appearing across minecraft restarts
+                new RenderEvent().call();
+            }
         }
     }
 
@@ -43,10 +47,10 @@ public class MixinIngame {
 
     /**
      * @author Technerder
-     * @param entityplayersp
+     * @param entityplayersp Get the client-side Player
      */
     private void swingItem(EntityPlayerSP entityplayersp) {
-        final int swingAnimationEnd = entityplayersp.isPotionActive(Potion.digSpeed) ? (6 - (1 + entityplayersp.getActivePotionEffect(Potion.digSpeed).getAmplifier()) * 1) : (entityplayersp.isPotionActive(Potion.digSlowdown) ? (6 + (1 + entityplayersp.getActivePotionEffect(Potion.digSlowdown).getAmplifier()) * 2) : 6);
+        final int swingAnimationEnd = entityplayersp.isPotionActive(Potion.digSpeed) ? (6 - (1 + entityplayersp.getActivePotionEffect(Potion.digSpeed).getAmplifier())) : (entityplayersp.isPotionActive(Potion.digSlowdown) ? (6 + (1 + entityplayersp.getActivePotionEffect(Potion.digSlowdown).getAmplifier()) * 2) : 6);
         if (!entityplayersp.isSwingInProgress || entityplayersp.swingProgressInt >= swingAnimationEnd / 2 || entityplayersp.swingProgressInt < 0) {
             entityplayersp.swingProgressInt = -1;
             entityplayersp.isSwingInProgress = true;

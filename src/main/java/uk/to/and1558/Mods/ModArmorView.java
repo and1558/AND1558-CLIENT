@@ -37,17 +37,7 @@ public class ModArmorView extends ModDraggable {
 			if(is == null) {
 				return;
 			}else if(is.getItem().isDamageable()) {
-				if(mc.thePlayer.inventory.armorInventory[0] == null) {
-					renderItemStack(pos, 0, is);
-				}else if(mc.thePlayer.inventory.armorInventory[1] == null) {
-					renderItemStack(pos, 1, is);
-				}else if(mc.thePlayer.inventory.armorInventory[2] == null) {
-					renderItemStack(pos, 2, is);
-				}else if(mc.thePlayer.inventory.armorInventory[3] == null) {
-					renderItemStack(pos, 3, is);
-				}else {
-					renderItemStack(pos, 4, is);
-				}
+				renderItemStack(pos, 4, is);
 			}
 			
 		}

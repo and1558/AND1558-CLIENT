@@ -37,7 +37,7 @@ public class MixinDebugOverlay {
             if (ModInstances.getOldDebug().isEnabled()) {
                 this.mc.mcProfiler.startSection("debug");
                 GL11.glPushMatrix();
-                this.mc.fontRendererObj.drawStringWithShadow("Minecraft 1.8.9 / AND1558 CLIENT ( vanilla/and1558 // " + this.mc.debug +" )" + " Using OLD F3", 2, 2, 16777215);
+                this.mc.fontRendererObj.drawStringWithShadow("Minecraft 1.8.9 / AND1558 CLIENT ( " + this.mc.debug +" )" + " Using OLD F3", 2, 2, 16777215);
                 this.mc.fontRendererObj.drawStringWithShadow(this.mc.renderGlobal.getDebugInfoRenders(), 2, 12, 16777215);
                 this.mc.fontRendererObj.drawStringWithShadow(this.mc.renderGlobal.getDebugInfoEntities(), 2, 22, 16777215);
                 this.mc.fontRendererObj.drawStringWithShadow("P: " + this.mc.effectRenderer.getStatistics() + ". T: " + this.mc.theWorld.getDebugLoadedEntities(), 2, 32, 16777215);
