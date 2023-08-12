@@ -21,7 +21,7 @@ import uk.to.and1558.VersionString;
 public class MixinIngame {
     protected final Minecraft mc = Minecraft.getMinecraft();
     @Inject(method = "renderGameOverlay", at = @At("RETURN"))
-    private void renderGameOverlayR(){
+    private void renderGameOverlayR(float partialTicks, CallbackInfo ci){
         if(!mc.gameSettings.showDebugInfo) {
             Minecraft.getMinecraft().fontRendererObj.drawStringWithShadow(VersionString.Ver, 2, 2, -1);
             if (mc.inGameHasFocus && mc.thePlayer != null && mc.theWorld != null) {
