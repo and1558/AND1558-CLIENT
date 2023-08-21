@@ -37,6 +37,7 @@ public class DrawChangelogs {
         changelog.add("-  Fixed Glitched Combo Text when opening the editor");
         changelog.add("-  Fixed Client keybinds resetting after restarting Minecraft");
         changelog.add("-  Changed Microsoft Login method to allow 2FA Accounts");
+        changelog.add("-  Made the fire effect lower when using the Low Fire Mod");
         changelog.add("NOTE: ANY IMPROVEMENTS/FIXES TO BUGS WILL BE ACCEPTED AFTER CHECKED THAT ITS WORKING");
         for (String s : changelog) {
             wheretoDraw.drawString(fontRendererObj, EnumChatFormatting.GREEN + s, posX + fontRendererObj.getStringWidth("joe") - 0, y + yAdd,0);
@@ -48,21 +49,13 @@ public class DrawChangelogs {
         int y = 83;
         int yAdd = 0;
         // dev 1.82 -> Moved changelog text to an array instead of individually making them
+        // dev 1.82 pt2 -> Removed changelog from Main Menu to conserve screen space
         List<String> changelogLess = new ArrayList<>();
         changelogLess.add(ver.ChangelogMainMenu);
-        changelogLess.add("- Disable HUD Mod from being visible when another menu opens");
-        changelogLess.add("- Fixed client crashing when trying to login using a Mojang/MS Account");
-        changelogLess.add("- Removed Offensive text from Discord RPC");
-        changelogLess.add("- Changed text from \"Finally Mixin!\" to \"Welcome {username}\"");
-        changelogLess.add("- Fixed broken buttons in the Mod Screen");
-        changelogLess.add("- Made OldF3 Toggleable");
-        changelogLess.add("- Fixed Mod Toggler not checking every mods when opening");
-        changelogLess.add("- Fixed HP Text not showing when opening the editor without a world opened");
-        changelogLess.add("- Fixed Glitched Combo Text when opening the editor");
-        changelogLess.add("- Fixed Client keybinds resetting after restarting Minecraft");
-        changelogLess.add("- Changed Microsoft Login method to allow 2FA Accounts");
-        changelogLess.add("NOTE: ANY CODE PUSH WILL BE ACCEPTED");
-        changelogLess.add("AFTER THAT IT IS CONFIRMED WORKING/SAFE");
+        changelogLess.add("Big Update?!?!");
+        changelogLess.add("[To see the Changelogs, open the changelog menu]");
+        //changelogLess.add("NOTE: ANY CODE PUSH WILL BE ACCEPTED");
+        //changelogLess.add("AFTER THAT IT IS CONFIRMED WORKING/SAFE");
         changelogLess.add("Turn ON Fast-Render to turn OFF UI Blur");
         for (String s : changelogLess) {
             wheretoDraw.drawString(fontRendererObj, EnumChatFormatting.GREEN + s,posX + fontRendererObj.getStringWidth("joe") - 0, y + yAdd,0);

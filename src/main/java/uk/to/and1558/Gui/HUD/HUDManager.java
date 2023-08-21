@@ -8,6 +8,7 @@ import uk.to.and1558.Events.EventManager;
 import uk.to.and1558.Events.EventTarget;
 import uk.to.and1558.Events.impl.RenderEvent;
 import uk.to.and1558.Gui.ModScreen;
+import uk.to.and1558.and1558;
 
 import java.util.*;
 
@@ -15,7 +16,7 @@ public class HUDManager
 {
     private static HUDManager instance;
     private Set<IRenderer> registeredRenderers;
-    private Minecraft mc;
+    private final Minecraft mc;
     
     static {
         HUDManager.instance = null;
@@ -35,9 +36,7 @@ public class HUDManager
     }
     
     public void register(final IRenderer... renderers) {
-        for (final IRenderer render : renderers) {
-            this.registeredRenderers.add(render);
-        }
+        this.registeredRenderers.addAll(Arrays.asList(renderers));
     }
     
     public void unregister(final IRenderer... renderers) {

@@ -2,6 +2,7 @@ package uk.to.and1558.Mods.ModLoader;
 
 import uk.to.and1558.Gui.HUD.HUDManager;
 import uk.to.and1558.Mods.*;
+import uk.to.and1558.and1558;
 
 public class ModInstances {
 

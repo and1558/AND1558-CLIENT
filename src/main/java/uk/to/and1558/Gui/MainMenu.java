@@ -17,6 +17,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import uk.to.and1558.Gui.FallbackGui.PanelCrashReport;
+import uk.to.and1558.Gui.impl.UnicodeFontRenderer;
 import uk.to.and1558.Mods.ModLoader.ModInstances;
 import uk.to.and1558.Gui.impl.RButton;
 import uk.to.and1558.Plugins.ClientAnimations.Animation;
@@ -64,13 +65,13 @@ public class MainMenu extends GuiScreen
         // dev 1.82 -> Changed to a smoother animation
         if(animation != null)
             posX = (int) animation.getValue();
+
         and1558.getInstance().runSingleplayer();
         // Stuck in 39 - 40
         this.mc.getTextureManager().bindTexture(new ResourceLocation("and1558/images/bg.jpg"));
         Gui.drawModalRectWithCustomSizedTexture(-21 + Mouse.getX() / 90, Mouse.getY() * -1 / 90, 0.0f, 0.0f, this.width + 20, this.height + 20, (float)(this.width + 21), (float)(this.height + 20));
         final String s1 = "Copyright " + EnumChatFormatting.RESET+ EnumChatFormatting.RED + EnumChatFormatting.BOLD + "Mojang AB" + EnumChatFormatting.RESET + ", DO NOT REDISTRIBUTE";
         this.drawString(fontRendererObj, s1, this.width - this.fontRendererObj.getStringWidth(s1) - 2, this.height - 10, -1);
-
         DrawChangelogs.getLess(this, this.fontRendererObj, posX);
 
         // dev 1.82. Added Animations for client text name

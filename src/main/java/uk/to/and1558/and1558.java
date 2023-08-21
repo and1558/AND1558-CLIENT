@@ -66,77 +66,77 @@ public class and1558 {
     }
     public void init2() {
         this.logger.info("Initializing Mods");
-        if (getIO.loadConfig("Keystrokes") == true) {
+        if (getIO.loadConfig("Keystrokes")) {
             new ModTogglerScreen().setEnable(0, true);
             ModInstances.getKeystrokes().isEnabled = true;
         } else {
             new ModTogglerScreen().setEnable(0, false);
             ModInstances.getKeystrokes().isEnabled = false;
         }
-        if (getIO.loadConfig("bps") == true) {
+        if (getIO.loadConfig("bps")) {
             new ModTogglerScreen().setEnable(1, true);
             ModInstances.getSpeedCounter().isEnabled = true;
         } else {
             new ModTogglerScreen().setEnable(1, false);
             ModInstances.getSpeedCounter().isEnabled = false;
         }
-        if (getIO.loadConfig("ping") == true) {
+        if (getIO.loadConfig("ping")) {
             new ModTogglerScreen().setEnable(2, true);
             ModInstances.getPingCounter().isEnabled = true;
         } else {
             new ModTogglerScreen().setEnable(2, false);
             ModInstances.getPingCounter().isEnabled = false;
         }
-        if (getIO.loadConfig("lowfire") == true) {
+        if (getIO.loadConfig("lowfire")) {
             new ModTogglerScreen().setEnable(3, true);
             ModInstances.getLfire().isEnabled = true;
         } else {
             new ModTogglerScreen().setEnable(3, false);
             ModInstances.getLfire().isEnabled = false;
         }
-        if(getIO.loadConfig("oldanimations") == true){
+        if(getIO.loadConfig("oldanimations")){
             new ModTogglerScreen().setEnable(4, true);
             ModInstances.getOldanim().isEnabled = true;
         }else{
             new ModTogglerScreen().setEnable(4, false);
             ModInstances.getOldanim().isEnabled = false;
         }
-        if(getIO.loadConfig("perspective") == true){
+        if(getIO.loadConfig("perspective")){
             new ModTogglerScreen().setEnable(6, true);
             ModInstances.getPerspective().isEnabled = true;
         }else{
             new ModTogglerScreen().setEnable(6, false);
             ModInstances.getPerspective().isEnabled = false;
         }
-        if (getIO.loadConfig("armorview") == true) {
+        if (getIO.loadConfig("armorview")) {
             new ModTogglerScreen().setEnable(8, true);
             ModInstances.getArmorView().isEnabled = true;
         } else {
             new ModTogglerScreen().setEnable(8, false);
             ModInstances.getArmorView().isEnabled = false;
         }
-        if (getIO.loadConfig("sprinttoggle") == true) {
+        if (getIO.loadConfig("sprinttoggle")) {
             new ModTogglerScreen().setEnable(7, true);
             ModInstances.getToggleSprint().isEnabled = true;
         } else {
             new ModTogglerScreen().setEnable(7, false);
             ModInstances.getToggleSprint().isEnabled = false;
         }
-        if (getIO.loadConfig("oldf3") == true){
+        if (getIO.loadConfig("oldf3")){
             new ModTogglerScreen().setEnable(9,true);
             ModInstances.getOldDebug().isEnabled = true;
         }else{
             new ModTogglerScreen().setEnable(9,false);
             ModInstances.getOldDebug().isEnabled = false;
         }
-        if (getIO.loadConfig("hp") == true){
+        if (getIO.loadConfig("hp")){
             new ModTogglerScreen().setEnable(10,true);
             ModInstances.getHPDisplay().isEnabled = true;
         }else{
             new ModTogglerScreen().setEnable(10,false);
             ModInstances.getHPDisplay().isEnabled = false;
         }
-        if(getIO.loadConfig("rminput") == true){
+        if(getIO.loadConfig("rminput")){
             RawMouseInput.turnOnRMInput();
         }
     }

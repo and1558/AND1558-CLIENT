@@ -1,14 +1,12 @@
 package uk.to.and1558.mixins.client;
 
-import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.potion.Potion;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.MovingObjectPosition;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -19,28 +17,30 @@ import uk.to.and1558.VersionString;
 
 @Mixin(GuiIngame.class)
 public class MixinIngame {
-    protected final Minecraft mc = Minecraft.getMinecraft();
+    // IntellIJ told to add "and1558$" to any class that is not getting overwritten or modified or is new/unique
+    @Unique
+    protected final Minecraft and1558$mc = Minecraft.getMinecraft();
     @Inject(method = "renderGameOverlay", at = @At("RETURN"))
     private void renderGameOverlayR(float partialTicks, CallbackInfo ci){
-        if(!mc.gameSettings.showDebugInfo) {
+        if(!and1558$mc.gameSettings.showDebugInfo) {
             Minecraft.getMinecraft().fontRendererObj.drawStringWithShadow(VersionString.Ver, 2, 2, -1);
-            if (mc.inGameHasFocus && mc.thePlayer != null && mc.theWorld != null) {
-                // Dev-1.82 -> Prevent some HUD randomly not appearing across minecraft restarts
-                new RenderEvent().call();
-            }
         }
+        // Dev-1.82 -> Prevent some HUD randomly not appearing across minecraft restarts [Attempt 5]
+        // This one single bug really demotivate me
+        new RenderEvent().call();
     }
 
     /**
      * @author Technerder
      */
-    private void attemptSwing() {
-        if (this.mc.thePlayer.getItemInUseCount() > 0) {
-            final boolean mouseDown = this.mc.gameSettings.keyBindAttack.isKeyDown() && this.mc.gameSettings.keyBindUseItem.isKeyDown();
-            if (mouseDown && this.mc.objectMouseOver != null && this.mc.objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK && ModInstances.getOldanim().isEnabled) {
-                this.swingItem(this.mc.thePlayer);
+    @Unique
+    private void and1558$attemptSwing() {
+        if (this.and1558$mc.thePlayer.getItemInUseCount() > 0) {
+            final boolean mouseDown = this.and1558$mc.gameSettings.keyBindAttack.isKeyDown() && this.and1558$mc.gameSettings.keyBindUseItem.isKeyDown();
+            if (mouseDown && this.and1558$mc.objectMouseOver != null && this.and1558$mc.objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK && ModInstances.getOldanim().isEnabled) {
+                this.and1558$swingItem(this.and1558$mc.thePlayer);
             }else if(mouseDown){
-                this.swingItem(this.mc.thePlayer);
+                this.and1558$swingItem(this.and1558$mc.thePlayer);
             }
         }
     }
@@ -49,7 +49,8 @@ public class MixinIngame {
      * @author Technerder
      * @param entityplayersp Get the client-side Player
      */
-    private void swingItem(EntityPlayerSP entityplayersp) {
+    @Unique
+    private void and1558$swingItem(EntityPlayerSP entityplayersp) {
         final int swingAnimationEnd = entityplayersp.isPotionActive(Potion.digSpeed) ? (6 - (1 + entityplayersp.getActivePotionEffect(Potion.digSpeed).getAmplifier())) : (entityplayersp.isPotionActive(Potion.digSlowdown) ? (6 + (1 + entityplayersp.getActivePotionEffect(Potion.digSlowdown).getAmplifier()) * 2) : 6);
         if (!entityplayersp.isSwingInProgress || entityplayersp.swingProgressInt >= swingAnimationEnd / 2 || entityplayersp.swingProgressInt < 0) {
             entityplayersp.swingProgressInt = -1;
@@ -58,8 +59,8 @@ public class MixinIngame {
     }
     @Inject(method = "updateTick", at = @At(value = "HEAD"))
     private void playOldAnim(CallbackInfo ci){
-        if(this.mc.thePlayer != null){
-            attemptSwing();
+        if(this.and1558$mc.thePlayer != null){
+            and1558$attemptSwing();
             new AnimationHandler().updateSwingProgress();
         }
     }

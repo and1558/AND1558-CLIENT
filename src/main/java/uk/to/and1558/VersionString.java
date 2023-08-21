@@ -5,6 +5,6 @@ public class VersionString {
     public static String Ver = "Minecraft 1.8.9 / AND1558 CLIENT DEV-1.82 [Github]";
     public static String verSimple = "dev-1.82";
     public static String titleVer = "Minecraft 1.8.9 / AND1558 PVP Client [Github]";
-    public String ChangelogMainMenu = "Changelog (Version Dev-1.82) :";
+    public String ChangelogMainMenu = "You are currently Running Version Dev-1.82";
     public String ChangelogMainMenu2 = "Changelog (Version Dev-1.82)";
 }

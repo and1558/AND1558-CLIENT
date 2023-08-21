@@ -216,6 +216,7 @@ public class MixinEntityRenderer{
                 }
             }
         }
+
     }
     @Shadow private boolean cloudFog;
     @Shadow private float thirdPersonDistance;

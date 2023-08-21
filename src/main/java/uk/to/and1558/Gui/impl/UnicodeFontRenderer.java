@@ -32,7 +32,7 @@ public class UnicodeFontRenderer {
     }
 
     public static UnicodeFontRenderer getFontOnPC(String name, int size, int fontType, float kerning) {
-        return getFontOnPC(name, size, fontType, kerning, 3.0f);
+        return getFontOnPC(name, size, fontType, kerning, 3f);
     }
 
     public static UnicodeFontRenderer getFontOnPC(String name, int size, int fontType, float kerning, float antiAliasingFactor) {

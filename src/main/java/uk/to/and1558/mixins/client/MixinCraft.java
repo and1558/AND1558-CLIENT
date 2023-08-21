@@ -4,10 +4,7 @@ import jdk.nashorn.internal.runtime.Version;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.MusicTicker;
 import net.minecraft.client.audio.SoundHandler;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.GuiChat;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.gui.*;
 import net.minecraft.client.main.GameConfiguration;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -54,9 +51,12 @@ import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.util.List;
 
+import static org.lwjgl.opengl.GL11.glClearColor;
+
 
 @Mixin(Minecraft.class)
 public class MixinCraft{
+    @Shadow public GuiIngame ingameGUI;
     @Shadow public GameSettings gameSettings;
     /**
      * Useful class shadowed
@@ -69,6 +69,7 @@ public class MixinCraft{
     private static Logger logger;
     @Shadow private Timer timer;
     @Shadow private Session session;
+    boolean displayCreated = false;
     @Inject(method = "<init>", at = @At("RETURN"))
     private void EarlyInit(GameConfiguration gameConfiguration, CallbackInfo ci){
         /**---------------------------------------------------------
@@ -83,15 +84,25 @@ public class MixinCraft{
     }
     @Inject(method = "startGame", at = @At("HEAD"))
     private void initMinecraft(CallbackInfo ci) throws InterruptedException {
+        try {
+            this.createDisplay();
+        } catch (LWJGLException e) {
+            throw new RuntimeException(e);
+        }
+        this.displayWidth = 1280;
+        this.displayHeight = 720;
         and1558.getInstance().init();
+        // Pass-in Minecraft's Render Engine to AND1558, so we can access it
         and1558.getInstance().renderEngine = renderEngine;
-        SplashScreen.setProgress(1, "Mixin - Initializing Mixins");
+        SplashScreen.setProgress(2, "Mixin - Initializing Mixins");
         /**----------------------------------
          * Raw Mouse Handling Mod Initializer
          * ----------------------------------
          */
         Minecraft.getMinecraft().mouseHelper = new RawMouseHelper();
+        SplashScreen.setProgress(3, "Client - Initializing Raw Mouse Input");
         RawMouseInput.init();
+        SplashScreen.setProgress(5, "Minecraft - Initializing");
     }
     @Inject(method = "startGame", at = @At("RETURN"))
     private void initMinecraftReturn(CallbackInfo ci){
@@ -113,38 +124,10 @@ public class MixinCraft{
             Minecraft.getMinecraft().playerController.resetBlockRemoving();
         }
     }**/
-    boolean done,done1,done2,done3 = false;
-    @Inject(method = "startGame", at = @At(value = "RETURN", target = "Lnet/minecraft/client/renderer/GlStateManager;alphaFunc(IF)V"))
-    private void init1(CallbackInfo ci){
-        if(!done) {
-            SplashScreen.setProgress(3, "Minecraft - Initializing OpenGL");
-            done=true;
-        }
-    }
-
-    @Inject(method = "startGame", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/texture/TextureMap;<init>(Ljava/lang/String;)V"))
-    private void init2(CallbackInfo ci){
-        if(!done1) {
-            SplashScreen.setProgress(4, "Minecraft - Initializing Textures");
-            done1=true;
-        }
-    }
 
     @Inject(method = "startGame", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/texture/TextureMap;setBlurMipmapDirect(ZZ)V"))
     private void init3(CallbackInfo ci){
         and1558.logger.info("MIXING CLASSES... Stage 2");
-        if(!done2) {
-            SplashScreen.setProgress(6, "Minecraft - Initializing Renderer");
-            done2=true;
-        }
-    }
-
-    @Inject(method = "startGame", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;checkGLError(Ljava/lang/String;)V"))
-    private void init4(CallbackInfo ci) {
-        if (!done3) {
-            SplashScreen.setProgress(8, "Minecraft - Finished!");
-            done3 = true;
-        }
     }
     @Inject(method = "runTick", at = @At("HEAD"))
     private void event1(CallbackInfo ci){
@@ -152,6 +135,7 @@ public class MixinCraft{
     }
     @Inject(method = "runTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;dispatchKeypresses()V", shift = At.Shift.BEFORE))
     private void onKey(CallbackInfo ci) {
+        // Keyboard key event
         int k = Keyboard.getEventKey() == 0 ? Keyboard.getEventCharacter() + 256 : Keyboard.getEventKey();
         KeyEvent keyEvent = new KeyEvent(k);
         keyEvent.call();
@@ -168,6 +152,8 @@ public class MixinCraft{
 
     @Inject(method = "shutdownMinecraftApplet", at = @At("HEAD"))
     private void shutdownMinecraft(CallbackInfo ci){
+        // Logic to turn off Minecraft
+        // Use this to properly deload or stop some stuff in the client
         this.gameSettings.fullScreen = false;
         and1558.getInstance().shutdown();
     }
@@ -176,18 +162,26 @@ public class MixinCraft{
      * @reason Changed to use custom splash screen
      */
     @Overwrite
-    private void drawSplashScreen(TextureManager textureManagerInstance) throws LWJGLException {
+    private void drawSplashScreen(TextureManager textureManagerInstance)  {
+        glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+        // Draw custom splash screen
         SplashScreen.drawSplash(textureManagerInstance);
     }
     /**
      * @author Mojang
-     * @reason Change title text [might change to a seperate variable but for now its just this]
+     * @reason Change title text
      */
     @Overwrite
     private void createDisplay() throws LWJGLException
     {
+        if(displayCreated) {
+            glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+            return;
+        }
+        displayCreated = true;
         Display.setResizable(true);
         Display.setTitle(VersionString.titleVer);
+        Display.setDisplayMode(new DisplayMode(1280, 720));
 
         try
         {
@@ -212,6 +206,7 @@ public class MixinCraft{
             }
 
             Display.create();
+            glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         }
     }
 
@@ -250,22 +245,11 @@ public class MixinCraft{
     }
     /**
      * @author Mojang
-     * @reason i have no idea what i did here, perhaps i just change it to support my image or just too bored to figure out how to use Shadowing
      */
-    @Overwrite
+    @Shadow
     private ByteBuffer readImageToBuffer(InputStream imageStream) throws IOException
     {
-        BufferedImage bufferedimage = ImageIO.read(imageStream);
-        int[] aint = bufferedimage.getRGB(0, 0, bufferedimage.getWidth(), bufferedimage.getHeight(), (int[])null, 0, bufferedimage.getWidth());
-        ByteBuffer bytebuffer = ByteBuffer.allocate(4 * aint.length);
-
-        for (int i : aint)
-        {
-            bytebuffer.putInt(i << 8 | i >> 24 & 255);
-        }
-
-        bytebuffer.flip();
-        return bytebuffer;
+        return null;
     }
     /**
      * @author Mojang
@@ -322,6 +306,9 @@ public class MixinCraft{
             }
             else
             {
+                // Changed default value of window size to the correct one
+                this.tempDisplayWidth = 1280;
+                this.tempDisplayHeight = 720;
                 Display.setDisplayMode(new DisplayMode(this.tempDisplayWidth, this.tempDisplayHeight));
                 this.displayWidth = this.tempDisplayWidth;
                 this.displayHeight = this.tempDisplayHeight;
