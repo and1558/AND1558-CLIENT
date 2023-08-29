@@ -45,7 +45,7 @@ public class ClientPhysic {
     public static void doRender(Entity entity, double x, double y, double z) {
         EntityItem item = ((EntityItem) entity);
 
-        rotation = 2 * item.getAge();
+        rotation = 2 * item.getAge() % 360;
         if(item.getAge() >= 6) rotation = 6;
         if (!mc.inGameHasFocus) rotation = 0;
 
