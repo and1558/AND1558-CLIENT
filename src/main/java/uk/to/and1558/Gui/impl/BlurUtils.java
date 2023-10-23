@@ -15,8 +15,6 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL14;
 import org.lwjgl.opengl.GL30;
-import uk.to.and1558.Plugins.ClientAnimations.Animation;
-import uk.to.and1558.Plugins.ClientAnimations.Easing;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -38,7 +36,7 @@ public class BlurUtils {
     private static Framebuffer blurOutputHorz = null;
     private static Shader blurShaderVert = null;
     public static Framebuffer blurOutputVert = null;
-    private static RounededShader roundedShader = new RounededShader();
+    private static RoundedShader roundedShader = new RoundedShader();
 
     private static Matrix4f createProjectionMatrix(int width, int height) {
         Matrix4f projMatrix  = new Matrix4f();
@@ -182,14 +180,14 @@ public class BlurUtils {
         GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST);
     }
 
-    public static class RounededShader {
+    public static class RoundedShader {
 
         private final ResourceLocation fragLocation;
         private final ResourceLocation vertexLocation;
         private Minecraft mc = Minecraft.getMinecraft();
         private int programID;
 
-        public RounededShader(){
+        public RoundedShader(){
             this.fragLocation = new ResourceLocation("and1558/shaders/rounded_texture_frag.fsh");
             this.vertexLocation = new ResourceLocation("and1558/shaders/rounded_texture_vert.vsh");
             programID = glCreateProgram();

@@ -84,11 +84,6 @@ public class MixinCraft{
     }
     @Inject(method = "startGame", at = @At("HEAD"))
     private void initMinecraft(CallbackInfo ci) throws InterruptedException {
-        try {
-            this.createDisplay();
-        } catch (LWJGLException e) {
-            throw new RuntimeException(e);
-        }
         this.displayWidth = 1280;
         this.displayHeight = 720;
         and1558.getInstance().init();
@@ -169,6 +164,15 @@ public class MixinCraft{
     }
     /**
      * @author Mojang
+     * @reason Remove 30 FPS Limit in GUIs
+     */
+    @Overwrite
+    public int getLimitFramerate()
+    {
+        return Minecraft.getMinecraft().theWorld == null && this.currentScreen != null ? 60 : this.gameSettings.limitFramerate;
+    }
+    /**
+     * @author Mojang
      * @reason Change title text
      */
     @Overwrite
@@ -181,7 +185,6 @@ public class MixinCraft{
         displayCreated = true;
         Display.setResizable(true);
         Display.setTitle(VersionString.titleVer);
-        Display.setDisplayMode(new DisplayMode(1280, 720));
 
         try
         {
@@ -250,25 +253,6 @@ public class MixinCraft{
     private ByteBuffer readImageToBuffer(InputStream imageStream) throws IOException
     {
         return null;
-    }
-    /**
-     * @author Mojang
-     * @reason change to a higher resolutions
-     */
-    @Overwrite
-    private void setInitialDisplayMode() throws LWJGLException
-    {
-        if (this.fullscreen)
-        {
-            Display.setFullscreen(true);
-            DisplayMode displaymode = Display.getDisplayMode();
-            this.displayWidth = Math.max(1, displaymode.getWidth());
-            this.displayHeight = Math.max(1, displaymode.getHeight());
-        }
-        else
-        {
-            Display.setDisplayMode(new DisplayMode(1280, 720));
-        }
     }
 
     @Shadow public int displayWidth;

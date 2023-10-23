@@ -30,17 +30,19 @@ public class RButton extends GuiButton {
         {
             FontRenderer fontrenderer = mc.fontRendererObj;
 
+            this.hovered = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width && mouseY < this.yPosition + this.height;
+            int i = this.getHoverState(this.hovered);
+
             //Transparent Rect
             //0x44000000
             //drawRect(this.xPosition, this.yPosition, this.xPosition + this.width, this.yPosition + this.height, 0x44000000);
             //RoundUtils.drawRoundedRect(this.xPosition, this.yPosition, this.xPosition + this.width, this.yPosition + this.height, 5, 0x44000000);
-
-            GuiUtils.drawRoundedRect(this.xPosition, this.yPosition, this.xPosition + this.width, this.yPosition + this.height, this.radius, 0x99000000);
+            if(!this.hovered)
+                GuiUtils.drawRoundedRect(this.xPosition, this.yPosition, this.xPosition + this.width, this.yPosition + this.height, this.radius, 0x99000000);
 
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
-            this.hovered = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width && mouseY < this.yPosition + this.height;
-            int i = this.getHoverState(this.hovered);
+
 
             GlStateManager.enableBlend();
             GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
@@ -56,6 +58,8 @@ public class RButton extends GuiButton {
             }
             else if (this.hovered)
             {
+                drawRect(this.xPosition, this.yPosition, this.xPosition + this.width, this.yPosition + this.height, 0x99000000);
+                this.drawHollowRect(this.xPosition-1, this.yPosition-1, this.width+1, this.height+1, 0xFF00FF00);
                 j = 16777120;
             }
 
@@ -64,6 +68,13 @@ public class RButton extends GuiButton {
         }
     }
 
+    public void drawHollowRect(int x, int y, int w, int h, int color) {
+        this.drawHorizontalLine(x, x + w, y, color);
+        this.drawHorizontalLine(x, x + w, y + h, color);
+
+        this.drawVerticalLine(x, y + h, y, color);
+        this.drawVerticalLine(x + w, y + h, y, color);
+    }
 
     /**
      * Fired when the mouse button is dragged. Equivalent of MouseListener.mouseDragged(MouseEvent e).

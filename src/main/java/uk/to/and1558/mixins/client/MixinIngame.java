@@ -1,19 +1,35 @@
 package uk.to.and1558.mixins.client;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.GuiIngame;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.potion.Potion;
+import net.minecraft.scoreboard.Score;
+import net.minecraft.scoreboard.ScoreObjective;
+import net.minecraft.scoreboard.ScorePlayerTeam;
+import net.minecraft.scoreboard.Scoreboard;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MovingObjectPosition;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import uk.to.and1558.Events.impl.RenderEvent;
+import uk.to.and1558.Gui.impl.BlurUtils;
 import uk.to.and1558.Mods.ModLoader.ModInstances;
 import uk.to.and1558.Plugins.AnimationHandler;
 import uk.to.and1558.VersionString;
+
+import java.util.Collection;
+import java.util.List;
+
+import static net.minecraft.client.gui.Gui.drawRect;
 
 @Mixin(GuiIngame.class)
 public class MixinIngame {

@@ -30,6 +30,8 @@ public class GuiCredits extends GuiScreen{
     private Animation animationY11 = new Animation(1l,0,510,Easing.EASE_IN_OUT_QUART);
     private Animation animationY12 = new Animation(1l,0,510,Easing.EASE_IN_OUT_QUART);
     private Animation animationY13 = new Animation(1l,0,510,Easing.EASE_IN_OUT_QUART);
+    private Animation animationY14 = new Animation(1l,0,510,Easing.EASE_IN_OUT_QUART);
+    private Animation animationY15 = new Animation(1l,0,510,Easing.EASE_IN_OUT_QUART);
     private Animation animationX = new Animation(1l,0,0,Easing.EASE_IN_OUT_QUART);
     private Animation animationX1  = new Animation(1l,0,0,Easing.EASE_IN_OUT_QUART);
     private Animation animationX2 = new Animation(1l,0,0,Easing.EASE_IN_OUT_QUART);
@@ -44,6 +46,8 @@ public class GuiCredits extends GuiScreen{
     private Animation animationX11 = new Animation(1l,0,0,Easing.EASE_IN_OUT_QUART);
     private Animation animationX12 = new Animation(1l,0,0,Easing.EASE_IN_OUT_QUART);
     private Animation animationX13 = new Animation(1l,0,0,Easing.EASE_IN_OUT_QUART);
+    private Animation animationX14 = new Animation(1l,0,0,Easing.EASE_IN_OUT_QUART);
+    private Animation animationX15 = new Animation(1l,0,0,Easing.EASE_IN_OUT_QUART);
     boolean introPlayed = false;
     @Override
     public void initGui() {
@@ -77,8 +81,10 @@ public class GuiCredits extends GuiScreen{
         this.drawCenteredString(fontRendererObj, EnumChatFormatting.WHITE + "BlueBloxCraft", this.width / 2 - 2 + (int) animationX9.getValue(), (int) animationY9.getValue() + 160, 0);
         this.drawCenteredString(fontRendererObj, EnumChatFormatting.WHITE + "asbyth", this.width / 2 - 2 + (int) animationX10.getValue(), (int) animationY10.getValue() + 170, 0);
         this.drawCenteredString(fontRendererObj, EnumChatFormatting.WHITE + "Gavin" ,this.width / 2 - 2 + (int) animationX11.getValue(), (int) animationY11.getValue() + 180, 0);
-        this.drawCenteredString(fontRendererObj, EnumChatFormatting.WHITE + "Canelex[Perspective Mod v3] and DjTheRedstoner[Perspective Mod v4]" ,this.width / 2 - 2 + (int) animationX12.getValue(), (int) animationY12.getValue() + 190, 0);
-        this.drawCenteredString(fontRendererObj, EnumChatFormatting.WHITE + "Open Source Mods", this.width / 2 - 2 + (int) animationX13.getValue(), (int) animationY13.getValue() + 200, 0);
+        this.drawCenteredString(fontRendererObj, EnumChatFormatting.WHITE + "Canelex[Perspective Mod v3]" ,this.width / 2 - 2 + (int) animationX12.getValue(), (int) animationY12.getValue() + 190, 0);
+        this.drawCenteredString(fontRendererObj, EnumChatFormatting.WHITE + "DjTheRedstoner[Perspective Mod v4]", this.width / 2 - 2 + (int) animationX13.getValue(), (int) animationY13.getValue() + 200, 0);
+        this.drawCenteredString(fontRendererObj, EnumChatFormatting.WHITE + "Upio and Spacebyte (Microsoft Authentication)", this.width / 2 - 2 + (int) animationX14.getValue(), (int) animationY14.getValue() + 210, 0);
+        this.drawCenteredString(fontRendererObj, EnumChatFormatting.WHITE + "Open Source Mods", this.width / 2 - 2 + (int) animationX15.getValue(), (int) animationY15.getValue() + 220, 0);
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
     @Override
@@ -122,6 +128,10 @@ public class GuiCredits extends GuiScreen{
                 animationY12 = new Animation(1000l, 510, 0, Easing.EASE_OUT_QUINT);
                 Thread.sleep(50);
                 animationY13 = new Animation(1000l, 510, 0, Easing.EASE_OUT_QUINT);
+                Thread.sleep(50);
+                animationY14 = new Animation(1000l, 510, 0, Easing.EASE_OUT_QUINT);
+                Thread.sleep(50);
+                animationY15 = new Animation(1000l, 510, 0, Easing.EASE_OUT_QUINT);
                 Thread.sleep(500);
                 playAnim();
             }
@@ -131,7 +141,9 @@ public class GuiCredits extends GuiScreen{
         }).start();
     }
     public void playAnim(){
-        new Thread(()->{
+        // stub
+
+        /**new Thread(()->{
             try {
                 // Stage 1 -> go right non-loop
                 animationX = new Animation(1000l, 0, 20, Easing.EASE_OUT_QUINT);
@@ -162,6 +174,10 @@ public class GuiCredits extends GuiScreen{
                 Thread.sleep(50);
                 animationX13 = new Animation(1000l, 0, 20, Easing.EASE_OUT_QUINT);
                 Thread.sleep(50);
+                animationX14 = new Animation(1000l, 0, 20, Easing.EASE_OUT_QUINT);
+                Thread.sleep(50);
+                animationX15 = new Animation(1000l, 0, 20, Easing.EASE_OUT_QUINT);
+                Thread.sleep(50);
                 // Stage 2 -> go right non-loop
                 animationX = new Animation(1000l, 20, -20, Easing.EASE_OUT_QUINT);
                 Thread.sleep(50);
@@ -190,6 +206,10 @@ public class GuiCredits extends GuiScreen{
                 animationX12 = new Animation(1000l, 20, -20, Easing.EASE_OUT_QUINT);
                 Thread.sleep(50);
                 animationX13 = new Animation(1000l, 20, -20, Easing.EASE_OUT_QUINT);
+                Thread.sleep(50);
+                animationX14 = new Animation(1000l, 20, -20, Easing.EASE_OUT_QUINT);
+                Thread.sleep(50);
+                animationX15 = new Animation(1000l, 20, -20, Easing.EASE_OUT_QUINT);
                 Thread.sleep(50);
                 while(true) {
                     animationX = new Animation(1000l, -20, 20, Easing.EASE_OUT_QUINT);
@@ -220,6 +240,10 @@ public class GuiCredits extends GuiScreen{
                     Thread.sleep(50);
                     animationX13 = new Animation(1000l, -20, 20, Easing.EASE_OUT_QUINT);
                     Thread.sleep(50);
+                    animationX14 = new Animation(1000l, -20, 20, Easing.EASE_OUT_QUINT);
+                    Thread.sleep(50);
+                    animationX15 = new Animation(1000l, -20, 20, Easing.EASE_OUT_QUINT);
+                    Thread.sleep(50);
                     // ====================================
                     animationX = new Animation(1000l, 20, -20, Easing.EASE_OUT_QUINT);
                     Thread.sleep(50);
@@ -249,11 +273,15 @@ public class GuiCredits extends GuiScreen{
                     Thread.sleep(50);
                     animationX13 = new Animation(1000l, 20, -20, Easing.EASE_OUT_QUINT);
                     Thread.sleep(50);
+                    animationX14 = new Animation(1000l, 20, -20, Easing.EASE_OUT_QUINT);
+                    Thread.sleep(50);
+                    animationX15 = new Animation(1000l, 20, -20, Easing.EASE_OUT_QUINT);
+                    Thread.sleep(50);
                 }
             }
             catch (InterruptedException e){
                 throw new RuntimeException(e);
             }
-        }).start();
+        }).start();**/
     }
 }

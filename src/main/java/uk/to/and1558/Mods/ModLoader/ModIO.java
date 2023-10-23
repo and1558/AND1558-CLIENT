@@ -86,7 +86,7 @@ public class ModIO {
             return true;
         }
     }
-    public String loadRToken() {
+    /**public String loadRToken() {
         try {
             content = new ConfigurationAPI().readFile(new File(getJsonFolder(), "creds.json"));
             JSONObject jsonObject = new JSONObject(content);
@@ -103,7 +103,7 @@ public class ModIO {
             }
         }
         return "refreshtokenhere";
-    }
+    }**/
     // Testing!!!
     String contentNew="";
     public boolean loadConfigNew(String modType){

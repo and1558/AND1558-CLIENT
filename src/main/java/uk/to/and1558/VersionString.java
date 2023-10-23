@@ -7,4 +7,10 @@ public class VersionString {
     public static String titleVer = "Minecraft 1.8.9 / AND1558 PVP Client [Github]";
     public String ChangelogMainMenu = "You are currently Running Version Dev-1.82";
     public String ChangelogMainMenu2 = "Changelog (Version Dev-1.82)";
+    /** Version types using Integers
+     *  0 = Release
+     *  1 = Beta
+     *  2 = Dev-Beta
+     **/
+    public static int versionType = 2;
 }

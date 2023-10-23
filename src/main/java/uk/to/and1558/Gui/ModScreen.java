@@ -77,11 +77,6 @@ public class ModScreen extends GuiScreen {
     }
 
     @Override
-    public boolean doesGuiPauseGame() {
-        return false;
-    }
-
-    @Override
     public void updateScreen() {
         super.updateScreen();
     }

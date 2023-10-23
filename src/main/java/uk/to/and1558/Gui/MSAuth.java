@@ -1,20 +1,12 @@
 package uk.to.and1558.Gui;
 
-import net.minecraft.client.Minecraft;
-import uk.to.and1558.Plugins.ReflectionUtils;
-import uk.to.and1558.Plugins.openauth.microsoft.MicrosoftAuthResult;
-import uk.to.and1558.Plugins.openauth.microsoft.MicrosoftAuthenticationException;
-import uk.to.and1558.Plugins.openauth.microsoft.MicrosoftAuthenticator;
-import uk.to.and1558.Plugins.openauth.microsoft.model.response.MinecraftProfile;
-import uk.to.and1558.and1558;
-
-import java.lang.reflect.Field;
+import uk.to.and1558.Plugins.mcpcba.SessionUtils;
 
 public class MSAuth {
 
-    String refreshToken = "";
-    public void authenticate() throws MicrosoftAuthenticationException {
-        Minecraft minecraft = Minecraft.getMinecraft();
+    //String refreshToken = "";
+    public void authenticate(MSAuthGUI gui) {
+        /**Minecraft minecraft = Minecraft.getMinecraft();
         MicrosoftAuthenticator auth = new MicrosoftAuthenticator();
         try {
             MicrosoftAuthResult result = auth.loginWithWebview();
@@ -33,9 +25,17 @@ public class MSAuth {
             and1558.getInstance().modifyableSession.changeSession(mcprofile.getName(), mcprofile.getId(), result.getAccessToken(), "mojang");
         } catch (MicrosoftAuthenticationException e) {
             throw new MicrosoftAuthenticationException(e);
+        }**/
+        try {
+            SessionUtils.tryLoginBrowser(gui);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
-    public void authenticateWithRToken(String token) throws MicrosoftAuthenticationException{
+    /**public static void saveToken(String url){
+        and1558.getIO.saveCredsJson(url);
+    }**/
+    /**public void authenticateWithRToken(String token) throws MicrosoftAuthenticationException{
         Minecraft minecraft = Minecraft.getMinecraft();
         MicrosoftAuthenticator auth = new MicrosoftAuthenticator();
         MicrosoftAuthResult result = auth.loginWithRefreshToken(token);
@@ -51,5 +51,5 @@ public class MSAuth {
         MinecraftProfile mcprofile = result.getProfile();
         //((MixinCraft) Minecraft.getMinecraft()).setSession(new Session(result.getProfile().getName(),result.getProfile().getId(), result.getAccessToken(), "mojang"));
         and1558.getInstance().modifyableSession.changeSession(mcprofile.getName(), mcprofile.getId(), result.getAccessToken(), "mojang");
-    }
+    }**/
 }
