@@ -25,11 +25,17 @@ public class SessionMod extends Session {
         this.UUID = UUID;
         showChangetoLog();
     }
+    // VALUE SHOULD ALWAYS BE FALSE UNLESS ITS USED FOR DEBUGGING PURPOSES
+    public static boolean showToken = false;
     public void showChangetoLog(){
         and1558.logger.info("-----------------Session Changed-------------------");
         and1558.logger.info("Successfully changed session to the given arguments");
         and1558.logger.info("Username : " + username);
-        and1558.logger.info("Access Token : [CENSORED]");
+        if(showToken){
+            and1558.logger.info("Access Token : " + token);
+        }else{
+            and1558.logger.info("Access Token : [CENSORED]");
+        }
         and1558.logger.info("UUID : " + UUID);
         and1558.logger.info("---------------------------------------------------");
     }

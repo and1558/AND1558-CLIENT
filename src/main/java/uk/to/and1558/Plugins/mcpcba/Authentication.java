@@ -1,8 +1,10 @@
 package uk.to.and1558.Plugins.mcpcba;
 
+import org.json.JSONObject;
 import uk.to.and1558.Plugins.mcpcba.http.HttpClient;
 import uk.to.and1558.Plugins.mcpcba.http.HttpRequest;
 import uk.to.and1558.Plugins.mcpcba.http.HttpResponse;
+import uk.to.and1558.and1558;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -129,25 +131,59 @@ public class Authentication {
     */
     public static JsonObject getAccountInfo(String accessToken){
         // This creates the request body needed in order to fetch the account info
+        and1558.logger.info("========== Microsoft Login Debug ==========");
+        and1558.logger.info("[MSLOGIN] Starting HTTP Client");
         HttpClient client = HttpClient.newHttpClient();
+        and1558.logger.info("[MSLOGIN] Building HTTP Request");
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create("https://api.minecraftservices.com/minecraft/profile"))
             .header("Authorization", "Bearer " + accessToken)
             .GET()
             .build();
-        
+        if(SessionUtils.printJsonInfo){
+            and1558.logger.info("ACCESSTOKEN (DO NOT SHARE): " + accessToken);
+        }
         // We to send the request & if it throws an error, return null, if it does not then return the request response
         try {
+            and1558.logger.info("[MSLOGIN] Sending HTTP Request");
             // Send the request
             HttpResponse response = client.send(request);
-
+            if(SessionUtils.printJsonInfo) {
+                and1558.logger.info(response.body());
+            }
+            and1558.logger.info("[MSLOGIN] Recevied a respond of " + response.statusCode() + "! Parsing into JSON...");
+            if(response.statusCode() == 401){
+                and1558.logger.info("FAILED TO LOGIN, RECEIVED 401!");
+                and1558.logger.info("THIS CAN BE CAUSED BY PKIX ERROR ON JAVA DUE TO MISSING CERTIFICATES");
+                and1558.logger.info("TRY USING ANOTHER JAVA INSTALLATION");
+                and1558.logger.info("Developer Recommends Liberica JRE 8 or any Java 8 Version above 112");
+            }
             // Read & parse the json data provided, this is where it could error
             JsonReader jsonReader = Json.createReader(new StringReader(response.body()));
+            and1558.logger.info("[MSLOGIN] Parsing into JSON... Stage 2");
             JsonObject jsonObject = jsonReader.readObject();
+            and1558.logger.info("[MSLOGIN] Finished Parsing! Closing JSONReader");
             jsonReader.close();
-            
+            if(SessionUtils.printJsonInfo){
+                and1558.logger.info("=====Result of jsonReader=====");
+                and1558.logger.info(jsonReader);
+                and1558.logger.info("==============================");
+            }
+            and1558.logger.info("===========================================");
             return jsonObject;
         } catch (Exception e) {
+            and1558.logger.info("Exception Thrown!");
+            and1558.logger.info("Exception type: " + e.getMessage());
+            e.printStackTrace();
+            and1558.logger.info("===========================================");
+            if(e.getMessage().contains("401")){
+                JSONObject json = new JSONObject();
+
+                json.put("errortype", "http401");
+                JsonReader jsonReader = Json.createReader(new StringReader(json.toString()));
+                JsonObject json1 = jsonReader.readObject();
+                return json1;
+            }
             return null;
         }
     }

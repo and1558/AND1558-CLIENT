@@ -1,6 +1,8 @@
 package uk.to.and1558.Gui;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -22,8 +24,10 @@ import uk.to.and1558.Mods.ModLoader.ModInstances;
 import uk.to.and1558.Gui.impl.RButton;
 import uk.to.and1558.Plugins.ClientAnimations.Animation;
 import uk.to.and1558.Plugins.ClientAnimations.Easing;
+import uk.to.and1558.Plugins.RenderRGB;
 import uk.to.and1558.VersionString;
 import uk.to.and1558.and1558;
+import uk.to.and1558.club.aetherium.api.particle.SnowfallParticles;
 
 import static org.lwjgl.opengl.GL11.glColor4f;
 
@@ -59,7 +63,6 @@ public class MainMenu extends GuiScreen
         clientTextAnim = new Animation(2f, this.width, 0, Easing.EASE_OUT_QUINT);
         super.initGui();
     }
-
     @Override
     public void drawScreen(final int mouseX, final int mouseY, final float partialTicks) {
         // dev 1.82 -> Changed to a smoother animation
@@ -67,9 +70,8 @@ public class MainMenu extends GuiScreen
             posX = (int) animation.getValue();
 
         and1558.getInstance().runSingleplayer();
-        // Stuck in 39 - 40
-        this.mc.getTextureManager().bindTexture(new ResourceLocation("and1558/images/bg.jpg"));
-        Gui.drawModalRectWithCustomSizedTexture(-21 + Mouse.getX() / 90, Mouse.getY() * -1 / 90, 0.0f, 0.0f, this.width + 20, this.height + 20, (float)(this.width + 21), (float)(this.height + 20));
+        // DECEMBER UPDATE!1
+        and1558.drawClientBackground(and1558.options.darkMode, this.width, this.height);
         final String s1 = "Copyright " + EnumChatFormatting.RESET+ EnumChatFormatting.RED + EnumChatFormatting.BOLD + "Mojang AB" + EnumChatFormatting.RESET + ", DO NOT REDISTRIBUTE";
         this.drawString(fontRendererObj, s1, this.width - this.fontRendererObj.getStringWidth(s1) - 2, this.height - 10, -1);
         DrawChangelogs.getLess(this, this.fontRendererObj, posX);
@@ -96,10 +98,17 @@ public class MainMenu extends GuiScreen
         GlStateManager.rotate(-20.0F, 0.0F, 0.0F, 1.0F);
         float f = 1.8F - MathHelper.abs(MathHelper.sin((float) (Minecraft.getSystemTime() % 1000L) / 1000.0F * (float) Math.PI * 2.0F) * 0.5F);
         // dev 1.82 -> Changed text from "Finally Mixin!" to "Welcome {username}"
-        f = f * 100.0F / (float) (this.fontRendererObj.getStringWidth("Welcome " + mc.getSession().getUsername() + "!") + 32);
-        GlStateManager.scale(f, f, f);
-        this.drawCenteredString(this.fontRendererObj, "Welcome " + mc.getSession().getUsername() + "!", 0, -8, -256);
-        GlStateManager.popMatrix();
+        if (Calendar.getInstance().get(Calendar.MONTH) == Calendar.DECEMBER) {
+            f = f * 140.0F / (float) (this.fontRendererObj.getStringWidth("Happy Holiday " + mc.getSession().getUsername() + "!") + 32);
+            GlStateManager.scale(f, f, f);
+            RenderRGB.drawCenteredChristmasString(this.fontRendererObj, "Happy Holiday " + mc.getSession().getUsername() + "!", 0, -8, true);
+            GlStateManager.popMatrix();
+        }else{
+            f = f * 100.0F / (float) (this.fontRendererObj.getStringWidth("Welcome " + mc.getSession().getUsername() + "!") + 32);
+            GlStateManager.scale(f, f, f);
+            this.drawCenteredString(this.fontRendererObj, "Welcome " + mc.getSession().getUsername() + "!", 0, -8, -256);
+            GlStateManager.popMatrix();
+        }
         GL11.glDisable(GL11.GL_BLEND);
         // dev 1.82 -> Fixed yellowed background when using Fast Render on Optifine
         glColor4f(1,1,1,1);

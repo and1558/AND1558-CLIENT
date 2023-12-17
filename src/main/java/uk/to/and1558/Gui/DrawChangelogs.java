@@ -39,6 +39,7 @@ public class DrawChangelogs {
         changelog.add("-  Changed Microsoft Login method to allow 2FA Accounts");
         changelog.add("-  Made the fire effect lower when using the Low Fire Mod");
         changelog.add("-  Changed 30 FPS Limit on GUI when no world is opened to 60 FPS");
+        changelog.add("-  Christmas/Holiday Changes!");
         changelog.add("NOTE: ANY IMPROVEMENTS/FIXES TO BUGS WILL BE ACCEPTED AFTER CHECKED THAT ITS WORKING");
         for (String s : changelog) {
             wheretoDraw.drawString(fontRendererObj, EnumChatFormatting.GREEN + s, posX + fontRendererObj.getStringWidth("joe") - 0, y + yAdd,0);

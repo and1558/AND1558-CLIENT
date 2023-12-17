@@ -1,6 +1,8 @@
 package uk.to.and1558;
 
+import jdk.nashorn.internal.runtime.Version;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.main.GameConfiguration;
 import net.minecraft.client.renderer.texture.TextureManager;
@@ -9,9 +11,11 @@ import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import uk.to.and1558.DiscordRP.DiscordRPCEvent;
 import uk.to.and1558.Events.EventManager;
@@ -32,10 +36,15 @@ import uk.to.and1558.Gui.impl.GuiUtils;
 import uk.to.and1558.Plugins.ClientAnimations.Animation;
 import uk.to.and1558.Plugins.ClientAnimations.Easing;
 import uk.to.and1558.Plugins.SessionMod;
+import uk.to.and1558.club.aetherium.api.particle.SnowfallParticles;
+
+import java.util.Calendar;
+import java.util.Date;
 
 public class and1558 {
     public static final Logger logger = LogManager.getLogger();
     public static final and1558 INSTANCE = new and1558();
+    public static ClientOptions options = new ClientOptions();
     public boolean started = false;
     public static final and1558 getInstance() { return INSTANCE; }
     // dev-1.82. Added animations for GuiUtils and made it accessible here
@@ -139,6 +148,8 @@ public class and1558 {
         if(getIO.loadConfig("rminput")){
             RawMouseInput.turnOnRMInput();
         }
+        particles = SnowfallParticles.create(360);
+        options.init();
     }
     public void start(){
         hudManager = HUDManager.getInstance();
@@ -147,6 +158,7 @@ public class and1558 {
 
     public void shutdown(){
         DiscordEvent.shutdown();
+        options.saveAll();
     }
     public DiscordRPCEvent getDiscordRPC(){
         return DiscordEvent;
@@ -207,7 +219,7 @@ public class and1558 {
         if(MODPOSGUI != null && MODPOSGUI.isPressed()){
             hudManager.openMenuScreen();
         }
-        Display.setTitle("Minecraft 1.8.9 / AND1558 PVP Client [Github]");
+        Display.setTitle(VersionString.titleVer);
     }
     public void setKeybind(KeyBinding key, String type){
         if(type.contains("POS")) {
@@ -249,96 +261,27 @@ public class and1558 {
     public void EarlyTick(){
 
     }
-    public static enum Options{
-        testslide("options.fov", true, false, 30.0F, 110.0F, 1.0F);
-        private final boolean enumFloat;
-        private final boolean enumBoolean;
-        private final String enumString;
-        private final float valueStep;
-        private float valueMin;
-        private float valueMax;
-
-        public static and1558.Options getEnumOptions(int p_74379_0_)
-        {
-            for (and1558.Options gamesettings$options : values())
-            {
-                if (gamesettings$options.returnEnumOrdinal() == p_74379_0_)
-                {
-                    return gamesettings$options;
+    public SnowfallParticles particles;
+    public static void drawClientBackground(boolean forceDark, int width, int height){
+        if (Calendar.getInstance().get(Calendar.MONTH) == Calendar.DECEMBER){
+            Date data = new Date();
+            if(forceDark){
+                Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("and1558/images/bgseasonal/bg_winter_snowy.png"));
+                Gui.drawModalRectWithCustomSizedTexture(-21 + Mouse.getX() / 90, Mouse.getY() * -1 / 90, 0.0f, 0.0f, width + 20, height + 20, (float)(width + 21), (float)(height + 20));
+                if(and1558.getInstance().particles != null) and1558.getInstance().particles.render();
+            }else{
+                if(data.getHours() < 6 || data.getHours() > 14){
+                    Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("and1558/images/bgseasonal/bg_winter_snowy.png"));
+                    Gui.drawModalRectWithCustomSizedTexture(-21 + Mouse.getX() / 90, Mouse.getY() * -1 / 90, 0.0f, 0.0f, width + 20, height + 20, (float)(width + 21), (float)(height + 20));
+                    if(and1558.getInstance().particles != null) and1558.getInstance().particles.render();
+                }else{
+                    Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("and1558/images/bgseasonal/bg_winter_sun.png"));
+                    Gui.drawModalRectWithCustomSizedTexture(-21 + Mouse.getX() / 90, Mouse.getY() * -1 / 90, 0.0f, 0.0f, width + 20, height + 20, (float)(width + 21), (float)(height + 20));
                 }
             }
-
-            return null;
-        }
-        private Options(String p_i1015_3_, boolean isFloat, boolean isBoolean)
-        {
-            this(p_i1015_3_, isFloat, isBoolean, 0.0F, 1.0F, 0.0F);
-        }
-
-        private Options(String name, boolean isFloat, boolean isBoolean, float min, float max, float defValue)
-        {
-            this.enumString = name;
-            this.enumFloat = isFloat;
-            this.enumBoolean = isBoolean;
-            this.valueMin = min;
-            this.valueMax = max;
-            this.valueStep = defValue;
-        }
-
-        public boolean getEnumFloat()
-        {
-            return this.enumFloat;
-        }
-
-        public boolean getEnumBoolean()
-        {
-            return this.enumBoolean;
-        }
-
-        public int returnEnumOrdinal()
-        {
-            return this.ordinal();
-        }
-
-        public String getEnumString()
-        {
-            return this.enumString;
-        }
-
-        public float getValueMax()
-        {
-            return this.valueMax;
-        }
-
-        public void setValueMax(float p_148263_1_)
-        {
-            this.valueMax = p_148263_1_;
-        }
-
-        public float normalizeValue(float p_148266_1_)
-        {
-            return MathHelper.clamp_float((this.snapToStepClamp(p_148266_1_) - this.valueMin) / (this.valueMax - this.valueMin), 0.0F, 1.0F);
-        }
-
-        public float denormalizeValue(float p_148262_1_)
-        {
-            return this.snapToStepClamp(this.valueMin + (this.valueMax - this.valueMin) * MathHelper.clamp_float(p_148262_1_, 0.0F, 1.0F));
-        }
-
-        public float snapToStepClamp(float p_148268_1_)
-        {
-            p_148268_1_ = this.snapToStep(p_148268_1_);
-            return MathHelper.clamp_float(p_148268_1_, this.valueMin, this.valueMax);
-        }
-
-        protected float snapToStep(float p_148264_1_)
-        {
-            if (this.valueStep > 0.0F)
-            {
-                p_148264_1_ = this.valueStep * (float)Math.round(p_148264_1_ / this.valueStep);
-            }
-
-            return p_148264_1_;
+        }else{
+            Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("and1558/images/bg.jpg"));
+            Gui.drawModalRectWithCustomSizedTexture(-21 + Mouse.getX() / 90, Mouse.getY() * -1 / 90, 0.0f, 0.0f, width + 20, height + 20, (float)(width + 21), (float)(height + 20));
         }
     }
 }

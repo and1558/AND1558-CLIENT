@@ -1,32 +1,16 @@
 package uk.to.and1558.Plugins.mcpcba;
 
 import java.awt.Desktop;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.digest.DigestUtils;
-import com.mojang.authlib.GameProfile;
-import net.minecraft.client.Minecraft;
 import net.minecraft.util.Session;
 import uk.to.and1558.Gui.MSAuthGUI;
 import uk.to.and1558.and1558;
-
-import javax.json.Json;
 import javax.json.JsonObject;
-import javax.json.JsonReader;
 
 public class SessionUtils {
 
@@ -38,7 +22,7 @@ public class SessionUtils {
     * @param session      Session instance from net.minecraft.util.Session
     */
 	public static void setSession(Session session) {
-		and1558.INSTANCE.modifyableSession.changeSession(session.getUsername(), session.getPlayerID(), session.getToken(), "mojang");
+		and1558.INSTANCE.modifyableSession.changeSession(session.getUsername(), session.getPlayerID(), session.getToken(), session.getSessionType().toString());
 	}
 	
 	/**
@@ -84,20 +68,41 @@ public class SessionUtils {
 	* @param code          the code provided from login.live.com/oauth20_authorize.srf
 	* @return A status string you can put on your GUI
     */
+	public static boolean printJsonInfo = false;
 	public static String recieveResponse(String code) {
 		try {
+			if(printJsonInfo){
+				and1558.logger.info("==========================================================");
+				and1558.logger.info("WARNING! printJsonInfo is set to TRUE");
+				and1558.logger.info("CONSOLE MAY OR MAY NOT OUTPUT SENSITIVE INFORMATION!");
+			}
+			and1558.logger.info("Getting access token");
 			String accessToken = new Authentication().retrieveAccessToken(code,recentPkce);
+			and1558.logger.info("Getting profile info");
 			JsonObject loginProfileInfo = Authentication.getAccountInfo(accessToken);
-			
-			String name = loginProfileInfo.getString("name");
+			if(loginProfileInfo.containsValue("http401")){
+				return "Failed to Login! Try changing to another Java Installation!";
+			}
+			if(printJsonInfo){
+				and1558.logger.info("=======RESULT OF loginProfileInfo=======");
+				and1558.logger.info(loginProfileInfo);
+				and1558.logger.info("========================================");
+				and1558.logger.info("==========================================================");
+			}
+			and1558.logger.info("Getting profile name");
+            String name = loginProfileInfo.getString("name");
+			and1558.logger.info("Getting profile id");
 			String id = loginProfileInfo.getString("id");
-			
+			and1558.logger.info("Found all needed info!");
+			and1558.logger.info("Changing session to selected profile!");
 			setSession(new Session(name, id, accessToken, "legacy"));
-
+			and1558.logger.info("Success");
 			return "Logged in successfully as " + name +"!";
 		} catch (Exception e) {
+			and1558.logger.info("==========FAILED TO LOGIN==========");
 			e.printStackTrace();
-			return "Could not log-in. Please check console!";
+			and1558.logger.info("===================================");
+			return "Could not log-in. Try using another Java Installation!";
 		}
 	}
 }

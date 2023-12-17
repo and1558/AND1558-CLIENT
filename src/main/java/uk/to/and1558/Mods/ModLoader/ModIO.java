@@ -58,6 +58,7 @@ public class ModIO {
         }
     }
     String content;
+    Configuration contentNew;
     public boolean loadConfig(String modjson) {
         try {
             content = new ConfigurationAPI().readFile(new File(getJsonFolder(), modjson + "_config" + ".cfg"));
@@ -86,6 +87,39 @@ public class ModIO {
             return true;
         }
     }
+    public boolean loadMultipleConfig(String settingName) {
+        try {
+            contentNew = new ConfigurationAPI().loadExistingConfiguration(new File(getJsonFolder(), "clientsettings.cfg"));
+        } catch (IOException e) {
+            //e.printStackTrace();
+            saveMultipleConfig(settingName, true);
+            try {
+                configSaving.save();
+            }catch (Exception e2){
+                and1558.logger.error("Failed to save: " + e.getMessage());
+            }
+
+            return true;
+        }
+        try {
+            and1558.logger.info(settingName + " has a value of " + contentNew.get(settingName));
+            return contentNew.get(settingName).equals(true);
+        } catch (NullPointerException npe) {
+            npe.printStackTrace();
+            contentNew.set(settingName, true);
+            return true;
+        }
+    }
+    public void saveMultipleConfig(String settingName, Object value) {
+        configSaving = ConfigurationAPI.newConfiguration(new File(getJsonFolder(), "clientsettings.cfg"));
+        configSaving.set(settingName, value); // The Value can be set anything from string to boolean, int, float, double, long, etc
+
+        try {
+            configSaving.save();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     /**public String loadRToken() {
         try {
             content = new ConfigurationAPI().readFile(new File(getJsonFolder(), "creds.json"));
@@ -105,7 +139,7 @@ public class ModIO {
         return "refreshtokenhere";
     }**/
     // Testing!!!
-    String contentNew="";
+    String contentNew1 = "";
     public boolean loadConfigNew(String modType){
         try {
             // create Gson instance

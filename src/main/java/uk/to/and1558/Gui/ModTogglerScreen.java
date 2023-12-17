@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class ModTogglerScreen extends GuiScreen {
     GuiScreen lastGui;
-    boolean check1,check2,check3,check4,check5,check6,check7,check8,check9,check10,check11 = false; // Simplified to 1 straight line [dev-1.82]
+    boolean check1,check2,check3,check4,check5,check6,check7,check8,check9,check10,check11,check12 = false; // Simplified to 1 straight line [dev-1.82]
     public ModTogglerScreen(GuiScreen p_i1046_1_)
     {
         this.lastGui = p_i1046_1_;
@@ -37,7 +37,8 @@ public class ModTogglerScreen extends GuiScreen {
         this.buttonList.add(new GuiCheckBox(8, 10, 170, check9));
         this.buttonList.add(new GuiCheckBox(9, 10, 190, check10));
         this.buttonList.add(new GuiCheckBox(11, 10, 210, check11));
-        this.buttonList.add(new GuiButton(10,10,240, "Back"));
+        this.buttonList.add(new GuiCheckBox(12, 10, 230, check12));
+        this.buttonList.add(new GuiButton(10,10,260, "Back"));
         super.initGui();
     }
     private void checkAll(){
@@ -53,6 +54,7 @@ public class ModTogglerScreen extends GuiScreen {
         checkMods(8, ModInstances.getArmorView().isEnabled);
         checkMods(9, ModInstances.getOldDebug().isEnabled);
         checkMods(10, ModInstances.getHPDisplay().isEnabled);
+        checkMods(12, ModInstances.getComboCounter().isEnabled);
     }
     private void loadAll(){
         check1 = and1558.getIO.loadConfig("Keystrokes");
@@ -66,6 +68,7 @@ public class ModTogglerScreen extends GuiScreen {
         check9 = and1558.getIO.loadConfig("armorview");
         check10 = and1558.getIO.loadConfig("oldf3");
         check11 = and1558.getIO.loadConfig("hp");
+        check12 = and1558.getIO.loadConfig("comboCounter");
     }
 
     //Re-draws/draws screen, Depends on FPS
@@ -85,6 +88,7 @@ public class ModTogglerScreen extends GuiScreen {
         this.drawString(fontRendererObj, "- 1.7 Version of F3", 32, 196, -1); // Working
         // dev 1.82 -> Added HP to toggling list
         this.drawString(fontRendererObj, "- HP Display", 32, 216, -1); // Working
+        this.drawString(fontRendererObj, "- Combo Display", 32, 236, -1); // Working
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
@@ -96,69 +100,75 @@ public class ModTogglerScreen extends GuiScreen {
         // Use logic = value ? false : true;
         switch (button.id) {
             case 0: {
-                check1 = check1 ? false : true;
+                check1 = !check1;
                 and1558.getIO.saveConfig(check1, "Keystrokes");
                 ModInstances.getKeystrokes().isEnabled = check1;
                 break;
             }
             case 1:{
-                check2 = check2 ? false : true;
+                check2 = !check2;
                 and1558.getIO.saveConfig(check2, "bps");
                 ModInstances.getSpeedCounter().isEnabled = check2;
                 break;
             }
             case 2:{
-                check3 = check3 ? false : true;
+                check3 = !check3;
                 and1558.getIO.saveConfig(check3, "ping");
                 ModInstances.getPingCounter().isEnabled = check3;
                 break;
             }
             case 3:{
-                check4 = check4 ? false : true;
+                check4 = !check4;
                 and1558.getIO.saveConfig(check4, "lowfire");
                 ModInstances.getLfire().isEnabled = check4;
                 break;
             }
             case 4:{
-                check5 = check5 ? false : true;
+                check5 = !check5;
                 and1558.getIO.saveConfig(check5, "oldanimations");
                 ModInstances.getOldanim().isEnabled = check5;
                 break;
             }
             case 5:{
-                check6 = check6 ? false : true;
+                check6 = !check6;
                 and1558.getIO.saveConfig(check6, "itemPhys");
                 ModInstances.getItemPhysics().isEnabled = check6;
                 break;
             }
             case 6:{
-                check7 = check7 ? false : true;
+                check7 = !check7;
                 and1558.getIO.saveConfig(check7, "perspective");
                 ModInstances.getPerspective().isEnabled = check7;
                 break;
             }
             case 7:{
-                check8 = check8 ? false : true;
+                check8 = !check8;
                 and1558.getIO.saveConfig(check8, "sprinttoggle");
                 ModInstances.getToggleSprint().isEnabled = check8;
                 break;
             }
             case 8:{
-                check9 = check9 ? false : true;
+                check9 = !check9;
                 and1558.getIO.saveConfig(check9, "armorview");
                 ModInstances.getArmorView().isEnabled = check9;
                 break;
             }
             case 9:{
-                check10 = check10 ? false : true;
+                check10 = !check10;
                 and1558.getIO.saveConfig(check10,"oldf3");
                 ModInstances.getOldDebug().isEnabled = check10;
                 break;
             }
             case 11:{
-                check11 = check11 ? false : true;
+                check11 = !check11;
                 and1558.getIO.saveConfig(check11,"hp");
                 ModInstances.getHPDisplay().isEnabled = check11;
+                break;
+            }
+            case 12:{
+                check12 = !check12;
+                and1558.getIO.saveConfig(check12, "comboCounter");
+                ModInstances.getComboCounter().isEnabled = check12;
                 break;
             }
             case 10:{
@@ -173,27 +183,29 @@ public class ModTogglerScreen extends GuiScreen {
         // Simplified the else if statement
         // See last change for more info
         if(which == 0) {
-            check1 = isEnabled ? true : false;
+            check1 = isEnabled;
         }else if(which == 1) {
-            check2 = isEnabled ? true : false;
+            check2 = isEnabled;
         }else if(which == 2) {
-            check3 = isEnabled ? true : false;
+            check3 = isEnabled;
         }else if(which == 3) {
-            check4 = isEnabled ? true : false;
+            check4 = isEnabled;
         }else if(which == 4) {
-            check5 = isEnabled ? true : false;
+            check5 = isEnabled;
         }else if(which == 5) {
-            check6 = isEnabled ? true : false;
+            check6 = isEnabled;
         }else if(which == 6) {
-            check7 = isEnabled ? true : false;
+            check7 = isEnabled;
         }else if(which == 7) {
-            check8 = isEnabled ? true : false;
+            check8 = isEnabled;
         }else if(which == 8) {
-            check9 = isEnabled ? true : false;
+            check9 = isEnabled;
         }else if(which == 9) {
-            check10 = isEnabled ? true : false;
+            check10 = isEnabled;
         }else if(which == 10){
-            check11 = isEnabled ? true : false;
+            check11 = isEnabled;
+        }else if(which == 11){
+            check12 = isEnabled;
         }
     }
     private void checkMods(int which, boolean isEnabled) {
@@ -222,6 +234,8 @@ public class ModTogglerScreen extends GuiScreen {
             check10 = isEnabled ? true : false;
         }else if(which == 9) {
             check11 = isEnabled ? true : false;
+        }else if(which == 10){
+            check12 = isEnabled ? true : false;
         }
     }
     // Updates screen at a specific amount of time, Regarding the FPS

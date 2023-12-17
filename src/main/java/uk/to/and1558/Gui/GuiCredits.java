@@ -32,6 +32,7 @@ public class GuiCredits extends GuiScreen{
     private Animation animationY13 = new Animation(1l,0,510,Easing.EASE_IN_OUT_QUART);
     private Animation animationY14 = new Animation(1l,0,510,Easing.EASE_IN_OUT_QUART);
     private Animation animationY15 = new Animation(1l,0,510,Easing.EASE_IN_OUT_QUART);
+    private Animation animationY16 = new Animation(1l,0,510,Easing.EASE_IN_OUT_QUART);
     private Animation animationX = new Animation(1l,0,0,Easing.EASE_IN_OUT_QUART);
     private Animation animationX1  = new Animation(1l,0,0,Easing.EASE_IN_OUT_QUART);
     private Animation animationX2 = new Animation(1l,0,0,Easing.EASE_IN_OUT_QUART);
@@ -48,12 +49,14 @@ public class GuiCredits extends GuiScreen{
     private Animation animationX13 = new Animation(1l,0,0,Easing.EASE_IN_OUT_QUART);
     private Animation animationX14 = new Animation(1l,0,0,Easing.EASE_IN_OUT_QUART);
     private Animation animationX15 = new Animation(1l,0,0,Easing.EASE_IN_OUT_QUART);
+    private Animation animationX16 = new Animation(1l,0,0,Easing.EASE_IN_OUT_QUART);
     boolean introPlayed = false;
     @Override
     public void initGui() {
         super.initGui();
         if(!introPlayed) playIntro();
         introPlayed = true;
+
     }
     Animation buttonX = new Animation(1f, 50, 300, Easing.EASE_IN_OUT_QUART);
     boolean animationSet = false;
@@ -68,7 +71,7 @@ public class GuiCredits extends GuiScreen{
             animationSet = true;
         }
         this.buttonList.clear();
-        this.buttonList.add(new GuiButton(0, this.width / 2 - (int) buttonX.getValue(), this.height / 2 + 68, 98, 20, "Exit to Main Menu"));
+        this.buttonList.add(new GuiButton(0, this.width / 2 - (int) buttonX.getValue(), this.height / 2 + 78, 98, 20, "Exit to Main Menu"));
         this.drawCenteredString(this.mc.fontRendererObj,"AND1558 Client Credits", this.width / 2 - 2 + (int) animationX.getValue(), (int) animationY.getValue() + 20, -1);
         this.drawCenteredString(fontRendererObj, "§f§lDevelopers:", this.width / 2 - 2 + (int) animationX1.getValue(), (int) animationY1.getValue() + 70, 0);
         this.drawCenteredString(fontRendererObj, EnumChatFormatting.WHITE + "Mojang Developers", this.width / 2 - 2 + (int) animationX2.getValue(), (int) animationY2.getValue() + 90, 0);
@@ -84,7 +87,8 @@ public class GuiCredits extends GuiScreen{
         this.drawCenteredString(fontRendererObj, EnumChatFormatting.WHITE + "Canelex[Perspective Mod v3]" ,this.width / 2 - 2 + (int) animationX12.getValue(), (int) animationY12.getValue() + 190, 0);
         this.drawCenteredString(fontRendererObj, EnumChatFormatting.WHITE + "DjTheRedstoner[Perspective Mod v4]", this.width / 2 - 2 + (int) animationX13.getValue(), (int) animationY13.getValue() + 200, 0);
         this.drawCenteredString(fontRendererObj, EnumChatFormatting.WHITE + "Upio and Spacebyte (Microsoft Authentication)", this.width / 2 - 2 + (int) animationX14.getValue(), (int) animationY14.getValue() + 210, 0);
-        this.drawCenteredString(fontRendererObj, EnumChatFormatting.WHITE + "Open Source Mods", this.width / 2 - 2 + (int) animationX15.getValue(), (int) animationY15.getValue() + 220, 0);
+        this.drawCenteredString(fontRendererObj, EnumChatFormatting.WHITE + "refactoring. (Snowfall Particles)", this.width / 2 - 2 + (int) animationX15.getValue(), (int) animationY15.getValue() + 220, 0);
+        this.drawCenteredString(fontRendererObj, EnumChatFormatting.WHITE + "Open Source Mods", this.width / 2 - 2 + (int) animationX16.getValue(), (int) animationY16.getValue() + 230, 0);
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
     @Override
@@ -100,6 +104,7 @@ public class GuiCredits extends GuiScreen{
     public void playIntro(){
         new Thread(() -> {
             try {
+                buttonX = new Animation(1f, 50, 300, Easing.EASE_IN_OUT_QUART);
                 Thread.sleep(500);
                 animationY = new Animation(1000l, 510, 0, Easing.EASE_OUT_QUINT);
                 Thread.sleep(50);
@@ -132,6 +137,8 @@ public class GuiCredits extends GuiScreen{
                 animationY14 = new Animation(1000l, 510, 0, Easing.EASE_OUT_QUINT);
                 Thread.sleep(50);
                 animationY15 = new Animation(1000l, 510, 0, Easing.EASE_OUT_QUINT);
+                Thread.sleep(50);
+                animationY16 = new Animation(1000l, 510, 0, Easing.EASE_OUT_QUINT);
                 Thread.sleep(500);
                 playAnim();
             }

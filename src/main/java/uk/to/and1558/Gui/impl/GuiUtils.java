@@ -18,8 +18,7 @@ public class GuiUtils {
     // dev 1.82 -> with or without blur
     public static void drawRoundBG(GuiScreen screen, boolean blurred){
         if(Minecraft.getMinecraft().theWorld == null){
-            Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("and1558/images/bg.jpg"));
-            Gui.drawModalRectWithCustomSizedTexture(-21 + Mouse.getX() / 90, Mouse.getY() * -1 / 90, 0.0f, 0.0f, screen.width + 20, screen.height + 20, (float)(screen.width + 21), (float)(screen.height + 20));
+            and1558.drawClientBackground(and1558.options.darkMode, screen.width, screen.height);
         }
         // Checks if blur is enabled or not [dev 1.82]
         if(blurred){
@@ -41,8 +40,7 @@ public class GuiUtils {
     // dev 1.82. Added a medium sized box
     public static void drawRoundBGMediumSize(GuiScreen screen, boolean blurred){
         if(Minecraft.getMinecraft().theWorld == null){
-            Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("and1558/images/bg.jpg"));
-            Gui.drawModalRectWithCustomSizedTexture(-21 + Mouse.getX() / 90, Mouse.getY() * -1 / 90, 0.0f, 0.0f, screen.width + 20, screen.height + 20, (float)(screen.width + 21), (float)(screen.height + 20));
+            and1558.drawClientBackground(and1558.options.darkMode, screen.width, screen.height);
         }
         if(blurred){
             and1558.guiUtils.disableDefaultBlur = true;

@@ -23,12 +23,9 @@ Note: This might take a while.
 1. Goto Gradle Task
 2. Click on Tasks -> Build -> build
 3. Wait for it to finish and open the Compiled jar in (build/libs)
-4. Get a jfxrt.jar from your jre (Make sure its Java 8) located in <jrefolder>/jre/lib/ext and open it with an archive opener (7-Zip, Winrar, etc)
-5. Open the built client jar file
-6. Copy everything inside jfxrt.jar to the client jar<br>
-This is to prevent crashing on some launcher as it doesn't know where the jfxrt.jar is located or allow minecraft to use it or if the end-user JRE Installation doesn't include jfxrt.jar<br>
-INFO: jfxrt.jar is used for the Microsoft Login Window, which used JavaFX and is included in the jfxrt.jar
-7. and you should be done
+4. and you should be done
+- Note: You no longer need to extract jfxrt.jar from a Java Installation!<br>
+The Client no longer needs them for Microsoft Login
 #### Launching from a launcher
 1. Install the normal client using the installer provided in the client website
 2. Make sure you are installing version dev-1.81 or above

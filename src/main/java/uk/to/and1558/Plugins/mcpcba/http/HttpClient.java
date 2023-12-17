@@ -4,7 +4,6 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.Map;
 
 public class HttpClient {
