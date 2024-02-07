@@ -52,24 +52,4 @@ public class OldScaleResolution
     {
         return this.scaledWidth;
     }
-
-    public int getScaledHeight()
-    {
-        return this.scaledHeight;
-    }
-
-    public double getScaledWidth_double()
-    {
-        return this.scaledWidthD;
-    }
-
-    public double getScaledHeight_double()
-    {
-        return this.scaledHeightD;
-    }
-
-    public int getScaleFactor()
-    {
-        return this.scaleFactor;
-    }
 }

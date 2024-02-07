@@ -19,6 +19,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import uk.to.and1558.Gui.FallbackGui.PanelCrashReport;
+import uk.to.and1558.Gui.fun.GuiSnake;
 import uk.to.and1558.Gui.impl.UnicodeFontRenderer;
 import uk.to.and1558.Mods.ModLoader.ModInstances;
 import uk.to.and1558.Gui.impl.RButton;
@@ -157,7 +158,7 @@ public class MainMenu extends GuiScreen
                 break;
             }
             case 8: {
-                this.mc.displayGuiScreen(new GuiCredits());
+                this.mc.displayGuiScreen(new GuiSnake());
                 break;
             }
             case 9:{

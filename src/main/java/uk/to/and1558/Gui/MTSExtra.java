@@ -12,7 +12,7 @@ import java.io.IOException;
 public class MTSExtra extends GuiScreen {
     @Override
     public void initGui() {
-        this.buttonList.add(new GuiCheckBox(0, 26, 40, and1558.options.darkMode));
+        this.buttonList.add(new GuiCheckBox(0, 26, 70, and1558.options.darkMode));
         super.initGui();
     }
     //SliderElement slider = new SliderElement((int) 100, (int) 60, (int) 100, (int) 16, (float) 0, (float) 100, (float) 50);
@@ -20,7 +20,8 @@ public class MTSExtra extends GuiScreen {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         GuiUtils.drawRoundBG(this, true);
         drawCenteredString(fontRendererObj, "Extra Configurations", this.width / 2, 20,-1);
-        drawString(fontRendererObj, "- Force Seasonal Background Dark Mode", 49, 46, -1);
+        drawString(fontRendererObj, "==== Seasonal Specific Settings ====", 49, 46, -1);
+        drawString(fontRendererObj, "- Force Seasonal Background Dark Mode", 49, 76, -1);
         //slider.draw();
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
