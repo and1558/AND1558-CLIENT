@@ -151,7 +151,7 @@ public class MainMenu extends GuiScreen
                 break;
             }
             case 8: {
-                this.mc.displayGuiScreen(new GuiCredits());
+                //this.mc.displayGuiScreen(new GuiSnake());
                 break;
             }
             case 9:{
