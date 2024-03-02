@@ -25,15 +25,15 @@ apply plugin: 'java'
 apply plugin: 'com.github.johnrengelman.shadow'
 
 version = "1.0"
-group= "uk.to" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "and1558"
+group= "owo" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "aydendevy"
 
 sourceCompatibility = targetCompatibility = 1.8
 compileJava.options.encoding = 'UTF-8'
 
 minecraft {
     version = "1.8.9"
-    tweakClass = "uk.to.and1558.mixins.and1558Tweaker"
+    tweakClass = "owo.aydendevy.mixins.and1558Tweaker"
     runDir = "run"
     mappings = "stable_22"
     makeObfSourceJar = false
@@ -64,8 +64,6 @@ dependencies {
         exclude module: 'gson'
         exclude module: 'commons-io'
     }
-
-    embed('org.spongepowered:mixin:0.7.11-SNAPSHOT')
     embed group: 'com.github.Vatuu', name: 'discord-rpc', version: '1.6.2'
     embed fileTree(dir: 'src/libs', include: '*.jar')
 }
@@ -97,7 +95,7 @@ jar {
 jar {
     manifest.attributes(
             "MixinConfigs": 'mixins.and1558.json',
-            "TweakClass": "uk.to.and1558.mixins.and1558Tweaker",
+            "TweakClass": "owo.aydendevy.mixins.and1558Tweaker",
             "TweakOrder": 0,
             "Manifest-Version": 1.0
     )

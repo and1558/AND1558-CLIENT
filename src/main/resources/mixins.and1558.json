@@ -2,7 +2,7 @@
   "required": true,
   "compatibilityLevel": "JAVA_8",
   "verbose": true,
-  "package": "uk.to.and1558.mixins",
+  "package": "owo.aydendevy.mixins",
   "refmap": "mixins.exampleclient.refmap.json",
   "mixins": [
     "client.MixinCraft",
