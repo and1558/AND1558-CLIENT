@@ -17,8 +17,11 @@ public class DrawChangelogs {
         int yAdd = 0;
         wheretoDraw.drawCenteredString(fontRendererObj, EnumChatFormatting.GREEN + ver.ChangelogMainMenu2, wheretoDraw.width / 2, 10, 0);
         List<String> changelog = new ArrayList<>();
+        changelog.add("!! DEPRECATION NOTICE !! PLEASE CHECK THE GITHUB REPO FOR THIS PROJECT FOR MORE INFORMATION");
         changelog.add("-  Fixed Item Physics rotating very fast on high FPS (>80FPS)");
         changelog.add("-  Made snow particles visible on almost all GUIs");
+        changelog.add("-  Disable gray/darker background when dragging HUDs");
+        changelog.add("-  Added a way to add custom backgrounds");
         changelog.add("-  Added more settings in the Extra Options Menu");
         changelog.add("NOTE: ANY IMPROVEMENTS/FIXES TO BUGS WILL BE ACCEPTED AFTER CHECKED THAT ITS WORKING");
         for (String s : changelog) {
@@ -35,6 +38,7 @@ public class DrawChangelogs {
         List<String> changelogLess = new ArrayList<>();
         changelogLess.add(ver.ChangelogMainMenu);
         changelogLess.add("Minor Update and Bug Fixes!");
+        changelogLess.add("!! DEPRECATION NOTICE !! PLEASE CHECK THE GITHUB REPO FOR THIS PROJECT FOR MORE INFORMATION");
         changelogLess.add("[To see the Changelogs, open the changelog menu]");
         //changelogLess.add("NOTE: ANY CODE PUSH WILL BE ACCEPTED");
         //changelogLess.add("AFTER THAT IT IS CONFIRMED WORKING/SAFE");

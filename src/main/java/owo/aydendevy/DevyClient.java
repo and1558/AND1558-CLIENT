@@ -24,6 +24,7 @@ import owo.aydendevy.Events.impl.UpdateCheckThread;
 import owo.aydendevy.Gui.HUD.HUDManager;
 import owo.aydendevy.Gui.ModTogglerScreen;
 import owo.aydendevy.Gui.SplashScreen;
+import owo.aydendevy.Gui.MainMenu;
 import owo.aydendevy.IO.FileIOManager;
 import owo.aydendevy.Mods.ModLoader.ModIO;
 import owo.aydendevy.Mods.ModLoader.ModInstances;
@@ -266,7 +267,7 @@ public class DevyClient {
                     getInstance().imageLoaded = false;
                 }
                 if(!getInstance().imageLoaded){
-                    logger.info("Loading Custom Background Image");
+
                     getInstance().customimg = ImageIO.read(new File(options.customBackgroundPath));
                     getInstance().imageLoaded = true;
                     logger.info("Image Loaded!");
@@ -274,8 +275,6 @@ public class DevyClient {
                 getInstance().glimg.bindTexture(getInstance().customimg);
                 Gui.drawModalRectWithCustomSizedTexture(-21 + Mouse.getX() / 90, Mouse.getY() * -1 / 90, 0.0f, 0.0f, width + 20, height + 20, (float)(width + 21), (float)(height + 20));
             }catch (IOException ioe){
-                logger.error("Failed to load custom image!");
-                logger.error("Reverting to default client background image...");
                 Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("and1558/images/bg.jpg"));
                 Gui.drawModalRectWithCustomSizedTexture(-21 + Mouse.getX() / 90, Mouse.getY() * -1 / 90, 0.0f, 0.0f, width + 20, height + 20, (float)(width + 21), (float)(height + 20));
             }
@@ -289,7 +288,7 @@ public class DevyClient {
     public String loadedimgpath = "";
     public GLUtils glimg = new GLUtils();
     BufferedImage customimg = null;
-    boolean imageLoaded = false;
+    public boolean imageLoaded = false;
     boolean notifDone = false;
     boolean notifRDone = false;
     String notifMessage = "";

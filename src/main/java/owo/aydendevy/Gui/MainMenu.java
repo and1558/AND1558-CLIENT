@@ -72,7 +72,11 @@ public class MainMenu extends GuiScreen
 
         // dev 1.82. Added Animations for client text name
         this.drawCenteredString(this.mc.fontRendererObj, EnumChatFormatting.BOLD + "Devy" + EnumChatFormatting.RESET + "Client", this.width / 2 - 2 - (int) clientTextAnim.getValue(), this.height / 2 - 30, -1);
-
+        if(DevyClient.options.customBackground){
+            if(!DevyClient.getInstance().imageLoaded){
+                Minecraft.getMinecraft().currentScreen.drawString(Minecraft.getMinecraft().fontRendererObj, EnumChatFormatting.RED + "UNABLE TO LOAD CUSTOM BACKGROUND!", 0, 0, -1);
+            }
+        }
         super.drawScreen(mouseX, mouseY, partialTicks);
         mc.getTextureManager().bindTexture(new ResourceLocation("and1558/images/menu/exit.png"));
         Gui.drawModalRectWithCustomSizedTexture(width - 22, 7, 0, 0, 16, 16, 16, 16);
@@ -151,7 +155,7 @@ public class MainMenu extends GuiScreen
                 break;
             }
             case 8: {
-                //this.mc.displayGuiScreen(new GuiSnake());
+                this.mc.displayGuiScreen(new GuiCredits());
                 break;
             }
             case 9:{

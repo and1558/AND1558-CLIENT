@@ -87,7 +87,9 @@ public class HUDConfigScreen extends GuiScreen {
             renderOverlay(DevyClient.getInstance().partialTicks);
             Minecraft.getMinecraft().fontRendererObj.drawStringWithShadow(VersionString.Ver, 2, 2, -1);
         }
-        else super.drawDefaultBackground();
+        else if (!dragged) {
+            super.drawDefaultBackground();
+        }
         final float zBackup = this.zLevel;
         this.zLevel = 200;
         for (IRenderer renderer : renderers.keySet()) {
@@ -105,9 +107,11 @@ public class HUDConfigScreen extends GuiScreen {
                     this.drawHollowRect(pos.getAbsoluteX(), pos.getAbsoluteY(), renderer.getWidth(), renderer.getHeight(), 0x8800FF00);
                     Gui.drawRect(pos.getAbsoluteX(), pos.getAbsoluteY(), pos.getAbsoluteX() + renderer.getWidth(), pos.getAbsoluteY() + renderer.getHeight(), 0x3300AA00);
                     if (dragged) {
+                        // Sets the selected HUDs ONCE
                         if(selected == null){
                             selected = renderer;
                         }
+                        // Prevents dragging other HUDs
                         if(selected == renderer) {
                             pos.setAbsolute(pos.getAbsoluteX() + mouseX - this.prevX, pos.getAbsoluteY() + mouseY - this.prevY);
 
