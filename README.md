@@ -1,5 +1,5 @@
 # AND1558-CLIENT
-> We are going to make one last update before discontinuing this client.<br>
+> This client has been discontinued.<br>
 Don't worry! The development for this client will continue on another name and with a different loader.<br>
 As you may expect from the package rename, it will probably be named DevyClient, although this decision might change later on in the future.<br><br>
 You might ask why are we moving?<br>
