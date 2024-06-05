@@ -24,7 +24,7 @@ Note: This might take a while.
 6. Next edit your run configurations
 7. Expand on the Application menu
 8. Click "Minecraft Client"
-9. on the line "-cp" change it to "and1558.main"
+9. on the line "-cp" change it to "aydendevy.main"
 10. You should be done now
 #### Compiling
 1. Goto Gradle Task
