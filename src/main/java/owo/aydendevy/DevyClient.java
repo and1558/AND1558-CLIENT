@@ -33,8 +33,13 @@ import owo.aydendevy.Gui.impl.GuiUtils;
 import owo.aydendevy.Plugins.ClientAnimations.Animation;
 import owo.aydendevy.Plugins.ClientAnimations.Easing;
 import owo.aydendevy.Plugins.SessionMod;
+import owo.aydendevy.Renderer.GLUtils;
 import owo.aydendevy.club.aetherium.api.particle.SnowfallParticles;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -73,81 +78,45 @@ public class DevyClient {
         EventManager.register(new AnimationHandler());
     }
     public void init2() {
+        // dev-1.83 Simplify
+        // dev-note: what the fuck was i on making this?
         if(!initialized) {
             this.logger.info("Initializing Mods");
-            if (getIO.loadConfig("Keystrokes")) {
-                new ModTogglerScreen().setEnable(0, true);
-                ModInstances.getKeystrokes().isEnabled = true;
-            } else {
-                new ModTogglerScreen().setEnable(0, false);
-                ModInstances.getKeystrokes().isEnabled = false;
-            }
-            if (getIO.loadConfig("bps")) {
-                new ModTogglerScreen().setEnable(1, true);
-                ModInstances.getSpeedCounter().isEnabled = true;
-            } else {
-                new ModTogglerScreen().setEnable(1, false);
-                ModInstances.getSpeedCounter().isEnabled = false;
-            }
-            if (getIO.loadConfig("ping")) {
-                new ModTogglerScreen().setEnable(2, true);
-                ModInstances.getPingCounter().isEnabled = true;
-            } else {
-                new ModTogglerScreen().setEnable(2, false);
-                ModInstances.getPingCounter().isEnabled = false;
-            }
-            if (getIO.loadConfig("lowfire")) {
-                new ModTogglerScreen().setEnable(3, true);
-                ModInstances.getLfire().isEnabled = true;
-            } else {
-                new ModTogglerScreen().setEnable(3, false);
-                ModInstances.getLfire().isEnabled = false;
-            }
-            if (getIO.loadConfig("oldanimations")) {
-                new ModTogglerScreen().setEnable(4, true);
-                ModInstances.getOldanim().isEnabled = true;
-            } else {
-                new ModTogglerScreen().setEnable(4, false);
-                ModInstances.getOldanim().isEnabled = false;
-            }
-            if (getIO.loadConfig("perspective")) {
-                new ModTogglerScreen().setEnable(6, true);
-                ModInstances.getPerspective().isEnabled = true;
-            } else {
-                new ModTogglerScreen().setEnable(6, false);
-                ModInstances.getPerspective().isEnabled = false;
-            }
-            if (getIO.loadConfig("armorview")) {
-                new ModTogglerScreen().setEnable(8, true);
-                ModInstances.getArmorView().isEnabled = true;
-            } else {
-                new ModTogglerScreen().setEnable(8, false);
-                ModInstances.getArmorView().isEnabled = false;
-            }
-            if (getIO.loadConfig("sprinttoggle")) {
-                new ModTogglerScreen().setEnable(7, true);
-                ModInstances.getToggleSprint().isEnabled = true;
-            } else {
-                new ModTogglerScreen().setEnable(7, false);
-                ModInstances.getToggleSprint().isEnabled = false;
-            }
-            if (getIO.loadConfig("oldf3")) {
-                new ModTogglerScreen().setEnable(9, true);
-                ModInstances.getOldDebug().isEnabled = true;
-            } else {
-                new ModTogglerScreen().setEnable(9, false);
-                ModInstances.getOldDebug().isEnabled = false;
-            }
-            if (getIO.loadConfig("hp")) {
-                new ModTogglerScreen().setEnable(10, true);
-                ModInstances.getHPDisplay().isEnabled = true;
-            } else {
-                new ModTogglerScreen().setEnable(10, false);
-                ModInstances.getHPDisplay().isEnabled = false;
-            }
+            // Keystrokes mod
+            new ModTogglerScreen().setEnable(0, getIO.loadConfig("Keystrokes"));
+            ModInstances.getKeystrokes().isEnabled = getIO.loadConfig("Keystrokes");
+            // Speedometer Mod
+            new ModTogglerScreen().setEnable(1, getIO.loadConfig("bps"));
+            ModInstances.getSpeedCounter().isEnabled = getIO.loadConfig("bps");
+            // Ping Display Mod
+            new ModTogglerScreen().setEnable(2, getIO.loadConfig("ping"));
+            ModInstances.getPingCounter().isEnabled = getIO.loadConfig("ping");
+            // Low Fire Mod
+            new ModTogglerScreen().setEnable(3, getIO.loadConfig("lowfire"));
+            ModInstances.getLfire().isEnabled = getIO.loadConfig("lowfire");
+            // Legacy/1.7 Animations Mod
+            new ModTogglerScreen().setEnable(4, getIO.loadConfig("oldanimations"));
+            ModInstances.getOldanim().isEnabled = getIO.loadConfig("oldanimations");
+            // Perspective Mod
+            new ModTogglerScreen().setEnable(6, getIO.loadConfig("perspective"));
+            ModInstances.getPerspective().isEnabled = getIO.loadConfig("perspective");
+            // Armor View HUD Mod
+            new ModTogglerScreen().setEnable(8, getIO.loadConfig("armorview"));
+            ModInstances.getArmorView().isEnabled = getIO.loadConfig("armorview");
+            // Sprint Toggle Mod
+            new ModTogglerScreen().setEnable(7, getIO.loadConfig("sprinttoggle"));
+            ModInstances.getToggleSprint().isEnabled = getIO.loadConfig("sprinttoggle");
+            // Legacy/1.7 F3 Debug Mod
+            new ModTogglerScreen().setEnable(9, getIO.loadConfig("oldf3"));
+            ModInstances.getOldDebug().isEnabled = getIO.loadConfig("oldf3");
+            // HP Display Mod
+            new ModTogglerScreen().setEnable(10, getIO.loadConfig("hp"));
+            ModInstances.getHPDisplay().isEnabled = getIO.loadConfig("hp");
+
             if (getIO.loadConfig("rminput")) {
                 RawMouseInput.turnOnRMInput();
             }
+
             options.init();
             particles = SnowfallParticles.create(360);
             initialized = true;
@@ -282,11 +251,45 @@ public class DevyClient {
                     Gui.drawModalRectWithCustomSizedTexture(-21 + Mouse.getX() / 90, Mouse.getY() * -1 / 90, 0.0f, 0.0f, width + 20, height + 20, (float)(width + 21), (float)(height + 20));
                 }
             }
-        }else{
+        }else if(options.customBackground){
+            //Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("and1558/images/bg.jpg"));
+            try{
+                if(options.customBackgroundPath.length() <1){
+                    logger.error("Custom image settings is enabled");
+                    logger.error("but the path is empty or invalid");
+                    Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("and1558/images/bg.jpg"));
+                    Gui.drawModalRectWithCustomSizedTexture(-21 + Mouse.getX() / 90, Mouse.getY() * -1 / 90, 0.0f, 0.0f, width + 20, height + 20, (float)(width + 21), (float)(height + 20));
+                    return;
+                }
+                if(getInstance().loadedimgpath != options.customBackgroundPath) {
+                    getInstance().loadedimgpath = options.customBackgroundPath;
+                    getInstance().imageLoaded = false;
+                }
+                if(!getInstance().imageLoaded){
+                    logger.info("Loading Custom Background Image");
+                    getInstance().customimg = ImageIO.read(new File(options.customBackgroundPath));
+                    getInstance().imageLoaded = true;
+                    logger.info("Image Loaded!");
+                }
+                getInstance().glimg.bindTexture(getInstance().customimg);
+                Gui.drawModalRectWithCustomSizedTexture(-21 + Mouse.getX() / 90, Mouse.getY() * -1 / 90, 0.0f, 0.0f, width + 20, height + 20, (float)(width + 21), (float)(height + 20));
+            }catch (IOException ioe){
+                logger.error("Failed to load custom image!");
+                logger.error("Reverting to default client background image...");
+                Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("and1558/images/bg.jpg"));
+                Gui.drawModalRectWithCustomSizedTexture(-21 + Mouse.getX() / 90, Mouse.getY() * -1 / 90, 0.0f, 0.0f, width + 20, height + 20, (float)(width + 21), (float)(height + 20));
+            }
+
+        }
+        else{
             Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation("and1558/images/bg.jpg"));
             Gui.drawModalRectWithCustomSizedTexture(-21 + Mouse.getX() / 90, Mouse.getY() * -1 / 90, 0.0f, 0.0f, width + 20, height + 20, (float)(width + 21), (float)(height + 20));
         }
     }
+    public String loadedimgpath = "";
+    public GLUtils glimg = new GLUtils();
+    BufferedImage customimg = null;
+    boolean imageLoaded = false;
     boolean notifDone = false;
     boolean notifRDone = false;
     String notifMessage = "";

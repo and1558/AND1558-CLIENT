@@ -26,7 +26,8 @@ public class MixinIngame {
         if(!and1558$mc.gameSettings.showDebugInfo) {
             Minecraft.getMinecraft().fontRendererObj.drawStringWithShadow(VersionString.Ver, 2, 2, -1);
         }
-        DevyClient.getInstance().renderNotifs();
+        if(and1558$mc.currentScreen == null)
+            DevyClient.getInstance().renderNotifs();
         // Dev-1.82 -> Prevent some HUD randomly not appearing across minecraft restarts [Attempt 5]
         // This one single bug really demotivate me
         // This bug only happens in Singleplayer, i dont fucking know why

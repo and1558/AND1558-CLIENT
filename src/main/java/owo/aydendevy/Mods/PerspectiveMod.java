@@ -113,6 +113,8 @@ public class PerspectiveMod extends ModDraggable {
 
     @Override
     public void render(ScreenPosition pos) {
+        // Hardcoded Limitation, Hypixel does not allow Perspective Mod to be used on their server.
+        // DO NOT REMOVE THIS LIMITATION!
         if(Minecraft.getMinecraft().getCurrentServerData().serverIP.contains("hypixel") && ModInstances.getPerspective().isEnabled){
             //this.mc.displayGuiScreen(new PanelCrashReport("Perspective mod"));
             ModInstances.getPerspective().isEnabled = false;

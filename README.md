@@ -1,5 +1,12 @@
 # AND1558-CLIENT
-Welcome to the AND1558 PVP Client Public Repository!
+> We are going to make one last update before discontinuing this client.<br>
+Don't worry! The development for this client will continue on another name and with a different loader.<br>
+As you may expect from the package rename, it will probably be named DevyClient, although this decision might change later on in the future.<br><br>
+You might ask why are we moving?<br>
+Well it's because this project uses deprecated tools that are no longer supported, and I also want to bring forge mods support. For example: Replay Mod.<br>
+Thank you for understanding!<br>
+(Licenses/rules on this repo WILL NOT AND WOULD NEVER CHANGE).
+#### Welcome to the AND1558 Client Public Repository!
 - You may use this client as a base but YOU MUST credit me for it
 - If you use this client or any of my code YOU MUST make your SOURCE CODE PUBLIC, no exceptions
 - For any issues you may have found, you are allowed to push/send fixes or create an issue for it

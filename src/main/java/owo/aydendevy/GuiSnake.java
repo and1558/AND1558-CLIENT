@@ -1,11 +1,10 @@
-package uk.to.and1558.Gui.fun;
+package owo.aydendevy;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
 import org.lwjgl.opengl.GL11;
-import uk.to.and1558.and1558;
 
 import java.util.Random;
 
@@ -27,7 +26,7 @@ public class GuiSnake extends GuiScreen {
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         distanceFromEdge = this.mc.displayHeight / 10;
-        and1558.drawClientBackground(and1558.options.darkMode, this.width, this.height);
+        DevyClient.drawClientBackground(DevyClient.options.darkMode, this.width, this.height);
         // Render game Window
         Gui.drawRect(distanceFromEdge, distanceFromEdge,  distanceFromEdge + gameWindowSize * mc.gameSettings.guiScale, distanceFromEdge + gameWindowSize * mc.gameSettings.guiScale, 0x87000000);
         // drawFood(distanceFromEdge + 10,distanceFromEdge + 10);

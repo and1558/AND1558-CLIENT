@@ -90,9 +90,34 @@ public class ModIO {
             return true;
         }
     }
+    public String loadMultipleConfigS(String settingName) {
+        try {
+            contentNew = new ConfigurationAPI().loadExistingConfiguration(new File(getJsonFolder(), "clientsettings.cfg"));
+        } catch (IOException e) {
+            //e.printStackTrace();
+            loadDefaultValues();
+            try {
+                configSaving.save();
+            }catch (Exception e2){
+                DevyClient.logger.error("Failed to save: " + e.getMessage());
+            }
+
+            return "";
+        }
+        try {
+            DevyClient.logger.info(settingName + " has a value of " + contentNew.get(settingName));
+            return contentNew.get(settingName).toString();
+        } catch (NullPointerException npe) {
+            npe.printStackTrace();
+            contentNew.set(settingName, "");
+            return "";
+        }
+    }
     public void saveMultipleConfig(ClientOptions co) {
         configSaving = ConfigurationAPI.newConfiguration(new File(getJsonFolder(), "clientsettings.cfg"));
         configSaving.set("darkMode", co.darkMode);
+        configSaving.set("customBackground", co.customBackground);
+        configSaving.set("customBackgroundPath", co.customBackgroundPath);
         configSaving.set("snowParticles", co.snowParticles);
         configSaving.set("snowParticlesGUI", co.snowParticlesGUI);
         configSaving.set("blurEffect", co.blurEffect);
@@ -109,6 +134,8 @@ public class ModIO {
     public void loadDefaultValues() {
         configSaving = ConfigurationAPI.newConfiguration(new File(getJsonFolder(), "clientsettings.cfg"));
         configSaving.set("darkMode", true);
+        configSaving.set("customBackground", true);
+        configSaving.set("customBackgroundPath", "");
         configSaving.set("snowParticles", true);
         configSaving.set("snowParticlesGUI", true);
         configSaving.set("blurEffect", true);
@@ -121,9 +148,6 @@ public class ModIO {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-    public void loadNewConfig(){
-        
     }
     /**public String loadRToken() {
         try {

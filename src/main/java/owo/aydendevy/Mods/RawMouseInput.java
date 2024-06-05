@@ -64,24 +64,45 @@ public class RawMouseInput extends ModDraggable {
      */
     public static void toggleRawInput() {
         EntityPlayerSP player = Minecraft.getMinecraft().thePlayer;
-        float saveYaw = player.rotationYaw;
-        float savePitch = player.rotationPitch;
+        if(player != null) {
+            float saveYaw = player.rotationYaw;
+            float savePitch = player.rotationPitch;
 
-        if (Minecraft.getMinecraft().mouseHelper instanceof RawMouseHelper) {
-            Minecraft.getMinecraft().mouseHelper = new MouseHelper();
-            //Minecraft.getMinecraft().mouseHelper.grabMouseCursor();
-            Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("Toggled OFF"));
-            ModInstances.getRawInput().enabled = false;
-            DevyClient.getIO.saveConfig(false, "rminput");
-        } else {
-            Minecraft.getMinecraft().mouseHelper = new RawMouseHelper();
-            //Minecraft.getMinecraft().mouseHelper.grabMouseCursor();
-            Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("Toggled ON"));
-            ModInstances.getRawInput().enabled = true;
-            DevyClient.getIO.saveConfig(true, "rminput");
+            if (Minecraft.getMinecraft().mouseHelper instanceof RawMouseHelper) {
+                Minecraft.getMinecraft().mouseHelper = new MouseHelper();
+                //Minecraft.getMinecraft().mouseHelper.grabMouseCursor();
+                //Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("Toggled OFF"));
+                DevyClient.getInstance().sendNotif("Raw Mouse Input has been Disabled");
+                ModInstances.getRawInput().enabled = false;
+                DevyClient.getIO.saveConfig(false, "rminput");
+            } else {
+                Minecraft.getMinecraft().mouseHelper = new RawMouseHelper();
+                //Minecraft.getMinecraft().mouseHelper.grabMouseCursor();
+                //Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("Toggled ON"));
+                DevyClient.getInstance().sendNotif("Raw Mouse Input has been Enabled");
+                ModInstances.getRawInput().enabled = true;
+                DevyClient.getIO.saveConfig(true, "rminput");
+            }
+
+            player.rotationYaw = saveYaw;
+            player.rotationPitch = savePitch;
+        }else{
+            if (Minecraft.getMinecraft().mouseHelper instanceof RawMouseHelper) {
+                Minecraft.getMinecraft().mouseHelper = new MouseHelper();
+                //Minecraft.getMinecraft().mouseHelper.grabMouseCursor();
+                //Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("Toggled OFF"));
+                DevyClient.getInstance().sendNotif("Raw Mouse Input has been Disabled");
+                ModInstances.getRawInput().enabled = false;
+                DevyClient.getIO.saveConfig(false, "rminput");
+            } else {
+                Minecraft.getMinecraft().mouseHelper = new RawMouseHelper();
+                //Minecraft.getMinecraft().mouseHelper.grabMouseCursor();
+                //Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("Toggled ON"));
+                DevyClient.getInstance().sendNotif("Raw Mouse Input has been Enabled");
+                ModInstances.getRawInput().enabled = true;
+                DevyClient.getIO.saveConfig(true, "rminput");
+            }
         }
-        player.rotationYaw = saveYaw;
-        player.rotationPitch = savePitch;
     }
     public static void turnOnRMInput(){
         Minecraft.getMinecraft().mouseHelper = new RawMouseHelper();
@@ -91,10 +112,14 @@ public class RawMouseInput extends ModDraggable {
     }
 
     public static void rescan() {
-        Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("Rescanning input devices..."));
+        //Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("Rescanning input devices..."));
+        DevyClient.getInstance().sendNotif("Rescanning input devices...");
         RawMouseInput.getMouse();
         if (RawMouseInput.mouse != null) {
-            Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("Mouse Found."));
+            //Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("Mouse Found."));
+            DevyClient.getInstance().sendNotif("Mouse Input Device Found!");
+        }else{
+            DevyClient.getInstance().sendNotif("No mouse input devices found!");
         }
     }
 

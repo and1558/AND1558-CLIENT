@@ -2,6 +2,8 @@ package owo.aydendevy;
 
 public class ClientOptions {
     public boolean darkMode;
+    public boolean customBackground;
+    public String customBackgroundPath;
     public boolean snowParticles;
     public boolean snowParticlesGUI;
     public boolean blurEffect;
@@ -12,6 +14,8 @@ public class ClientOptions {
     }
     public void load(){
         darkMode = DevyClient.getIO.loadMultipleConfig("darkMode");
+        customBackground = DevyClient.getIO.loadMultipleConfig("customBackground");
+        customBackgroundPath = DevyClient.getIO.loadMultipleConfigS("customBackgroundPath");
         snowParticles = DevyClient.getIO.loadMultipleConfig("snowParticles");
         snowParticlesGUI = DevyClient.getIO.loadMultipleConfig("snowParticlesGUI");
         blurEffect = DevyClient.getIO.loadMultipleConfig("blurEffect");

@@ -21,7 +21,7 @@ public class GuiUtils {
         if(blurred){
             DevyClient.guiUtils.disableDefaultBlur = true;
             ScaledResolution sc = new ScaledResolution(Minecraft.getMinecraft());
-            BlurUtils.renderBlurredBackground(sc.getScaledWidth(), sc.getScaledHeight(), 10, 10, screen.width - 20, screen.height - 20, 7);
+            BlurUtils.renderBlurredBackground(sc.getScaledWidth(), sc.getScaledHeight(), (int) boxSizeX.getValue(), (int) boxSizeY.getValue(), (int) boxSizeX1.getValue() - 10, (int) boxSizeY1.getValue() - 10, 7);
         }else if(!blurred){
             DevyClient.guiUtils.disableDefaultBlur = false;
         }

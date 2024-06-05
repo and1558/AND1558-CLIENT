@@ -71,7 +71,7 @@ public class MainMenu extends GuiScreen
         DrawChangelogs.getLess(this, this.fontRendererObj, posX);
 
         // dev 1.82. Added Animations for client text name
-        this.drawCenteredString(this.mc.fontRendererObj, EnumChatFormatting.BOLD + "AND1558 " + EnumChatFormatting.RESET + "Client", this.width / 2 - 2 - (int) clientTextAnim.getValue(), this.height / 2 - 30, -1);
+        this.drawCenteredString(this.mc.fontRendererObj, EnumChatFormatting.BOLD + "Devy" + EnumChatFormatting.RESET + "Client", this.width / 2 - 2 - (int) clientTextAnim.getValue(), this.height / 2 - 30, -1);
 
         super.drawScreen(mouseX, mouseY, partialTicks);
         mc.getTextureManager().bindTexture(new ResourceLocation("and1558/images/menu/exit.png"));
